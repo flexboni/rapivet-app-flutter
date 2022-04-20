@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">rapivet test</string>
+    <string name="facebook_app_id">461984801798325</string>
+    <string name="fb_login_protocol_scheme">fb461984801798325</string>
+
+</resources>
