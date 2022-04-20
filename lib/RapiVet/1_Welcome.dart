@@ -5,23 +5,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:swork_raon/0_DataProcess/Pet_data_manager.dart';
-import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
-import 'package:swork_raon/RapiVet/12_QA_read.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/1_2_Welcome_subfuncs.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/test/0_Api_Test.dart';
-import 'package:swork_raon/TestModule/testMain.dart';
-import '../0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/RapiVet/2_Login.dart';
-import 'package:swork_raon/RapiVet/4_RegisterPet.dart';
 import 'package:swork_raon/RapiVet/SceneSubFuncs/0_commonUI.dart';
+import 'package:swork_raon/RapiVet/SceneSubFuncs/1_2_Welcome_subfuncs.dart';
 
-import '11_QA_write.dart';
-import '3_Signup.dart';
-import '5_Main.dart';
-import '9_Result.dart';
+import '../0_CommonThisApp/rapivetStatics.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
