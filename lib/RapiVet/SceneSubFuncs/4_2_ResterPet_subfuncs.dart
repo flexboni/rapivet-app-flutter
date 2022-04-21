@@ -141,7 +141,7 @@ class register_subFuncs {
   pop_operate(BuildContext context, COME_FROM come_from) {
     if (come_from == COME_FROM.WELCOME) {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => welcome_page()));
+          MaterialPageRoute(builder: (BuildContext context) => WelcomePage()));
     } else if (come_from == COME_FROM.USER_INFO) {
       Navigator.pushReplacement(
           context,

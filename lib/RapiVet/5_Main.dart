@@ -103,7 +103,7 @@ class _main_scene_home extends State<StatefulWidget> {
             context,
             MaterialPageRoute(
                 builder: (BuildContext context) =>
-                    welcome_page() /*Api_test_scene()*/));
+                    WelcomePage() /*Api_test_scene()*/));
 
         return false;
       },

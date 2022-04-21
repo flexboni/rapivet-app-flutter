@@ -14,5 +14,5 @@ void main() {
   //   statusBarColor: Colors.black,
   // ));
   // Firebase.initializeApp();
-  runApp(welcome_page());
+  runApp(WelcomePage());
 }
