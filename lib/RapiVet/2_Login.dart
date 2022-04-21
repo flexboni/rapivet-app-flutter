@@ -1,31 +1,22 @@
-import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_signin_button/button_list.dart';
-import 'package:flutter_signin_button/button_view.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as phttp;
 import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
 import 'package:swork_raon/RapiVet/1_Welcome.dart';
 import 'package:swork_raon/RapiVet/SceneSubFuncs/2_2_Login_subfuncs.dart';
 import 'package:swork_raon/RapiVet/SceneSubFuncs/Api_manager.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/test/0_Api_Test.dart';
-import '../0_CommonThisApp/rapivetStatics.dart';
 
+import '../0_CommonThisApp/rapivetStatics.dart';
 import '3_Signup.dart';
-import '4_RegisterPet.dart';
-import '5_Main.dart';
 import 'SceneSubFuncs/0_commonUI.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
-import 'package:http/http.dart' as phttp;
 
 class Login_scene extends StatefulWidget {
   @override
