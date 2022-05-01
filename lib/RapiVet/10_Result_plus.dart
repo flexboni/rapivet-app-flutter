@@ -7,7 +7,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/0_DataProcess/one_healthcheck_data.dart';
-import 'package:swork_raon/RapiVet/9_Result.dart';
+import 'package:swork_raon/rapivet/9_Result.dart';
 import '../0_CommonThisApp/rapivetStatics.dart';
 
 import '5_Main.dart';
@@ -35,7 +35,7 @@ class Result_plus_scene extends StatefulWidget {
 }
 
 class _result_plus_scene_home extends State<StatefulWidget>
-    with TickerProviderStateMixin{
+    with TickerProviderStateMixin {
   callback_setstate() {
     setState(() {
       print("callback  state");
@@ -49,7 +49,6 @@ class _result_plus_scene_home extends State<StatefulWidget>
     super.initState();
   }
 
-
   get_data_fromServer() async {
     setState(() {
       _is_loading = true;
@@ -57,7 +56,7 @@ class _result_plus_scene_home extends State<StatefulWidget>
 
     _hCheck_list = await Result_subFuncs().get_currentPet_healthCehck_db();
 
-    if(_hCheck_list==[] || _hCheck_list.length==0) {
+    if (_hCheck_list == [] || _hCheck_list.length == 0) {
       JToast().show_toast("Informação não encontrada.", true);
 
       Navigator.pushReplacement(context,
@@ -82,12 +81,10 @@ class _result_plus_scene_home extends State<StatefulWidget>
           PageTransition(type: PageTransitionType.fade, child: Main_scene()));
     }
 
-
     goback_to_RESULT() {
       Navigator.pushReplacement(context,
           PageTransition(type: PageTransitionType.fade, child: Result_scene()));
     }
-
 
     callback_setstate() {
       setState(() {});
@@ -119,7 +116,8 @@ class _result_plus_scene_home extends State<StatefulWidget>
                               .get_result_btns(s_width, callback_setstate),
                           Padding(padding: new EdgeInsets.all(6)),
                           // 테이블 그리기
-                          ResultPlus_subFuncs().get_graphTable( context, s_width,  _hCheck_list),
+                          ResultPlus_subFuncs()
+                              .get_graphTable(context, s_width, _hCheck_list),
                           Padding(padding: new EdgeInsets.all(13)),
                           Row(
                             children: [
@@ -153,7 +151,7 @@ class _result_plus_scene_home extends State<StatefulWidget>
                       get_upbar(() {}, false, "RELATÓRIO", in_width: s_width,
                           callback_goBack: () {
                         //goback_to_main();
-                            goback_to_RESULT();
+                        goback_to_RESULT();
                       }),
                     ],
                   ),

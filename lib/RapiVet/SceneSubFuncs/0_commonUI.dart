@@ -11,14 +11,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/0_DataProcess/All_health_check_manager.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/5_2_main_subFuncs.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/test/0_Api_Test.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/5_2_main_subFuncs.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/test/0_Api_Test.dart';
 import '../../0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/RapiVet/10_Result_plus.dart';
-import 'package:swork_raon/RapiVet/11_QA_write.dart';
-import 'package:swork_raon/RapiVet/6_userInfo.dart';
-import 'package:swork_raon/RapiVet/7_Test_Guide.dart';
-import 'package:swork_raon/RapiVet/9_Result.dart';
+import 'package:swork_raon/rapivet/10_Result_plus.dart';
+import 'package:swork_raon/rapivet/11_QA_write.dart';
+import 'package:swork_raon/rapivet/6_userInfo.dart';
+import 'package:swork_raon/rapivet/7_Test_Guide.dart';
+import 'package:swork_raon/rapivet/9_Result.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../4_RegisterPet.dart';
 import '../5_Main.dart';
@@ -82,7 +82,11 @@ Widget get_one_textfield(double s_width, Color appblue,
                 controller: in_controller,
                 readOnly: is_readonly,
                 //textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 13, color: txtColor, fontFamily: "Roboto", fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 13,
+                    color: txtColor,
+                    fontFamily: "Roboto",
+                    fontWeight: FontWeight.bold),
                 keyboardType: _get_keyboard_type(
                     is_using_number_only, is_name_keyboard, is_phone_number),
                 // style: TextStyle(fontSize: 12),
@@ -283,14 +287,16 @@ void show_dialog_petlist(
                               height: 40,
                               child: Container(
                                 child: RadioListTile(
-                                  title: Text( _types_set[i],style: TextStyle(
-                                      color: (_types_set[i] ==
-                                          _input_dataset
-                                              .breed_txtedit_control
-                                              .text)
-                                          ? rapivetStatics.app_blue
-                                          : Colors.black.withOpacity(0.58),
-                                      fontSize: 11.5),),
+                                  title: Text(
+                                    _types_set[i],
+                                    style: TextStyle(
+                                        color: (_types_set[i] ==
+                                                _input_dataset
+                                                    .breed_txtedit_control.text)
+                                            ? rapivetStatics.app_blue
+                                            : Colors.black.withOpacity(0.58),
+                                        fontSize: 11.5),
+                                  ),
                                   value: i,
                                   groupValue: _get_current_pet_sort_list(
                                       _input_dataset, _types_set),

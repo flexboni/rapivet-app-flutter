@@ -9,10 +9,10 @@ import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/0_DataProcess/Pet_data_manager.dart';
 import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
 import 'package:swork_raon/0_DataProcess/one_user_data.dart';
-import 'package:swork_raon/RapiVet/5_Main.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/5_2_main_subFuncs.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/6_2_userInfo_subFuncs.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/Api_manager.dart';
+import 'package:swork_raon/rapivet/5_Main.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/5_2_main_subFuncs.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/6_2_userInfo_subFuncs.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/Api_manager.dart';
 import '../0_CommonThisApp/rapivetStatics.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -21,8 +21,8 @@ import 'SceneSubFuncs/0_commonUI.dart';
 
 one_user_data _this_user_data;
 
-bool _is_showing_adress= false;
-bool _is_showing_phoneNum =false;
+bool _is_showing_adress = false;
+bool _is_showing_phoneNum = false;
 
 class userInfo_scene extends StatefulWidget {
   @override
@@ -56,7 +56,7 @@ class _userInfo_home extends State<StatefulWidget>
   void initState() {
     super.initState();
 
-    _is_showing_adress =false;
+    _is_showing_adress = false;
     _is_showing_phoneNum = false;
 
     _this_user_data = one_user_data();
@@ -84,12 +84,12 @@ class _userInfo_home extends State<StatefulWidget>
     List<one_pet_data> petDatas = await Api_manager().get_pet_list(token);
     rapivetStatics.pet_data_list = petDatas;
 
-    if(_this_user_data.address1!=""){
+    if (_this_user_data.address1 != "") {
       _is_showing_adress = true;
     }
 
-    if(_this_user_data.phone_num!=""){
-      _is_showing_phoneNum =true;
+    if (_this_user_data.phone_num != "") {
+      _is_showing_phoneNum = true;
     }
 
     setState(() {
@@ -187,7 +187,8 @@ class _userInfo_home extends State<StatefulWidget>
                         children: [
                           Padding(padding: new EdgeInsets.all(45)),
                           Visibility(
-                            visible: /*!rapivetStatics.is_simple_loggined ||*/ !Platform.isIOS,
+                            visible: /*!rapivetStatics.is_simple_loggined ||*/ !Platform
+                                .isIOS,
                             child: Column(
                               children: [
                                 Row(
@@ -204,12 +205,12 @@ class _userInfo_home extends State<StatefulWidget>
                                       _this_user_data.name,
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                          fontSize: 17, color: normalFont_color),
+                                          fontSize: 17,
+                                          color: normalFont_color),
                                     ),
                                   ],
                                 ),
                                 Padding(padding: new EdgeInsets.all(10)),
-
                                 Visibility(
                                   visible: _is_showing_phoneNum,
                                   child: Column(
@@ -221,14 +222,19 @@ class _userInfo_home extends State<StatefulWidget>
                                         height: 48,
                                         child: Row(
                                           children: [
-                                            Padding(padding: new EdgeInsets.all(13)),
+                                            Padding(
+                                                padding:
+                                                    new EdgeInsets.all(13)),
                                             Icon(Icons.phone, color: iconColor),
-                                            Padding(padding: new EdgeInsets.all(10)),
+                                            Padding(
+                                                padding:
+                                                    new EdgeInsets.all(10)),
                                             Text(
                                               _this_user_data.phone_num,
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
-                                                  fontSize: 14, color: normalFont_color),
+                                                  fontSize: 14,
+                                                  color: normalFont_color),
                                             ),
                                           ],
                                         ),
@@ -237,7 +243,6 @@ class _userInfo_home extends State<StatefulWidget>
                                     ],
                                   ),
                                 ),
-
                                 Container(
                                   decoration: get_circle_boxDecoration(),
                                   //color: Colors.redAccent,
@@ -255,7 +260,8 @@ class _userInfo_home extends State<StatefulWidget>
                                         _this_user_data.email,
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
-                                            fontSize: 14, color: normalFont_color),
+                                            fontSize: 14,
+                                            color: normalFont_color),
                                       ),
                                     ],
                                   ),
@@ -273,21 +279,28 @@ class _userInfo_home extends State<StatefulWidget>
                                         height: 55,
                                         child: Row(
                                           children: [
-                                            Padding(padding: new EdgeInsets.all(13)),
+                                            Padding(
+                                                padding:
+                                                    new EdgeInsets.all(13)),
                                             Icon(
                                               Icons.location_on_rounded,
                                               color: iconColor,
                                             ),
-                                            Padding(padding: new EdgeInsets.all(10)),
+                                            Padding(
+                                                padding:
+                                                    new EdgeInsets.all(10)),
                                             Container(
                                               width: s_width * 0.9 * 0.7,
                                               child: Text(
-                                                _this_user_data.address2+", "+_this_user_data.address1,
+                                                _this_user_data.address2 +
+                                                    ", " +
+                                                    _this_user_data.address1,
                                                 maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
                                                 textAlign: TextAlign.left,
                                                 style: TextStyle(
-                                                    fontSize: 14, color: normalFont_color),
+                                                    fontSize: 14,
+                                                    color: normalFont_color),
                                               ),
                                             ),
                                           ],
@@ -300,7 +313,8 @@ class _userInfo_home extends State<StatefulWidget>
                                 Material(
                                   child: InkWell(
                                     onTap: () {
-                                      JToast().show_toast("página em preparação", true);
+                                      JToast().show_toast(
+                                          "página em preparação", true);
                                     },
                                     child: Container(
                                       decoration: get_circle_boxDecoration(),
@@ -309,7 +323,8 @@ class _userInfo_home extends State<StatefulWidget>
                                       height: 48,
                                       child: Row(
                                         children: [
-                                          Padding(padding: new EdgeInsets.all(13)),
+                                          Padding(
+                                              padding: new EdgeInsets.all(13)),
                                           //Icon(Icons.verified_sharp, color: iconColor),
                                           Opacity(
                                             opacity: 0.75,
@@ -318,7 +333,8 @@ class _userInfo_home extends State<StatefulWidget>
                                                 child: Image.asset(
                                                     'assets/userinfo_img/icon_news.png')),
                                           ),
-                                          Padding(padding: new EdgeInsets.all(10)),
+                                          Padding(
+                                              padding: new EdgeInsets.all(10)),
                                           Text(
                                             "Promoções",
                                             textAlign: TextAlign.left,
@@ -326,7 +342,8 @@ class _userInfo_home extends State<StatefulWidget>
                                                 fontSize: 14,
                                                 color: normalFont_color),
                                           ),
-                                          Padding(padding: new EdgeInsets.all(5)),
+                                          Padding(
+                                              padding: new EdgeInsets.all(5)),
                                           Opacity(
                                             opacity: 0.75,
                                             child: Container(
@@ -341,20 +358,26 @@ class _userInfo_home extends State<StatefulWidget>
                                 ),
                                 Padding(padding: new EdgeInsets.all(10)),
                                 Visibility(
-                                  visible: (_this_user_data.phone_num.trim()!=""),
-                                  child: get_one_btn(s_width * 0.9, rapivetStatics.app_blue,
-                                      "Editar", () {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (BuildContext context) =>
-                                                    SignUp_scene(SIGNUP_MODE.MODIFY, user_data: _this_user_data,)));
-                                      },
-                                      in_height: 50),
+                                  visible:
+                                      (_this_user_data.phone_num.trim() != ""),
+                                  child: get_one_btn(s_width * 0.9,
+                                      rapivetStatics.app_blue, "Editar", () {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                SignUp_scene(
+                                                  SIGNUP_MODE.MODIFY,
+                                                  user_data: _this_user_data,
+                                                )));
+                                  }, in_height: 50),
                                 ),
                                 Visibility(
-                                    visible: (_this_user_data.phone_num.trim()!=""),
-                                    child: Padding(padding: new EdgeInsets.all(10))),
+                                    visible:
+                                        (_this_user_data.phone_num.trim() !=
+                                            ""),
+                                    child: Padding(
+                                        padding: new EdgeInsets.all(10))),
                                 Container(
                                     width: s_width,
                                     height: 7,
@@ -363,7 +386,6 @@ class _userInfo_home extends State<StatefulWidget>
                               ],
                             ),
                           ),
-
                           Row(
                             children: [
                               Padding(
@@ -514,14 +536,13 @@ class _userInfo_home extends State<StatefulWidget>
                     ),
                   ),
                   Container(
-                    child: get_upbar(
-                      () {},
-                      false,
-                      "Minha área",
-                      in_width: s_width,
-                      callback_goBack: (){        Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (BuildContext context) => Main_scene()));}
-                    ),
+                    child: get_upbar(() {}, false, "Minha área",
+                        in_width: s_width, callback_goBack: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => Main_scene()));
+                    }),
                   ),
                   //    show_notReadyyet(s_width,s_height,is_full_screen: true)
                   show_loading(_is_loading, s_height, s_width, this),

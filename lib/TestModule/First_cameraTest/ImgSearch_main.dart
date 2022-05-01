@@ -2,37 +2,26 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:io' show Platform;
 import 'dart:typed_data';
-import 'dart:convert';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:image/image.dart' as imglib;
+import 'package:path_provider/path_provider.dart';
 import 'package:swork_raon/0_Commons_totally/JToast.dart';
-import 'package:swork_raon/RapiVet/7_Test_Guide.dart';
-import 'package:swork_raon/TestModule/First_cameraTest/subFuncs/ImgSearch_subFuncs.dart';
-import 'package:swork_raon/TestModule/First_cameraTest/subFuncs/animated_guide.dart';
-import '../../0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/0_commonUI.dart';
-import 'package:swork_raon/TestModule/First_cameraTest/testStatics.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/image_converter.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/myparams.dart';
-import 'package:swork_raon/TestModule/First_cameraTest/opencv_originals_ex.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/process_after_class.dart';
-import 'package:flutter/services.dart';
+import 'package:swork_raon/TestModule/First_cameraTest/subFuncs/ImgSearch_subFuncs.dart';
+import 'package:swork_raon/TestModule/First_cameraTest/subFuncs/animated_guide.dart';
+import 'package:swork_raon/TestModule/First_cameraTest/testStatics.dart';
+import 'package:swork_raon/rapivet/7_Test_Guide.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
 
-import 'package:path_provider/path_provider.dart';
-import 'dart:isolate';
-import 'dart:math';
-import 'package:image/image.dart' as imglib;
-
-import '../Loading_imgsearch.dart';
-import 'horizontal_checker.dart';
+import '../../0_CommonThisApp/rapivetStatics.dart';
 
 // jujego
 
@@ -108,7 +97,7 @@ class _ImgSearchHomeState extends State<ImgSearchHome>
     _initialize();
   }
 
-  turn_off_is_pause_for_safeOperation(int time_mill)async{
+  turn_off_is_pause_for_safeOperation(int time_mill) async {
     await Future.delayed(Duration(milliseconds: time_mill));
     is_pause_for_safeOperation = false;
   }
@@ -138,7 +127,7 @@ class _ImgSearchHomeState extends State<ImgSearchHome>
     print(cameraDescription.name);
     print(cameraDescription.sensorOrientation);
     print(cameraDescription.lensDirection);
-   // cameraDescription.
+    // cameraDescription.
 
     controller = CameraController(cameraDescription, ResolutionPreset.medium,
         enableAudio: false, imageFormatGroup: ImageFormatGroup.jpeg);
@@ -169,7 +158,7 @@ class _ImgSearchHomeState extends State<ImgSearchHome>
           call_operation(img);
         }
 
-        if (is_computing == false && is_pause_for_safeOperation ==false) {
+        if (is_computing == false && is_pause_for_safeOperation == false) {
           if (testStatics.is_finded_area == false) call_operation(img);
         }
 
@@ -274,7 +263,7 @@ class _ImgSearchHomeState extends State<ImgSearchHome>
                                 children: <Widget>[
                                   //Padding(padding: new EdgeInsets.all(35)),
                                   Container(
-                                    height: s_height*0.55,
+                                    height: s_height * 0.55,
                                     color: Colors.black,
                                     child: FittedBox(
                                       fit: BoxFit.scaleDown,
@@ -294,14 +283,14 @@ class _ImgSearchHomeState extends State<ImgSearchHome>
                                       ),
                                     ),
                                   ),
-                                 // Padding(padding: new EdgeInsets.all(10)),
+                                  // Padding(padding: new EdgeInsets.all(10)),
                                   Container(
                                     padding: new EdgeInsets.all(20),
                                     alignment: Alignment.topCenter,
-                                    height: s_height*0.3,
+                                    height: s_height * 0.3,
                                     color: rapivetStatics.app_bg,
-                                    child: get_find_end_check(
-                                        context, s_width, s_height, callback_loading_on),
+                                    child: get_find_end_check(context, s_width,
+                                        s_height, callback_loading_on),
                                   ),
                                 ],
                               ),
@@ -325,7 +314,7 @@ class _ImgSearchHomeState extends State<ImgSearchHome>
                 get_overlay_btns(context, callback_setstate, s_width, s_height),
                 show_loading(s_height, s_width, statusBarHeight, this),
                 get_test_result(context, is_test_mode, imageNew),
-                show_guide_img(s_width, s_height,callback_setstate),
+                show_guide_img(s_width, s_height, callback_setstate),
               ],
             ),
           ),
@@ -555,14 +544,13 @@ class _ImgSearchHomeState extends State<ImgSearchHome>
             .show_toast(compute_count.toString() + "::: " + error_txt, true);
       } else {
         if (error_txt.indexOf("stick location error") != -1) {
-
           _stick_error_count++;
 
-          if(_stick_error_count>=3){
+          if (_stick_error_count >= 3) {
             _stick_error_count = 0;
             JToast().show_toast("Insira a tira reagente corretamente. ", false);
           }
-        }else{
+        } else {
           _stick_error_count = 0;
         }
       }

@@ -7,8 +7,8 @@ import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
 import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/0_DataProcess/All_health_check_manager.dart';
 import 'package:swork_raon/0_DataProcess/one_healthcheck_data.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/0_commonUI.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/9_2_Result_subFuncs.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/9_2_Result_subFuncs.dart';
 
 import '5_Main.dart';
 
@@ -41,7 +41,7 @@ class _result_scene_home extends State<StatefulWidget>
 
     _hCheck_list = await Result_subFuncs().get_currentPet_healthCehck_db();
 
-    if(_hCheck_list==[] || _hCheck_list.length==0) {
+    if (_hCheck_list == [] || _hCheck_list.length == 0) {
       JToast().show_toast("Informação não encontrada.", true);
 
       Navigator.pushReplacement(context,
@@ -81,13 +81,12 @@ class _result_scene_home extends State<StatefulWidget>
           PageTransition(type: PageTransitionType.fade, child: Main_scene()));
     }
 
-    String _get_date_txt(){
-      try{
-       return _hCheck_date_strs[rapivetStatics.selected_check_index];
-      }catch(e){
+    String _get_date_txt() {
+      try {
+        return _hCheck_date_strs[rapivetStatics.selected_check_index];
+      } catch (e) {
         return ".";
       }
-
     }
 
     return WillPopScope(
@@ -118,7 +117,8 @@ class _result_scene_home extends State<StatefulWidget>
                                   context,
                                   _hCheck_date_strs,
                                   callback_setstate,
-                                  rapivetStatics.selected_check_index,s_width);
+                                  rapivetStatics.selected_check_index,
+                                  s_width);
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -186,8 +186,8 @@ class _result_scene_home extends State<StatefulWidget>
                           ),
                         ),
                         Padding(padding: new EdgeInsets.all(5)),
-                        Result_subFuncs()
-                            .get_current_checkUI(context, s_width, _current_health_data),
+                        Result_subFuncs().get_current_checkUI(
+                            context, s_width, _current_health_data),
                         Padding(padding: new EdgeInsets.all(5)),
                         Container(
                             width: s_width,

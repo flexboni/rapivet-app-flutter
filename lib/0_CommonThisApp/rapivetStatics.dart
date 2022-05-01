@@ -1,11 +1,12 @@
 import 'dart:ui';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swork_raon/0_DataProcess/one_healthcheck_data.dart';
 import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
-import 'package:swork_raon/RapiVet/10_Result_plus.dart';
-import 'package:intl/intl.dart';
+import 'package:swork_raon/rapivet/10_Result_plus.dart';
 
 enum COME_FROM { WELCOME, USER_INFO, MAIN } // check: doc_navigator.dart
 
@@ -103,13 +104,14 @@ class rapivetStatics {
   // time convert
   static converTime_to_displlay(String time_inFormat,
       {String in_format = "dd-MM-yyyy hh:mm",
-        bool is_without_year = false, bool is_plus_oneMonth = false}) {
+      bool is_without_year = false,
+      bool is_plus_oneMonth = false}) {
     var dateFormat = DateFormat(in_format); // you can change the format here
     var utcDate = dateFormat
         .format(DateTime.parse(time_inFormat)); // pass the UTC time here
     DateTime localDate = dateFormat.parse(utcDate, true).toLocal();
 
-    if(is_plus_oneMonth) localDate =localDate.add(Duration(days: 30));
+    if (is_plus_oneMonth) localDate = localDate.add(Duration(days: 30));
 
     String day = localDate.day.toString();
     if (day.length == 1) day = "0" + day;

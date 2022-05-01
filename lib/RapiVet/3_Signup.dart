@@ -8,9 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/0_DataProcess/one_user_data.dart';
-import 'package:swork_raon/RapiVet/6_userInfo.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/3_2_Signup_subFuncs.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/Api_manager.dart';
+import 'package:swork_raon/rapivet/6_userInfo.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/3_2_Signup_subFuncs.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/Api_manager.dart';
 import '../0_CommonThisApp/rapivetStatics.dart';
 
 import 'SceneSubFuncs/0_commonUI.dart';
@@ -21,7 +21,6 @@ import 'SceneSubFuncs/test/0_Api_Test.dart';
 enum SIGNUP_MODE { SIGNUP, MODIFY }
 SIGNUP_MODE _signup_mode;
 one_user_data _in_user_data;
-
 
 class SignUp_scene extends StatefulWidget {
   SignUp_scene(SIGNUP_MODE in_signup_mode, {one_user_data user_data = null}) {
@@ -215,8 +214,14 @@ class _signup_scene_home extends State<StatefulWidget>
 
     void _showDialog_address() {
       _dialog_phoneNum_txtedit_control.text = "";
-      show_dialog_popoup(context, s_width, _dialog_zip_txtedit_control,
-          "Por favor insira o código postal", "01001-000", _callback_get_zip, () {});
+      show_dialog_popoup(
+          context,
+          s_width,
+          _dialog_zip_txtedit_control,
+          "Por favor insira o código postal",
+          "01001-000",
+          _callback_get_zip,
+          () {});
     }
 
     callback_touch_adress1() {
@@ -271,7 +276,9 @@ class _signup_scene_home extends State<StatefulWidget>
             print("fatal error!!!!!");
           }
 
-          JToast().show_toast("Cadastro realizado com sucesso. Faça o cadastramento do primeiro pet.", false);
+          JToast().show_toast(
+              "Cadastro realizado com sucesso. Faça o cadastramento do primeiro pet.",
+              false);
           Signup_subfuncs().move_to_petRegister(context);
         }
       } else if (_signup_mode == SIGNUP_MODE.MODIFY) {
@@ -289,7 +296,7 @@ class _signup_scene_home extends State<StatefulWidget>
               _phoneNum_txtedit_control,
               rapivetStatics.token);
 
-          if(was_succeed){
+          if (was_succeed) {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -407,8 +414,8 @@ class _signup_scene_home extends State<StatefulWidget>
                               s_width, appblue, _pw1_txtedit_control, "",
                               is_password: true),
                           Padding(padding: new EdgeInsets.all(3)),
-                          get_explain_of_textfield_down(
-                              s_width, "Conter no mínimo 6 caracteres (letras maiúsculas, minúsculas, números e símbolos)"),
+                          get_explain_of_textfield_down(s_width,
+                              "Conter no mínimo 6 caracteres (letras maiúsculas, minúsculas, números e símbolos)"),
                           Padding(padding: new EdgeInsets.all(8)),
                           // pw2 -----------------------------------------------------
                           get_explain_of_textfield_up(
@@ -418,8 +425,8 @@ class _signup_scene_home extends State<StatefulWidget>
                               s_width, appblue, _pw2_txtedit_control, "",
                               is_password: true),
                           Padding(padding: new EdgeInsets.all(3)),
-                          get_explain_of_textfield_down(
-                              s_width, "Conter no mínimo 6 caracteres (letras maiúsculas, minúsculas, números e símbolos)"),
+                          get_explain_of_textfield_down(s_width,
+                              "Conter no mínimo 6 caracteres (letras maiúsculas, minúsculas, números e símbolos)"),
                           Padding(padding: new EdgeInsets.all(8)),
                           // agree check --------------------------------------------
                           Container(

@@ -1,21 +1,17 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/0_DataProcess/All_health_check_manager.dart';
-import 'package:swork_raon/RapiVet/12_QA_read.dart';
-import 'package:swork_raon/RapiVet/1_Welcome.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/0_commonUI.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/5_2_main_subFuncs.dart';
-import 'package:flutter/services.dart';
-import '9_Result.dart';
+import 'package:swork_raon/rapivet/12_QA_read.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/5_2_main_subFuncs.dart';
+import 'package:swork_raon/rapivet/main.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '9_Result.dart';
 
 extension GlobalKeyExtension on GlobalKey {
   Rect get globalPaintBounds {
@@ -100,10 +96,9 @@ class _main_scene_home extends State<StatefulWidget> {
     return WillPopScope(
       onWillPop: () async {
         Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) =>
-                    WelcomePage() /*Api_test_scene()*/));
+          context,
+          MaterialPageRoute(builder: (BuildContext context) => MainPage()),
+        );
 
         return false;
       },

@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-
-import 'RapiVet/1_Welcome.dart';
+import 'package:swork_raon/rapivet/main.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,5 +11,5 @@ void main() {
   //   statusBarColor: Colors.black,
   // ));
   // Firebase.initializeApp();
-  runApp(WelcomePage());
+  runApp(MainPage());
 }

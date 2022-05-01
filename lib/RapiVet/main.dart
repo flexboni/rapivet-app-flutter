@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/0_commonUI.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/1_2_Welcome_subfuncs.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/1_2_Welcome_subfuncs.dart';
 
 import '../0_CommonThisApp/rapivetStatics.dart';
 
@@ -18,12 +18,12 @@ void main() {
   //   statusBarColor: Colors.black,
   // ));
   // Firebase.initializeApp();
-  runApp(WelcomePage());
+  runApp(MainPage());
 }
 
 bool _isLoading = false;
 
-class WelcomePage extends StatelessWidget {
+class MainPage extends StatelessWidget {
   //final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   @override
@@ -195,7 +195,7 @@ class _WelcomeHomeState extends State<WelcomePageStateful>
                   // Navigator.push(
                   //     context,
                   //     MaterialPageRoute(
-                  //         builder: (BuildContext context) =>  Login_scene() /*Api_test_scene()*/));
+                  //         builder: (BuildContext context) =>  LoginPage() /*Api_test_scene()*/));
                 }, in_height: 53)),
                 // 5. signup/login btn
                 Padding(padding: new EdgeInsets.all(38)),

@@ -5,8 +5,8 @@
 // 로드할 때ㅣ welcome --> main ,,,  result (시작시에)
 
 import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/RapiVet/10_Result_plus.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/9_2_Result_subFuncs.dart';
+import 'package:swork_raon/rapivet/10_Result_plus.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/9_2_Result_subFuncs.dart';
 
 import 'one_healthcheck_data.dart';
 
@@ -78,7 +78,7 @@ class All_health_check_manager {
 
   String get_currentPet_suspect_countStr() {
     one_healthcheck_data currentPet_last_checkInfo =
-    _get_currentPet_last_checkInfo();
+        _get_currentPet_last_checkInfo();
 
     if (currentPet_last_checkInfo == null) return "0";
 
@@ -99,7 +99,7 @@ class All_health_check_manager {
     if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.PH))
       normal_count++;
 
-    normal_count = 7-normal_count;
+    normal_count = 7 - normal_count;
 
     return normal_count.toString();
   }

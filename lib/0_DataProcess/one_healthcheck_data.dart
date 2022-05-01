@@ -1,6 +1,5 @@
-import 'package:intl/intl.dart';
 import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/RapiVet/10_Result_plus.dart';
+import 'package:swork_raon/rapivet/10_Result_plus.dart';
 
 class one_healthcheck_data {
   String pet_uid;
@@ -55,7 +54,7 @@ class one_healthcheck_data {
     }
 
     if (result_mode == RESULT_PLUS_MODE.PH) {
-      if (ph==0 || ph == 1 || ph == 2)
+      if (ph == 0 || ph == 1 || ph == 2)
         return true;
       else
         return false;

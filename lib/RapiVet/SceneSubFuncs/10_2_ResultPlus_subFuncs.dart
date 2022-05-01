@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
 import 'package:swork_raon/0_DataProcess/one_healthcheck_data.dart';
-import 'package:swork_raon/RapiVet/10_Result_plus.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/0_commonUI.dart';
+import 'package:swork_raon/rapivet/10_Result_plus.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
 
 class ResultPlus_subFuncs {
   // 화면에 보이는대로
@@ -64,7 +64,7 @@ class ResultPlus_subFuncs {
       return "As cetonas são uma substância química produzida pelo corpo quando este não é capaz de usar a glicose como fonte de energia, e passa a utilizar a gordura. \n\nPROVÁVEIS CAUSAS: Anorexia; Dietas pobres em carboidratos e rico em gorduras; Estresse; Exercícios intenso; Gestação. ";
     }
     if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.GLUCOSE) {
-     // return "A presença de glicose na urina significa que a concentração excedeu o limiar renal. A medição é usada no diagnóstico e tratamento de desordens do metabolismo de carboidratos, incluindo Diabetes Mellitus, hiperglicemia e distúrbios hereditários. Normalmente não se detecta em animais saudáveis, embora pequenas quantidades possam ser secretadas por um rim não doente. Reações falso positivas podem ser produzidas por resíduos de produtos de limpeza contendo peróxido.";
+      // return "A presença de glicose na urina significa que a concentração excedeu o limiar renal. A medição é usada no diagnóstico e tratamento de desordens do metabolismo de carboidratos, incluindo Diabetes Mellitus, hiperglicemia e distúrbios hereditários. Normalmente não se detecta em animais saudáveis, embora pequenas quantidades possam ser secretadas por um rim não doente. Reações falso positivas podem ser produzidas por resíduos de produtos de limpeza contendo peróxido.";
       return "A glicose é uma das principais fontes de energia que o corpo do animal utiliza. Frequentemente, é possível detectar a glicose na urina dos cachorros com menos de 8 semanas de vida.\n\nPROVÁVEIS CAUSAS: Ingestão excessiva de carboidratos; Estresse.";
     }
     if (rapivetStatics.selected_result_plus_mode ==
@@ -73,7 +73,7 @@ class ResultPlus_subFuncs {
       return "Geralmente as urinas dos pets saudáveis não contém leucócitos. A presença de leucócitos na urina indica inflamações renais ou infecções do sistema urinário. O número de leucócitos pode variar conforme a ação imunológica do corpo.\n\nPROVÁVEIS CAUSAS: Ambiente anti-higiênico.";
     }
     if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.NITRITE) {
-     // return "O teste normalmente é negativo para animais sadios. Resultados negativos não excluem uma bacteriúria relevante. Antes do teste, deve diminuir a ingestão de líquidos, e descontinuar o uso de antibióticos e vitamina C. Um resultado negativo pode ocorrer devido às seguintes razões: bactérias que não apresentam nitrato redutase, dietas com baixos níveis de nitrato(animais carnívoros), aumento da diurese, altas concentrações de ácido ascórbico, ou incubação insuficiente da urina na bexiga.";
+      // return "O teste normalmente é negativo para animais sadios. Resultados negativos não excluem uma bacteriúria relevante. Antes do teste, deve diminuir a ingestão de líquidos, e descontinuar o uso de antibióticos e vitamina C. Um resultado negativo pode ocorrer devido às seguintes razões: bactérias que não apresentam nitrato redutase, dietas com baixos níveis de nitrato(animais carnívoros), aumento da diurese, altas concentrações de ácido ascórbico, ou incubação insuficiente da urina na bexiga.";
       return "O nitrito é produzido a partir dos nitratos naturais da urina pelas bactérias formadoras de nitrito. A identificação do nitrito é usada no diagnóstico de infecções do trato urinário. As bactérias formadoras de nitrito são: Escherichia coli, Staphylococcus aureus e Pseudomonas auruginosa. Elas possuem enzimas que reduzem o nitrato a nitrito. A infecção do trato urinário é detectado quando o nitrito está presente na urina. A maioria dos pets saudáveis não apresentam nitritos nas urinas. Para os que apresentam, é recomendável diminuir a ingestão de líquidos e interromper o uso de antibióticos e vitamina C (cerca de 3dias). \n\nPROVÁVEIS CAUSAS: Ambiente anti-higiênico; Ingestão excessiva de petiscos contendo alta quantidade de nitrito.";
     }
     if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.BLOOD) {
@@ -85,7 +85,7 @@ class ResultPlus_subFuncs {
       return "A estimativa do pH pode variar com o tempo da digestão, tempo de armazenamento da urina, infecção bacteriana e com o equilíbrio do ácido-básico do corpo. O pH normal da urina é de 6.0~7.0. Geralmente o pH dos herbívoros(alcalino) é mais alto do que o pH dos carnívoros(ácido). \n\nPROVÁVEIS CAUSAS: Ingestão excessiva de carne; Vegetariano; Ingestão excessiva de petiscos contendo alta quantidade de grãos e amido.";
     }
     if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PROTEIN) {
-     // return "A identificação da proteína urinária é usada no diagnóstico e tratamento de infecções do trato urinário (geralmente acompanhada por hematúria, pH alcalino e reação positiva para nitrito) e afecções renais. O teste é normalmente negativo para a maioria dos animais domésticos, mas saudáveis podem apresentar traços de proteína na urina.";
+      // return "A identificação da proteína urinária é usada no diagnóstico e tratamento de infecções do trato urinário (geralmente acompanhada por hematúria, pH alcalino e reação positiva para nitrito) e afecções renais. O teste é normalmente negativo para a maioria dos animais domésticos, mas saudáveis podem apresentar traços de proteína na urina.";
       return "Chamamos de proteinúria quando uma grande quantidade de proteínas é filtrada pelos rins e excretada na urina. Para a maioria dos pets saudáveis as proteínas são retidas no corpo, apresentando poucas ou não apresentando proteínas na urina. \n\nPROVÁVEIS CAUSAS: Exercícios físicos excessivo ou caminhada antes de fazer o teste; Ingestão excessiva de alimentos ricos em proteínas, como carne.";
     }
   }

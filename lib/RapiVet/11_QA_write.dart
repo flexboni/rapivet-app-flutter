@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/0_Commons_totally/JToast.dart';
-import 'package:swork_raon/RapiVet/12_QA_read.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/12_2_QA_read_subFuncs.dart';
+import 'package:swork_raon/rapivet/12_QA_read.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/12_2_QA_read_subFuncs.dart';
 import '../0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/0_commonUI.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
 
 TextEditingController _question_txtedit_control;
 bool _is_loading = false;
@@ -37,7 +37,6 @@ class _QA_write_home extends State<StatefulWidget>
     }
 
     onClick_write() async {
-
       if (_question_txtedit_control.text.trim() == "") {
         JToast().show_toast("Escreva a sua opinião ou a dúvida.", true);
         return;
@@ -57,7 +56,6 @@ class _QA_write_home extends State<StatefulWidget>
       setState(() {
         _is_loading = false;
       });
-
     }
 
     return Scaffold(

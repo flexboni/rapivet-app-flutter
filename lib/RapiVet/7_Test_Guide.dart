@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/7_2_Test_Guide_subFuncs.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/7_TimerPopup.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/7_2_Test_Guide_subFuncs.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/7_TimerPopup.dart';
 import '../0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/0_commonUI.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
 
 import '5_Main.dart';
 
@@ -42,11 +42,9 @@ class _test_guide_home extends State<StatefulWidget> {
       });
     }
 
-    goback_to_main(){
-      Navigator.pushReplacement(
-          context,
-          PageTransition(
-              type: PageTransitionType.fade, child: Main_scene()));
+    goback_to_main() {
+      Navigator.pushReplacement(context,
+          PageTransition(type: PageTransitionType.fade, child: Main_scene()));
     }
 
     // TODO: implement build
@@ -68,7 +66,7 @@ class _test_guide_home extends State<StatefulWidget> {
                       children: [
                         get_upbar(() {}, false, "MODO DE USAR",
                             in_width: s_width, callback_goBack: () {
-                              goback_to_main();
+                          goback_to_main();
                         }),
                         Padding(padding: new EdgeInsets.all(15)),
                         Container(
@@ -120,7 +118,8 @@ class _test_guide_home extends State<StatefulWidget> {
                                   get_one_btn(s_width * 0.9,
                                       rapivetStatics.app_blue, "CONFIRMAR", () {
                                     setState(() {
-                                      rapivetStatics.is_to_show_cam_guide = true;
+                                      rapivetStatics.is_to_show_cam_guide =
+                                          true;
                                       _is_showingTimer = true;
                                     });
                                   }, in_height: 50),

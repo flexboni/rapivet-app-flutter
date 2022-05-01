@@ -1,15 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:http/http.dart' as phttp;
 import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
-import 'package:http/http.dart' as phttp;
 import 'package:swork_raon/0_DataProcess/one_healthcheck_data.dart';
 import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
-import 'package:swork_raon/RapiVet/10_Result_plus.dart';
+import 'package:swork_raon/rapivet/10_Result_plus.dart';
 
 import '0_commonUI.dart';
 
@@ -475,7 +473,8 @@ class Result_subFuncs {
                             for (int i = 0; i < _types_set.length; i++)
                               Container(
                                 height: 40,
-                                padding: new EdgeInsets.fromLTRB(s_width*0.035, 0, 0, 0),
+                                padding: new EdgeInsets.fromLTRB(
+                                    s_width * 0.035, 0, 0, 0),
                                 child: RadioListTile(
                                   title: Text(
                                     _types_set[i],
@@ -490,8 +489,7 @@ class Result_subFuncs {
                                   activeColor: rapivetStatics.app_blue,
                                   onChanged: (int value) {
                                     // _value = value;
-                                    rapivetStatics.selected_check_index =
-                                        value;
+                                    rapivetStatics.selected_check_index = value;
                                     // print();
                                     Navigator.pop(context);
                                     FocusScope.of(context).unfocus();

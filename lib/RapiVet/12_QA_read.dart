@@ -4,16 +4,15 @@ import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
 import 'package:swork_raon/0_DataProcess/one_QA_data.dart';
-import 'package:swork_raon/RapiVet/11_QA_write.dart';
-import 'package:swork_raon/RapiVet/1_Welcome.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/12_2_QA_read_subFuncs.dart';
+import 'package:swork_raon/rapivet/11_QA_write.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/12_2_QA_read_subFuncs.dart';
 
 import '5_Main.dart';
 import 'SceneSubFuncs/0_commonUI.dart';
 
 bool _is_showing_questionArea = false;
 bool _is_loading = false;
-List<one_QA_data> _qa_datas_list =[];
+List<one_QA_data> _qa_datas_list = [];
 
 class QA_read extends StatefulWidget {
   @override
@@ -31,22 +30,21 @@ class _QA_read_home extends State<StatefulWidget>
   }
 
   _get_QnAs_fromServer() async {
-
     setState(() {
-      _is_loading =true;
+      _is_loading = true;
     });
 
-    _qa_datas_list=
-      await QA_read_subFuncs().get_QnA_fromServer(rapivetStatics.token);
+    _qa_datas_list =
+        await QA_read_subFuncs().get_QnA_fromServer(rapivetStatics.token);
 
-    if(_qa_datas_list==[] || _qa_datas_list.length ==0){
+    if (_qa_datas_list == [] || _qa_datas_list.length == 0) {
       _is_showing_questionArea = false;
-    }else{
+    } else {
       _is_showing_questionArea = true;
     }
 
     setState(() {
-      _is_loading =false;
+      _is_loading = false;
     });
   }
 
@@ -99,7 +97,7 @@ class _QA_read_home extends State<StatefulWidget>
                                 )
                               ]),
                           child: Container(
-                            width: s_width*0.8,
+                            width: s_width * 0.8,
                             child: Text(
                               "Você tem alguma dúvida ou quer deixar uma opinião?",
                               style: TextStyle(fontSize: 15.5),
@@ -122,7 +120,7 @@ class _QA_read_home extends State<StatefulWidget>
                           color: Colors.grey.withOpacity(0.1),
                         ),
                         Padding(padding: new EdgeInsets.all(12)),
-                        QA_read_subFuncs().get_QnA_UIs(_qa_datas_list,s_width),
+                        QA_read_subFuncs().get_QnA_UIs(_qa_datas_list, s_width),
                         Padding(padding: new EdgeInsets.all(50)),
                       ],
                     ),

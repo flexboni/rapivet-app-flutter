@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
 import 'package:swork_raon/0_CommonThisApp/String_work.dart';
 import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
 import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
-import 'package:swork_raon/RapiVet/4_RegisterPet.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/4_2_ResterPet_subfuncs.dart';
-import 'package:swork_raon/RapiVet/SceneSubFuncs/Api_manager.dart';
+import 'package:swork_raon/rapivet/4_RegisterPet.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/4_2_ResterPet_subfuncs.dart';
+import 'package:swork_raon/rapivet/SceneSubFuncs/Api_manager.dart';
 
 class Pet_data_manager {
   test() {
@@ -83,8 +83,8 @@ class Pet_data_manager {
       // image 업데이트
       if (rapivetStatics.pet_img_base64 != "") {
         print("이미지도 업데이트!!!");
-        await Api_manager().pet_photo_update(
-            rapivetStatics.token, modify_pet_uid, rapivetStatics.pet_img_base64);
+        await Api_manager().pet_photo_update(rapivetStatics.token,
+            modify_pet_uid, rapivetStatics.pet_img_base64);
       }
 
       print("pet uid=====================");
