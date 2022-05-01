@@ -4,9 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as phttp;
 import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
@@ -118,7 +116,8 @@ class _login_scene_home extends State<StatefulWidget>
         JToast().show_toast("Impossível dar continuidade.", false);
       else if (result == "success")
         JToast().show_toast(
-            "Enviamos a senha provisória para o e-mail cadastrado. Com a senha provisória faça o login e recadastre a senha nova.", false);
+            "Enviamos a senha provisória para o e-mail cadastrado. Com a senha provisória faça o login e recadastre a senha nova.",
+            false);
       else
         JToast().show_toast(result, true);
 
@@ -128,10 +127,9 @@ class _login_scene_home extends State<StatefulWidget>
     }
 
     callback_sign_up_with_facebook() async {
-
       //   FacebookAuth.in
-      final facebookLogin = FacebookLogin();
-      facebookLogin.loginBehavior=FacebookLoginBehavior.nativeOnly;
+      // final facebookLogin = FacebookLogin();
+      // facebookLogin.loginBehavior = FacebookLoginBehavior.nativeOnly;
 
       var result = null;
 
@@ -148,11 +146,13 @@ class _login_scene_home extends State<StatefulWidget>
       //final result = await facebookLogin.logIn(['email']); // ios, facebook api 3.0.0
 
       String token = "";
-      
-      try{
+
+      try {
         token = result.accessToken.token;
-      }catch(e){
-        JToast().show_toast("Você precisa instalar o aplicativo do Facebook para fazer o login usando a conta do Facebook.", false);
+      } catch (e) {
+        JToast().show_toast(
+            "Você precisa instalar o aplicativo do Facebook para fazer o login usando a conta do Facebook.",
+            false);
         return;
       }
 
@@ -165,17 +165,15 @@ class _login_scene_home extends State<StatefulWidget>
       print("profile!");
       print(profile);
 
-
-      String email =profile["email"];
-      String name  =profile["name"];
+      String email = profile["email"];
+      String name = profile["name"];
 
       setState(() {
         _is_loading = true;
       });
 
       try {
-        await Login_subFuncs()
-            .operate_social_sign(context, email, name);
+        await Login_subFuncs().operate_social_sign(context, email, name);
 
         print("success login!!!");
       } catch (error) {
@@ -187,8 +185,6 @@ class _login_scene_home extends State<StatefulWidget>
       setState(() {
         _is_loading = false;
       });
-
-
     }
 
     callback_sign_up_with_google() async {
@@ -198,7 +194,6 @@ class _login_scene_home extends State<StatefulWidget>
       });
 
       try {
-
         GoogleSignInAccount result = await _googleSignIn.signIn();
 
         await Login_subFuncs()
@@ -469,7 +464,8 @@ class _login_scene_home extends State<StatefulWidget>
                                         context,
                                         MaterialPageRoute(
                                             builder: (BuildContext context) =>
-                                                SignUp_scene(SIGNUP_MODE.SIGNUP)));
+                                                SignUp_scene(
+                                                    SIGNUP_MODE.SIGNUP)));
                                   },
                                   child: Container(
                                     width: s_width * 0.8,
@@ -630,7 +626,7 @@ class _login_scene_home extends State<StatefulWidget>
                                             'assets/facebook_sign.png',
                                             "   Cadastre-se no Facebook",
                                             () async {
-                                          callback_sign_up_with_facebook();
+                                          // callback_sign_up_with_facebook();
                                         }, in_height: 50),
                                       )),
                                   Padding(padding: new EdgeInsets.all(5)),
