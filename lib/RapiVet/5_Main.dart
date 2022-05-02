@@ -6,9 +6,9 @@ import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
 import 'package:swork_raon/0_DataProcess/All_health_check_manager.dart';
 import 'package:swork_raon/rapivet/12_QA_read.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/5_2_main_subFuncs.dart';
 import 'package:swork_raon/rapivet/main.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/5_2_main_subFuncs.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '9_Result.dart';

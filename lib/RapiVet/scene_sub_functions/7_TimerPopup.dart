@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/ImgSearch_main.dart';
 
-import '0_commonUI.dart';
+import 'common_ui.dart';
 import '7_2_Test_Guide_subFuncs.dart';
 
 bool _is_showingTimer;
@@ -108,11 +108,12 @@ class _timerPopup extends State<TimerPopup> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (BuildContext context) => ImgSearchHome()));
+                              builder: (BuildContext context) =>
+                                  ImgSearchHome()));
                     }, in_height: 50),
                     Padding(padding: new EdgeInsets.all(8)),
-                    get_one_btn(s_width * 0.8, rapivetStatics.app_blue, "Fechar",
-                        () {
+                    get_one_btn(
+                        s_width * 0.8, rapivetStatics.app_blue, "Fechar", () {
                       _endTimer();
                     }, in_height: 50),
                     Padding(padding: new EdgeInsets.all(15)),
@@ -154,18 +155,19 @@ class _timerPopup extends State<TimerPopup> {
     Timer.periodic(Duration(milliseconds: 13), (timer) {
       if (_exitTimer) timer.cancel();
 
-      if (_is_showingTimer==false) return;
+      if (_is_showingTimer == false) return;
 
       time_called = time_called + 13;
 
       Duration gap = DateTime.now().difference(_timer_startTime);
 
-      int remainedTime = rapivetStatics.test_takePic_waitSec * 1000 - gap.inMilliseconds;
+      int remainedTime =
+          rapivetStatics.test_takePic_waitSec * 1000 - gap.inMilliseconds;
 
       _timeRemain = remainedTime;
       _timeRemain_str = Test_Guide_subFuncs().millsec_to_MMssmm(_timeRemain);
 
-      if(_timeRemain<=0){
+      if (_timeRemain <= 0) {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(

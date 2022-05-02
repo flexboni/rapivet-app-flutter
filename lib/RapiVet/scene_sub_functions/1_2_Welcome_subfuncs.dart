@@ -8,9 +8,9 @@ import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/0_DataProcess/All_health_check_manager.dart';
 import 'package:swork_raon/0_DataProcess/Pet_data_manager.dart';
 import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/Api_manager.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/test/0_API_Test_subfuncs.dart';
 import 'package:swork_raon/rapivet/login.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/test/0_API_Test_subfuncs.dart';
 
 import '../4_RegisterPet.dart';
 import '../5_Main.dart';

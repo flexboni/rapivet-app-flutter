@@ -6,7 +6,7 @@
 
 import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
 import 'package:swork_raon/rapivet/10_Result_plus.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/9_2_Result_subFuncs.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/9_2_Result_subFuncs.dart';
 
 import 'one_healthcheck_data.dart';
 

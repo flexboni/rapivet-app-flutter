@@ -4,9 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/rapivet/12_QA_read.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/12_2_QA_read_subFuncs.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/12_2_QA_read_subFuncs.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
+
 import '../0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
 
 TextEditingController _question_txtedit_control;
 bool _is_loading = false;

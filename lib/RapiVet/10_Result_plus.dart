@@ -1,19 +1,17 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/0_DataProcess/one_healthcheck_data.dart';
 import 'package:swork_raon/rapivet/9_Result.dart';
-import '../0_CommonThisApp/rapivetStatics.dart';
 
+import '../0_CommonThisApp/rapivetStatics.dart';
 import '5_Main.dart';
-import 'SceneSubFuncs/0_commonUI.dart';
-import 'SceneSubFuncs/10_2_ResultPlus_subFuncs.dart';
-import 'SceneSubFuncs/9_2_Result_subFuncs.dart';
+import 'scene_sub_functions/10_2_ResultPlus_subFuncs.dart';
+import 'scene_sub_functions/9_2_Result_subFuncs.dart';
+import 'scene_sub_functions/common_ui.dart';
 
 enum RESULT_PLUS_MODE {
   KETON,

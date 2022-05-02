@@ -7,36 +7,36 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as phttp;
 import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/2_2_Login_subfuncs.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/Api_manager.dart';
 import 'package:swork_raon/rapivet/main.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/2_2_Login_subfuncs.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
+import 'package:swork_raon/rapivet/sign_up.dart';
 
 import '../0_CommonThisApp/rapivetStatics.dart';
-import '3_Signup.dart';
-import 'SceneSubFuncs/0_commonUI.dart';
 
 class LoginPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _login_scene_home();
+  State<StatefulWidget> createState() => _LoginPageState();
 }
 
-TextEditingController _email_txtedit_control;
-TextEditingController _pw_txtedit_control;
-TextEditingController _pwSearch_email_txtedit_control;
+TextEditingController emailController;
+TextEditingController passwordController;
+TextEditingController searchPasswordController;
 
 GoogleSignIn _googleSignIn;
 
-bool _is_social_sign_pop_on = false;
+bool showSocialSignPopup = false;
 
-class _login_scene_home extends State<StatefulWidget>
+class _LoginPageState extends State<StatefulWidget>
     with TickerProviderStateMixin {
-  bool _is_loading = false;
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
 
-    _is_loading = false;
+    isLoading = false;
     //
     _googleSignIn = GoogleSignIn(
       scopes: [
@@ -45,10 +45,10 @@ class _login_scene_home extends State<StatefulWidget>
       ],
     );
 
-    _is_social_sign_pop_on = false;
-    _email_txtedit_control = TextEditingController();
-    _pw_txtedit_control = TextEditingController();
-    _pwSearch_email_txtedit_control = TextEditingController();
+    showSocialSignPopup = false;
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    searchPasswordController = TextEditingController();
 
     // 필요없는듯
     _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
@@ -57,75 +57,76 @@ class _login_scene_home extends State<StatefulWidget>
     });
   }
 
-  bool _is_hide_password = true;
+  bool isHidePassword = true;
 
   @override
   Widget build(BuildContext context) {
-    double s_width = MediaQuery.of(context).size.width;
-    double s_height = MediaQuery.of(context).size.height;
+    double widthSize = MediaQuery.of(context).size.width;
+    double heightSize = MediaQuery.of(context).size.height;
 
-    callback_click_hidePassword() {
-      print("callback_click_hidePassword");
+    void handleHidePassword() {
       setState(() {
-        _is_hide_password = !_is_hide_password;
+        isHidePassword = !isHidePassword;
       });
     }
 
-    callback_click_loginBtn() async {
-      print("callback_click_loginBtn");
-
+    void clickLoginButton() async {
       setState(() {
-        _is_loading = true;
+        isLoading = true;
       });
 
-      String token = await Api_manager().login(
-          _email_txtedit_control.text.trim(), _pw_txtedit_control.text.trim());
+      String token = await Api_manager()
+          .login(emailController.text.trim(), passwordController.text.trim());
 
-      // 로그인 성공 -- temp
-      if (token != "") {
+      // 로그인 실패
+      if (token.isEmpty) {
+        JToast().show_toast("Não foi possível fazer o Login.", true);
+
+        setState(() {
+          isLoading = false;
+        });
+      } else {
+        // 로그인 성공 -- temp
         // load pet list
-        List<one_pet_data> petDatas = await Api_manager().get_pet_list(token);
-        rapivetStatics.pet_data_list = petDatas;
+        List<one_pet_data> petData = await Api_manager().get_pet_list(token);
+        rapivetStatics.pet_data_list = petData;
 
         Login_subFuncs().operate_after_login(context, token);
       }
 
-      // 로그인 실패
-      if (token == "") {
-        JToast().show_toast("Não foi possível fazer o Login.", true);
-
-        setState(() {
-          _is_loading = false;
-        });
-
-        return;
-      }
+      setState(() {
+        isLoading = false;
+      });
     }
 
-    callback_click_search_pw() async {
+    void clickSearchPassword() async {
       setState(() {
-        _is_loading = true;
+        isLoading = true;
       });
 
-      String result = await Api_manager()
-          .search_pw(_pwSearch_email_txtedit_control.text.trim());
-      print(result);
-
-      if (result == "")
-        JToast().show_toast("Impossível dar continuidade.", false);
-      else if (result == "success")
+      String result =
+          await Api_manager().search_pw(searchPasswordController.text.trim());
+      if (result == "") {
         JToast().show_toast(
-            "Enviamos a senha provisória para o e-mail cadastrado. Com a senha provisória faça o login e recadastre a senha nova.",
-            false);
-      else
+          "Impossível dar continuidade.",
+          false,
+        );
+      } else if (result == "success") {
+        JToast().show_toast(
+          "Enviamos a senha provisória para o e-mail cadastrado. Com a senha provisória faça o login e recadastre a senha nova.",
+          false,
+        );
+      } else {
         JToast().show_toast(result, true);
+      }
 
       setState(() {
-        _is_loading = false;
+        isLoading = false;
       });
     }
 
-    callback_sign_up_with_facebook() async {
+    // TODO
+    void handleFacebookSignup() async {
       //   FacebookAuth.in
       // final facebookLogin = FacebookLogin();
       // facebookLogin.loginBehavior = FacebookLoginBehavior.nativeOnly;
@@ -168,7 +169,7 @@ class _login_scene_home extends State<StatefulWidget>
       String name = profile["name"];
 
       setState(() {
-        _is_loading = true;
+        isLoading = true;
       });
 
       try {
@@ -182,47 +183,55 @@ class _login_scene_home extends State<StatefulWidget>
       }
 
       setState(() {
-        _is_loading = false;
+        isLoading = false;
       });
     }
 
-    callback_sign_up_with_google() async {
+    void handleGoogleSignUp() async {
       setState(() {
-        _is_loading = true;
-        _is_social_sign_pop_on = false;
+        isLoading = true;
+        showSocialSignPopup = false;
       });
 
       try {
         GoogleSignInAccount result = await _googleSignIn.signIn();
-
-        await Login_subFuncs()
-            .operate_social_sign(context, result.email, result.displayName);
-
-        print("success login!!!");
+        await Login_subFuncs().operate_social_sign(
+          context,
+          result.email,
+          result.displayName,
+        );
       } catch (error) {
-        print("failed login!!!");
-        print(error);
         JToast().show_toast("Impossível dar continuidade.", true);
+      } finally {
+        setState(() {
+          isLoading = false;
+        });
       }
-
-      setState(() {
-        _is_loading = false;
-      });
     }
 
-    callback_goback() {
-      Navigator.pushReplacement(
+    void clickGoBack() => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => MainPage(),
+          ),
+        );
+
+    void showSearchPasswordDialog() {
+      searchPasswordController.text = "";
+      // TODO 개선하기
+      showDialogPopup(
         context,
-        MaterialPageRoute(builder: (BuildContext context) => MainPage()),
+        widthSize,
+        searchPasswordController,
+        "Por favor insira seu e-mail.",
+        "nome@email.com",
+        () {
+          clickSearchPassword();
+        },
+        () {},
+        is_using_number_only: false,
+        is_phone_number: false,
       );
-    }
-
-    void _showDialog_search_pw() {
-      _pwSearch_email_txtedit_control.text = "";
-      show_dialog_popoup(context, s_width, _pwSearch_email_txtedit_control,
-          "Por favor insira seu e-mail.", "nome@email.com", () {
-        callback_click_search_pw();
-      }, () {}, is_using_number_only: false, is_phone_number: false);
     }
 
     // void _showDialog() {
@@ -323,353 +332,381 @@ class _login_scene_home extends State<StatefulWidget>
         return false;
       },
       child: Scaffold(
-          backgroundColor: rapivetStatics.app_bg,
-          body: AnnotatedRegion<SystemUiOverlayStyle>(
-            value: SystemUiOverlayStyle.dark,
-            child: SafeArea(
-              child: Stack(
-                children: [
-                  SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    child: Container(
-                      width: s_width,
-                      child: Column(
-                        children: [
-                          Padding(padding: new EdgeInsets.all(53)),
-                          Container(
-                            width: s_width * 0.9,
-                            child: Text(
-                              "Já sou cliente Rapivet",
-                              style: TextStyle(
-                                  fontFamily: "Roboto",
-                                  fontSize: 17.5,
-                                  color: rapivetStatics.app_black),
-                            ),
+        backgroundColor: rapivetStatics.app_bg,
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.dark,
+          child: SafeArea(
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  child: Container(
+                    width: widthSize,
+                    child: Column(
+                      children: [
+                        Padding(padding: new EdgeInsets.all(53)),
+                        Container(
+                          width: widthSize * 0.9,
+                          child: Text(
+                            "Já sou cliente Rapivet",
+                            style: TextStyle(
+                                fontFamily: "Roboto",
+                                fontSize: 17.5,
+                                color: rapivetStatics.app_black),
                           ),
-                          Padding(padding: new EdgeInsets.all(12)),
-                          get_explain_of_textfield_up(s_width, "E-mail"),
-                          Padding(padding: new EdgeInsets.all(2)),
-                          get_one_textfield(s_width, rapivetStatics.app_blue,
-                              _email_txtedit_control, ""),
-                          Padding(padding: new EdgeInsets.all(2)),
-                          get_explain_of_textfield_down(
-                              s_width, "Ex. nome@email.com"),
-                          Padding(padding: new EdgeInsets.all(8)),
-                          get_explain_of_textfield_up(s_width, "Sehna"),
-                          Padding(padding: new EdgeInsets.all(2)),
-                          get_one_textfield(s_width, rapivetStatics.app_blue,
-                              _pw_txtedit_control, "",
-                              is_password: _is_hide_password,
-                              is_to_show_pw_visibleMark: true,
-                              Callback_click_pw_show_btn:
-                                  callback_click_hidePassword),
-                          Padding(padding: new EdgeInsets.all(15)),
-                          get_one_btn(
-                              s_width * 0.9,
-                              rapivetStatics.app_blue.withOpacity(0.8),
-                              "Entar",
-                              callback_click_loginBtn,
-                              in_height: 52),
-                          Padding(padding: new EdgeInsets.all(0)),
-                          OutlinedButton(
+                        ),
+                        Padding(padding: new EdgeInsets.all(12)),
+                        get_explain_of_textfield_up(
+                          widthSize,
+                          "E-mail",
+                        ),
+                        Padding(padding: new EdgeInsets.all(2)),
+                        get_one_textfield(
+                          widthSize,
+                          rapivetStatics.app_blue,
+                          emailController,
+                          "",
+                        ),
+                        Padding(padding: new EdgeInsets.all(2)),
+                        get_explain_of_textfield_down(
+                          widthSize,
+                          "Ex. nome@email.com",
+                        ),
+                        Padding(padding: new EdgeInsets.all(8)),
+                        get_explain_of_textfield_up(
+                          widthSize,
+                          "Sehna",
+                        ),
+                        Padding(padding: new EdgeInsets.all(2)),
+                        get_one_textfield(
+                          widthSize,
+                          rapivetStatics.app_blue,
+                          passwordController,
+                          "",
+                          is_password: isHidePassword,
+                          is_to_show_pw_visibleMark: true,
+                          Callback_click_pw_show_btn: handleHidePassword,
+                        ),
+                        Padding(padding: new EdgeInsets.all(15)),
+                        get_one_btn(
+                          widthSize * 0.9,
+                          rapivetStatics.app_blue.withOpacity(0.8),
+                          "Entar",
+                          clickLoginButton,
+                          in_height: 52,
+                        ),
+                        Padding(padding: new EdgeInsets.all(0)),
+                        OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(
+                                color: rapivetStatics.app_bg, width: 0),
+                          ),
+                          onPressed: () {
+                            showSearchPasswordDialog();
+                          },
+                          child: Text(
+                            "Esqueci minha senha",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: rapivetStatics.app_blue),
+                          ),
+                        ),
+                        Padding(padding: new EdgeInsets.all(15)),
+                        Container(
+                          width: widthSize * 0.9,
+                          height: 52.88,
+                          child: FittedBox(
+                            child: OutlinedButton(
                               style: OutlinedButton.styleFrom(
                                 side: BorderSide(
-                                    color: rapivetStatics.app_bg, width: 0),
+                                    color: rapivetStatics.normal_ui_line_color,
+                                    width: 1),
+                                backgroundColor: Colors.white,
+                                shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(30.0),
+                                ),
                               ),
                               onPressed: () {
-                                _showDialog_search_pw();
+                                setState(() {
+                                  showSocialSignPopup = true;
+                                });
                               },
-                              child: Text(
-                                "Esqueci minha senha",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: rapivetStatics.app_blue),
-                              )),
-                          Padding(padding: new EdgeInsets.all(15)),
-                          Container(
-                            width: s_width * 0.9,
-                            height: 52.88,
-                            child: FittedBox(
-                              child: OutlinedButton(
-                                  style: OutlinedButton.styleFrom(
-                                      side: BorderSide(
-                                          color: rapivetStatics
-                                              .normal_ui_line_color,
-                                          width: 1),
-                                      backgroundColor: Colors.white,
-                                      shape: new RoundedRectangleBorder(
-                                          borderRadius:
-                                              new BorderRadius.circular(30.0))),
-                                  onPressed: () {
-                                    setState(() {
-                                      _is_social_sign_pop_on = true;
-                                    });
-                                  },
-                                  child: Container(
-                                    width: s_width * 0.8,
-                                    alignment: Alignment.center,
-                                    height: 52.88,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "CONTINUAR COM    ",
-                                          style: TextStyle(
-                                              fontFamily: "Roboto",
-                                              color: Colors.black
-                                                  .withOpacity(0.4)),
-                                        ),
-                                        Container(
-                                            height: 24,
-                                            child: Image.asset(
-                                                'assets/facebook.png')),
-                                        Text(
-                                          "   OU  ",
-                                          style: TextStyle(
-                                              // fontWeight: FontWeight.bold,
-                                              fontFamily: "Roboto",
-                                              color: Colors.black
-                                                  .withOpacity(0.4)),
-                                        ),
-                                        Container(
-                                            height: 28,
-                                            child: Image.asset(
-                                                'assets/google.png')),
-                                      ],
-                                    ),
-                                  )),
-                            ),
-                          ),
-                          Padding(padding: new EdgeInsets.all(7)),
-                          Container(
-                            width: s_width * 0.9,
-                            height: 52.88,
-                            child: FittedBox(
-                              child: OutlinedButton(
-                                  style: OutlinedButton.styleFrom(
-                                      backgroundColor: Colors.white,
-                                      side: BorderSide(
-                                          color: rapivetStatics.app_blue,
-                                          width: 1),
-                                      shape: new RoundedRectangleBorder(
-                                          borderRadius:
-                                              new BorderRadius.circular(30.0))),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                SignUp_scene(
-                                                    SIGNUP_MODE.SIGNUP)));
-                                  },
-                                  child: Container(
-                                    width: s_width * 0.8,
-                                    alignment: Alignment.center,
-                                    height: 52.88,
-                                    child: Text(
-                                      "SOU UM NOVO USUARIO",
+                              child: Container(
+                                width: widthSize * 0.8,
+                                alignment: Alignment.center,
+                                height: 52.88,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "CONTINUAR COM    ",
                                       style: TextStyle(
-                                          fontFamily: "Roboto",
-                                          //  fontWeight: FontWeight.bold,
-                                          color: rapivetStatics.app_blue),
+                                        fontFamily: "Roboto",
+                                        color: Colors.black.withOpacity(0.4),
+                                      ),
                                     ),
-                                  )),
+                                    Container(
+                                      height: 24,
+                                      child: Image.asset('assets/facebook.png'),
+                                    ),
+                                    Text(
+                                      "   OU  ",
+                                      style: TextStyle(
+                                        // fontWeight: FontWeight.bold,
+                                        fontFamily: "Roboto",
+                                        color: Colors.black.withOpacity(0.4),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 28,
+                                      child: Image.asset('assets/google.png'),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                          Padding(padding: new EdgeInsets.all(15)),
-                          // Container(
-                          //   width: s_width * 0.9,
-                          //   height: 52.88,
-                          //   child: FittedBox(
-                          //     child: OutlinedButton(
-                          //         style: OutlinedButton.styleFrom(
-                          //             backgroundColor: Colors.white,
-                          //             side: BorderSide(
-                          //                 color: rapivetStatics.app_blue, width: 1),
-                          //             shape: new RoundedRectangleBorder(
-                          //                 borderRadius:
-                          //                     new BorderRadius.circular(30.0))),
-                          //         onPressed: () {
-                          //           Navigator.push(
-                          //               context,
-                          //               MaterialPageRoute(
-                          //                   builder: (BuildContext context) =>
-                          //                       RegisterPet_scene(COME_FROM.WELCOME,
-                          //                           PET_REGISTER_MODE.ADD)));
-                          //         },
-                          //         child: Container(
-                          //           width: s_width * 0.8,
-                          //           alignment: Alignment.center,
-                          //           height: 52.88,
-                          //           child: Text(
-                          //             "!!!! TEST - PET !!!",
-                          //             style: TextStyle(
-                          //                 fontFamily: "Roboto",
-                          //                 //  fontWeight: FontWeight.bold,
-                          //                 color: rapivetStatics.app_blue),
-                          //           ),
-                          //         )),
-                          //   ),
-                          // ),
-                          // Padding(padding: new EdgeInsets.all(15)),
-                          // Container(
-                          //   width: s_width * 0.9,
-                          //   height: 52.88,
-                          //   child: FittedBox(
-                          //     child: OutlinedButton(
-                          //         style: OutlinedButton.styleFrom(
-                          //             backgroundColor: Colors.white,
-                          //             side: BorderSide(
-                          //                 color: rapivetStatics.app_blue, width: 1),
-                          //             shape: new RoundedRectangleBorder(
-                          //                 borderRadius:
-                          //                     new BorderRadius.circular(30.0))),
-                          //         onPressed: () {
-                          //           Navigator.push(
-                          //               context,
-                          //               MaterialPageRoute(
-                          //                   builder: (BuildContext context) =>
-                          //                       Main_scene()));
-                          //         },
-                          //         child: Container(
-                          //           width: s_width * 0.8,
-                          //           alignment: Alignment.center,
-                          //           height: 52.88,
-                          //           child: Text(
-                          //             "!!!! TEST - MAIN !!!",
-                          //             style: TextStyle(
-                          //                 fontFamily: "Roboto",
-                          //                 //  fontWeight: FontWeight.bold,
-                          //                 color: rapivetStatics.app_blue),
-                          //           ),
-                          //         )),
-                          //   ),
-                          // ),
-                          // Padding(padding: new EdgeInsets.all(15)),
-                          // Container(
-                          //   width: s_width * 0.9,
-                          //   height: 52.88,
-                          //   child: FittedBox(
-                          //     child: OutlinedButton(
-                          //         style: OutlinedButton.styleFrom(
-                          //             backgroundColor: Colors.white,
-                          //             side: BorderSide(
-                          //                 color: rapivetStatics.app_blue, width: 1),
-                          //             shape: new RoundedRectangleBorder(
-                          //                 borderRadius:
-                          //                 new BorderRadius.circular(30.0))),
-                          //         onPressed: () {
-                          //           Navigator.push(
-                          //               context,
-                          //               MaterialPageRoute(
-                          //                   builder: (BuildContext context) =>
-                          //                       Api_test_scene()));
-                          //         },
-                          //         child: Container(
-                          //           width: s_width * 0.8,
-                          //           alignment: Alignment.center,
-                          //           height: 52.88,
-                          //           child: Text(
-                          //             "!!!! TEST - API !!!",
-                          //             style: TextStyle(
-                          //                 fontFamily: "Roboto",
-                          //                 //  fontWeight: FontWeight.bold,
-                          //                 color: rapivetStatics.app_blue),
-                          //           ),
-                          //         )),
-                          //   ),
-                          // ),
-                          // Padding(padding: new EdgeInsets.all(15)),
-                        ],
-                      ),
+                        ),
+                        Padding(padding: new EdgeInsets.all(7)),
+                        Container(
+                          width: widthSize * 0.9,
+                          height: 52.88,
+                          child: FittedBox(
+                            child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                side: BorderSide(
+                                    color: rapivetStatics.app_blue, width: 1),
+                                shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(30.0),
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        SignUpPage(SIGNUP_MODE.SIGNUP),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: widthSize * 0.8,
+                                alignment: Alignment.center,
+                                height: 52.88,
+                                child: Text(
+                                  "SOU UM NOVO USUARIO",
+                                  style: TextStyle(
+                                      fontFamily: "Roboto",
+                                      //  fontWeight: FontWeight.bold,
+                                      color: rapivetStatics.app_blue),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(padding: new EdgeInsets.all(15)),
+                        // Container(
+                        //   width: s_width * 0.9,
+                        //   height: 52.88,
+                        //   child: FittedBox(
+                        //     child: OutlinedButton(
+                        //         style: OutlinedButton.styleFrom(
+                        //             backgroundColor: Colors.white,
+                        //             side: BorderSide(
+                        //                 color: rapivetStatics.app_blue, width: 1),
+                        //             shape: new RoundedRectangleBorder(
+                        //                 borderRadius:
+                        //                     new BorderRadius.circular(30.0))),
+                        //         onPressed: () {
+                        //           Navigator.push(
+                        //               context,
+                        //               MaterialPageRoute(
+                        //                   builder: (BuildContext context) =>
+                        //                       RegisterPet_scene(COME_FROM.WELCOME,
+                        //                           PET_REGISTER_MODE.ADD)));
+                        //         },
+                        //         child: Container(
+                        //           width: s_width * 0.8,
+                        //           alignment: Alignment.center,
+                        //           height: 52.88,
+                        //           child: Text(
+                        //             "!!!! TEST - PET !!!",
+                        //             style: TextStyle(
+                        //                 fontFamily: "Roboto",
+                        //                 //  fontWeight: FontWeight.bold,
+                        //                 color: rapivetStatics.app_blue),
+                        //           ),
+                        //         )),
+                        //   ),
+                        // ),
+                        // Padding(padding: new EdgeInsets.all(15)),
+                        // Container(
+                        //   width: s_width * 0.9,
+                        //   height: 52.88,
+                        //   child: FittedBox(
+                        //     child: OutlinedButton(
+                        //         style: OutlinedButton.styleFrom(
+                        //             backgroundColor: Colors.white,
+                        //             side: BorderSide(
+                        //                 color: rapivetStatics.app_blue, width: 1),
+                        //             shape: new RoundedRectangleBorder(
+                        //                 borderRadius:
+                        //                     new BorderRadius.circular(30.0))),
+                        //         onPressed: () {
+                        //           Navigator.push(
+                        //               context,
+                        //               MaterialPageRoute(
+                        //                   builder: (BuildContext context) =>
+                        //                       Main_scene()));
+                        //         },
+                        //         child: Container(
+                        //           width: s_width * 0.8,
+                        //           alignment: Alignment.center,
+                        //           height: 52.88,
+                        //           child: Text(
+                        //             "!!!! TEST - MAIN !!!",
+                        //             style: TextStyle(
+                        //                 fontFamily: "Roboto",
+                        //                 //  fontWeight: FontWeight.bold,
+                        //                 color: rapivetStatics.app_blue),
+                        //           ),
+                        //         )),
+                        //   ),
+                        // ),
+                        // Padding(padding: new EdgeInsets.all(15)),
+                        // Container(
+                        //   width: s_width * 0.9,
+                        //   height: 52.88,
+                        //   child: FittedBox(
+                        //     child: OutlinedButton(
+                        //         style: OutlinedButton.styleFrom(
+                        //             backgroundColor: Colors.white,
+                        //             side: BorderSide(
+                        //                 color: rapivetStatics.app_blue, width: 1),
+                        //             shape: new RoundedRectangleBorder(
+                        //                 borderRadius:
+                        //                 new BorderRadius.circular(30.0))),
+                        //         onPressed: () {
+                        //           Navigator.push(
+                        //               context,
+                        //               MaterialPageRoute(
+                        //                   builder: (BuildContext context) =>
+                        //                       Api_test_scene()));
+                        //         },
+                        //         child: Container(
+                        //           width: s_width * 0.8,
+                        //           alignment: Alignment.center,
+                        //           height: 52.88,
+                        //           child: Text(
+                        //             "!!!! TEST - API !!!",
+                        //             style: TextStyle(
+                        //                 fontFamily: "Roboto",
+                        //                 //  fontWeight: FontWeight.bold,
+                        //                 color: rapivetStatics.app_blue),
+                        //           ),
+                        //         )),
+                        //   ),
+                        // ),
+                        // Padding(padding: new EdgeInsets.all(15)),
+                      ],
                     ),
                   ),
-                  get_upbar(() {}, false, "LOGIN",
-                      in_width: s_width, callback_goBack: callback_goback),
-                  Visibility(
-                      visible: _is_social_sign_pop_on,
-                      child: Container(
-                        color: Colors.black.withOpacity(0.8),
-                        width: s_width,
-                        height: s_height,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: s_width * 0.9,
-                              decoration: BoxDecoration(
-                                //shape: BoxShape.circle,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5),
-                                ),
-                                color: Colors.white,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                      padding:
-                                          new EdgeInsets.all(s_width * 0.025)),
-                                  Container(
-                                      width: s_width * 0.8,
-                                      child: FittedBox(
-                                        fit: BoxFit.scaleDown,
-                                        child: get_one_login_btn(
-                                            s_width * 0.8,
-                                            Color.fromARGB(255, 59, 87, 157),
-                                            Colors.white,
-                                            'assets/facebook_sign.png',
-                                            "   Cadastre-se no Facebook",
-                                            () async {
-                                          // callback_sign_up_with_facebook();
-                                        }, in_height: 50),
-                                      )),
-                                  Padding(padding: new EdgeInsets.all(5)),
-                                  Container(
-                                      width: s_width * 0.8,
-                                      child: FittedBox(
-                                        fit: BoxFit.scaleDown,
-                                        child: get_one_login_btn(
-                                            s_width * 0.8,
-                                            Colors.white,
-                                            rapivetStatics.app_black,
-                                            'assets/google_sign.png',
-                                            "   Cadastre-se com o Google", () {
-                                          callback_sign_up_with_google();
-                                        }, in_height: 50, icon_height: 33),
-                                      )),
-                                  Padding(padding: new EdgeInsets.all(5)),
-                                  Container(
-                                      width: s_width * 0.8,
-                                      child: FittedBox(
-                                        fit: BoxFit.scaleDown,
-                                        child: get_one_login_btn(
-                                            s_width * 0.8,
-                                            rapivetStatics.app_blue,
-                                            Colors.white,
-                                            '',
-                                            "Fechar", () {
-                                          setState(() {
-                                            _is_social_sign_pop_on = false;
-                                          });
-                                        }, in_height: 50),
-                                      )),
-                                  Padding(
-                                      padding:
-                                          new EdgeInsets.all(s_width * 0.025)),
-                                ],
-                              ),
+                ),
+                get_upbar(() {}, false, "LOGIN",
+                    in_width: widthSize, callback_goBack: clickGoBack),
+                Visibility(
+                  visible: showSocialSignPopup,
+                  child: Container(
+                    color: Colors.black.withOpacity(0.8),
+                    width: widthSize,
+                    height: heightSize,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: widthSize * 0.9,
+                          decoration: BoxDecoration(
+                            //shape: BoxShape.circle,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(5),
                             ),
-                          ],
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: new EdgeInsets.all(widthSize * 0.025),
+                              ),
+                              Container(
+                                width: widthSize * 0.8,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: get_one_login_btn(
+                                      widthSize * 0.8,
+                                      Color.fromARGB(255, 59, 87, 157),
+                                      Colors.white,
+                                      'assets/facebook_sign.png',
+                                      "   Cadastre-se no Facebook", () async {
+                                    // callback_sign_up_with_facebook();
+                                  }, in_height: 50),
+                                ),
+                              ),
+                              Padding(padding: new EdgeInsets.all(5)),
+                              Container(
+                                width: widthSize * 0.8,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: get_one_login_btn(
+                                      widthSize * 0.8,
+                                      Colors.white,
+                                      rapivetStatics.app_black,
+                                      'assets/google_sign.png',
+                                      "   Cadastre-se com o Google", () {
+                                    handleGoogleSignUp();
+                                  }, in_height: 50, icon_height: 33),
+                                ),
+                              ),
+                              Padding(padding: new EdgeInsets.all(5)),
+                              Container(
+                                  width: widthSize * 0.8,
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: get_one_login_btn(
+                                        widthSize * 0.8,
+                                        rapivetStatics.app_blue,
+                                        Colors.white,
+                                        '',
+                                        "Fechar", () {
+                                      setState(() {
+                                        showSocialSignPopup = false;
+                                      });
+                                    }, in_height: 50),
+                                  )),
+                              Padding(
+                                padding: new EdgeInsets.all(widthSize * 0.025),
+                              ),
+                            ],
+                          ),
                         ),
-                      )),
-                  common_show_loading(s_height, s_width, 0, this, _is_loading),
-                ],
-              ),
+                      ],
+                    ),
+                  ),
+                ),
+                common_show_loading(
+                  heightSize,
+                  widthSize,
+                  0,
+                  this,
+                  isLoading,
+                ),
+              ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

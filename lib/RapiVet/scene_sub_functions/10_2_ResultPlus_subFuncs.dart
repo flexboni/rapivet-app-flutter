@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
 import 'package:swork_raon/0_DataProcess/one_healthcheck_data.dart';
 import 'package:swork_raon/rapivet/10_Result_plus.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
 
 class ResultPlus_subFuncs {
   // 화면에 보이는대로

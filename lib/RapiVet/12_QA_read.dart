@@ -1,14 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
 import 'package:swork_raon/0_DataProcess/one_QA_data.dart';
 import 'package:swork_raon/rapivet/11_QA_write.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/12_2_QA_read_subFuncs.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/12_2_QA_read_subFuncs.dart';
 
 import '5_Main.dart';
-import 'SceneSubFuncs/0_commonUI.dart';
+import 'scene_sub_functions/common_ui.dart';
 
 bool _is_showing_questionArea = false;
 bool _is_loading = false;

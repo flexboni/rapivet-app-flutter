@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/1_2_Welcome_subfuncs.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/1_2_Welcome_subfuncs.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
 import '../0_CommonThisApp/rapivetStatics.dart';
 

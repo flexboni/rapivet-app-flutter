@@ -12,8 +12,8 @@ import 'package:swork_raon/TestModule/First_cameraTest/testStatics.dart';
 import 'package:swork_raon/TestModule/Img_Proc_testModule/SubFuncs/SearchingResult/Search_ultimate_result.dart';
 import 'package:swork_raon/TestModule/Img_Proc_testModule/SubFuncs/SearchingResult/stickResult_dataset.dart';
 import 'package:swork_raon/rapivet/9_Result.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/Api_manager.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
 import '../../Loading_imgsearch.dart';
 // find check area ======================================================================================

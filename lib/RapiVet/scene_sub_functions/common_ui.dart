@@ -9,17 +9,15 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/0_DataProcess/All_health_check_manager.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/5_2_main_subFuncs.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/test/0_Api_Test.dart';
-import '../../0_CommonThisApp/rapivetStatics.dart';
 import 'package:swork_raon/rapivet/10_Result_plus.dart';
-import 'package:swork_raon/rapivet/11_QA_write.dart';
 import 'package:swork_raon/rapivet/6_userInfo.dart';
 import 'package:swork_raon/rapivet/7_Test_Guide.dart';
 import 'package:swork_raon/rapivet/9_Result.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/5_2_main_subFuncs.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../0_CommonThisApp/rapivetStatics.dart';
 import '../4_RegisterPet.dart';
 import '../5_Main.dart';
 import '4_2_ResterPet_subfuncs.dart';
@@ -359,7 +357,7 @@ int _get_current_pet_sort_list(
 }
 
 @override
-void show_dialog_popoup(
+void showDialogPopup(
     BuildContext context,
     double s_width,
     TextEditingController _in_txt_edit_cont,

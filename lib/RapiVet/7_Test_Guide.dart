@@ -1,15 +1,11 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/7_2_Test_Guide_subFuncs.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/7_TimerPopup.dart';
-import '../0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/7_TimerPopup.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
+import '../0_CommonThisApp/rapivetStatics.dart';
 import '5_Main.dart';
 
 class Test_Guide extends StatefulWidget {

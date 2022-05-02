@@ -19,7 +19,7 @@ import 'package:swork_raon/TestModule/First_cameraTest/subFuncs/ImgSearch_subFun
 import 'package:swork_raon/TestModule/First_cameraTest/subFuncs/animated_guide.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/testStatics.dart';
 import 'package:swork_raon/rapivet/7_Test_Guide.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
 import '../../0_CommonThisApp/rapivetStatics.dart';
 

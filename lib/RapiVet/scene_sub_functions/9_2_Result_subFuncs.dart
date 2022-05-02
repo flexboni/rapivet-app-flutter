@@ -9,7 +9,7 @@ import 'package:swork_raon/0_DataProcess/one_healthcheck_data.dart';
 import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
 import 'package:swork_raon/rapivet/10_Result_plus.dart';
 
-import '0_commonUI.dart';
+import 'common_ui.dart';
 
 class Result_subFuncs {
   Future<List<one_healthcheck_data>> get_currentPet_healthCehck_db() async {

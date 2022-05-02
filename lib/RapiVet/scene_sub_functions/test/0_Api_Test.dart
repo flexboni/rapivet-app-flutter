@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/0_commonUI.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/test/0_API_Test_subfuncs.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/test/0_API_Test_subfuncs.dart';
 
 class Api_test_scene extends StatefulWidget {
   @override

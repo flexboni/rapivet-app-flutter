@@ -4,8 +4,8 @@ import 'package:swork_raon/0_CommonThisApp/String_work.dart';
 import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
 import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
 import 'package:swork_raon/rapivet/4_RegisterPet.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/4_2_ResterPet_subfuncs.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/Api_manager.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/4_2_ResterPet_subfuncs.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
 
 class Pet_data_manager {
   test() {

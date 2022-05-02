@@ -1,35 +1,29 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/0_DataProcess/one_user_data.dart';
 import 'package:swork_raon/rapivet/6_userInfo.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/3_2_Signup_subFuncs.dart';
-import 'package:swork_raon/rapivet/SceneSubFuncs/Api_manager.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/3_2_Signup_subFuncs.dart';
+import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
+
 import '../0_CommonThisApp/rapivetStatics.dart';
-
-import 'SceneSubFuncs/0_commonUI.dart';
-import 'package:http/http.dart' as phttp;
-
-import 'SceneSubFuncs/test/0_Api_Test.dart';
+import 'scene_sub_functions/common_ui.dart';
 
 enum SIGNUP_MODE { SIGNUP, MODIFY }
 SIGNUP_MODE _signup_mode;
 one_user_data _in_user_data;
 
-class SignUp_scene extends StatefulWidget {
-  SignUp_scene(SIGNUP_MODE in_signup_mode, {one_user_data user_data = null}) {
+class SignUpPage extends StatefulWidget {
+  SignUpPage(SIGNUP_MODE in_signup_mode, {one_user_data user_data = null}) {
     _signup_mode = in_signup_mode;
     _in_user_data = user_data;
   }
 
   @override
-  State<StatefulWidget> createState() => _signup_scene_home();
+  State<StatefulWidget> createState() => _SignUpPageState();
 }
 
 bool _is_agreed = true;
@@ -46,7 +40,7 @@ TextEditingController _dialog_phoneNum_txtedit_control;
 TextEditingController _dialog_zip_txtedit_control,
     _dialog_smsCode_txtedit_control;
 
-class _signup_scene_home extends State<StatefulWidget>
+class _SignUpPageState extends State<StatefulWidget>
     with TickerProviderStateMixin {
   bool _is_loading = false;
   String phone_num;
@@ -121,7 +115,7 @@ class _signup_scene_home extends State<StatefulWidget>
       if (result == "failed-invalid" && sms_auth_failed_count < 3) {
         sms_auth_failed_count++;
         print(sms_auth_failed_count);
-        show_dialog_popoup(
+        showDialogPopup(
             context,
             s_width,
             _dialog_smsCode_txtedit_control,
@@ -188,7 +182,7 @@ class _signup_scene_home extends State<StatefulWidget>
 
       // show input-sms-code popup
       _dialog_smsCode_txtedit_control.text = "";
-      show_dialog_popoup(
+      showDialogPopup(
           context,
           s_width,
           _dialog_smsCode_txtedit_control,
@@ -200,7 +194,7 @@ class _signup_scene_home extends State<StatefulWidget>
 
     void _showDialog_phone() {
       _dialog_phoneNum_txtedit_control.text = "+55";
-      show_dialog_popoup(
+      showDialogPopup(
           context,
           s_width,
           _dialog_phoneNum_txtedit_control,
@@ -214,7 +208,7 @@ class _signup_scene_home extends State<StatefulWidget>
 
     void _showDialog_address() {
       _dialog_phoneNum_txtedit_control.text = "";
-      show_dialog_popoup(
+      showDialogPopup(
           context,
           s_width,
           _dialog_zip_txtedit_control,
