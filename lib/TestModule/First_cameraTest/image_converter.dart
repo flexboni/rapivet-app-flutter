@@ -1,21 +1,18 @@
 // imgLib -> Image package from https://pub.dartlang.org/packages/image
 import 'dart:io';
-import 'dart:typed_data';
 import 'dart:io' show Platform;
-import 'package:flutter/material.dart';
-import 'package:image/image.dart' as imglib;
-import 'package:camera/camera.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:swork_raon/TestModule/Img_Proc_testModule/SubFuncs/Stick/Check_stick.dart';
-import '../../0_CommonThisApp/JPosition.dart';
-import 'package:swork_raon/TestModule/Img_Proc_testModule/SubFuncs/JHistogram_finders/JHistogram_finder_vertical.dart';
-import 'package:swork_raon/TestModule/Img_Proc_testModule/SubFuncs/forData/JArea.dart';
-import '../Img_Proc_testModule/SubFuncs/JHistogram_finders/JHistogram_finder_horizontal.dart';
-import 'package:swork_raon/TestModule/Img_Proc_testModule/SubFuncs/JImgProc.dart';
-import 'package:swork_raon/TestModule/Img_Proc_testModule/SubFuncs/TimeChecker.dart';
-import 'package:swork_raon/TestModule/Img_Proc_testModule/SubFuncs/p_searchAngle.dart';
+import 'dart:typed_data';
 
-import 'testStatics.dart';
+import 'package:camera/camera.dart';
+import 'package:image/image.dart' as imglib;
+import 'package:swork_raon/TestModule/image_process_test_module/JHistogram_finders/JHistogram_finder_vertical.dart';
+import 'package:swork_raon/TestModule/image_process_test_module/JImgProc.dart';
+import 'package:swork_raon/TestModule/image_process_test_module/Stick/Check_stick.dart';
+import 'package:swork_raon/TestModule/image_process_test_module/TimeChecker.dart';
+import 'package:swork_raon/TestModule/image_process_test_module/forData/JArea.dart';
+import 'package:swork_raon/TestModule/image_process_test_module/p_searchAngle.dart';
+
+import '../image_process_test_module/JHistogram_finders/JHistogram_finder_horizontal.dart';
 
 Future<List<int>> convertImagetoPng(CameraImage image) async {
   DateTime currentTime1 = DateTime.now();
@@ -58,8 +55,8 @@ Future<List<int>> convertImagetoPng(CameraImage image) async {
 
 Future<List> StickSearching_operation(
     CameraImage image, String save_path, bool is_testMode) async {
-
-  print("new search ==================================================================================");
+  print(
+      "new search ==================================================================================");
 
   // explain.
   // is_testMode 는 실패해도 리턴되어야함.
@@ -75,11 +72,10 @@ Future<List> StickSearching_operation(
     origin_img = jimg_proc.convertYUV420(image);
   } else if (image.format.group == ImageFormatGroup.bgra8888) {
     origin_img = jimg_proc.convertBGRA8888(image);
-  }else if(image.format.group == ImageFormatGroup.jpeg){
+  } else if (image.format.group == ImageFormatGroup.jpeg) {
     origin_img = imglib.decodeJpg(image.planes[0].bytes);
     //imglib.decodeImage(data)
   }
-
 
   DateTime currentTime2 = DateTime.now();
   show_timeChecker("camera image --> imglib: ", currentTime1, currentTime2);
@@ -90,11 +86,10 @@ Future<List> StickSearching_operation(
     origin_img = imglib.copyRotate(origin_img, -90);
   }
 
- // origin_img = imglib.copyRotate(origin_img, 180);
+  // origin_img = imglib.copyRotate(origin_img, 180);
 
   // 3. resize
-  imglib.Image img =
-      imglib.copyResize(origin_img, height: 178); // w > h
+  imglib.Image img = imglib.copyResize(origin_img, height: 178); // w > h
 
   DateTime currentTime3 = DateTime.now();
   show_timeChecker("resize: ", currentTime2, currentTime3);
@@ -145,19 +140,23 @@ Future<List> StickSearching_operation(
     return _make_failResult("faile detect angle");
   }
 
-  print("5. deted angle: " + detected_angle.toString() + " degree -----------------------------");
+  print("5. deted angle: " +
+      detected_angle.toString() +
+      " degree -----------------------------");
   DateTime currentTime7 = DateTime.now();
   show_timeChecker("time- detect angle: ", currentTime5, currentTime7);
 
   // 6. rotation img (compensate)
-  print("6. rotation img (compensate) ------------------------------------------");
+  print(
+      "6. rotation img (compensate) ------------------------------------------");
   Uint8List byteRotated =
       jimg_proc.rotate(byteSobel, img.height, img.width, detected_angle);
   DateTime currentTime8 = DateTime.now();
   show_timeChecker("time- rotate : ", currentTime7, currentTime8);
 
   // 7. projection as horizontal
-  print("7. projection as horizontal ------------------------------------------");
+  print(
+      "7. projection as horizontal ------------------------------------------");
   JHistogram_finder_horizontal jhFinder_h = JHistogram_finder_horizontal();
 
   Uint8List projected_horizontal =
@@ -167,7 +166,8 @@ Future<List> StickSearching_operation(
       "time- projection_horizontal : ", currentTime8, currentTime9);
 
   // 8. search sample area horizontal direction  -------------------------------------------------
-  print("8. search sample area horizontal direction  ------------------------------------------");
+  print(
+      "8. search sample area horizontal direction  ------------------------------------------");
   DateTime currentTime_8_1 = DateTime.now(); // time check start
 
   int searchingX1 = jhFinder_h.get_searchinPointX1(
@@ -197,7 +197,6 @@ Future<List> StickSearching_operation(
   JHistogram_finder_vertical jhFinder_v = JHistogram_finder_vertical();
   Uint8List projected_vertical = null;
 
-
   bool is_to_rotate180 = false; // 무조건 두짚어 져야함.
   List<int> XareaPoints = null;
 /*
@@ -220,7 +219,6 @@ Future<List> StickSearching_operation(
 
     projected_vertical = jhFinder_v.projection_horizontal(
         sample_area_only_img, img.height, img.width);
-
 
     // XareaPoints 는 배색표 네모 중앙포인트를 의미함.
 
@@ -246,8 +244,8 @@ Future<List> StickSearching_operation(
   DateTime currentTime_10_1 = DateTime.now(); // time check end
   bytesGray =
       jimg_proc.rotate(bytesGray, img.height, img.width, detected_angle);
-  Uint8List stickIMG = jhFinder_v.get_area(bytesGray, img.height, img.width,
-      vertical_maxArea_list, XareaPoints);
+  Uint8List stickIMG = jhFinder_v.get_area(
+      bytesGray, img.height, img.width, vertical_maxArea_list, XareaPoints);
   //stickIMG = jhFinder_v.bg_flattening(stickIMG, img.height, img.width);
 
   // 나중에 사용할 수 도 있음.
@@ -256,25 +254,25 @@ Future<List> StickSearching_operation(
 
   // 11. check if stick is fitted ?
   Check_stick check_stick = Check_stick();
-  bool is_too_close = check_stick.is_stick_too_close_outline(img.height, img.width, XareaPoints);
+  bool is_too_close = check_stick.is_stick_too_close_outline(
+      img.height, img.width, XareaPoints);
 
-  if(is_too_close){
+  if (is_too_close) {
     print("too close of stick starting!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     return _make_failResult("too close of stick starting");
   }
 
-  stickIMG = check_stick.check_fitted(stickIMG,  img.height, img.width, vertical_maxArea_list, XareaPoints);
+  stickIMG = check_stick.check_fitted(
+      stickIMG, img.height, img.width, vertical_maxArea_list, XareaPoints);
 
-  if(stickIMG==null){
+  if (stickIMG == null) {
     print("stick location error !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     return _make_failResult("stick location error !!!!!!!");
   }
 
-
   // 12. get stick x points
   print("get stick x points!!!");
-  List<int> stick_x_points  = check_stick.get_stick_x_points(XareaPoints);
-
+  List<int> stick_x_points = check_stick.get_stick_x_points(XareaPoints);
 
   //final prefs = await SharedPreferences.getInstance();
   //prefs.setBool("is_finded", true);
@@ -285,12 +283,10 @@ Future<List> StickSearching_operation(
   // Uint8List areaCheckIMG = jhFinder_v.check_ultimate_area(
   //     byteRotated, img.height, img.width, vertical_maxArea_list, XareaPoints);
 
-
   // make img to display in UI
   List<int> jpg_to_display_inTestMode = null;
   print("make jpg!!!!");
-  if(is_testMode){
-
+  if (is_testMode) {
     // 테스트모드에서 보고 싶은 영상 여기 넣으면 됨.
     img = jimg_proc.graybytes_to_IMG(stickIMG, img);
     //img = jimg_proc.graybytes_to_RGB(projected_vertical, img);
@@ -299,9 +295,8 @@ Future<List> StickSearching_operation(
     print("jpeg:::: " + jpg_to_display_inTestMode.length.toString());
   }
 
-
- // print(save_path);
- // File(save_path).writeAsBytes(jpeg);
+  // print(save_path);
+  // File(save_path).writeAsBytes(jpeg);
 
   //if(is_to_rotate180) detected_angle = detected_angle+180;
 

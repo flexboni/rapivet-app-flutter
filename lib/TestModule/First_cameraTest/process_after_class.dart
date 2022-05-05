@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image/image.dart' as imglib;
-import 'dart:io';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:swork_raon/0_Commons_totally/Vector2d.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/testStatics.dart';
-import 'package:swork_raon/TestModule/Img_Proc_testModule/SubFuncs/JImgProc.dart';
-import 'package:swork_raon/TestModule/Img_Proc_testModule/SubFuncs/SearchingResult/Area_color_sets.dart';
-import 'package:swork_raon/TestModule/Img_Proc_testModule/SubFuncs/SearchingResult/SearchingResult_subs.dart';
-import 'package:swork_raon/TestModule/Img_Proc_testModule/SubFuncs/Stick/Detail_Check_stick.dart';
+import 'package:swork_raon/TestModule/image_process_test_module/JImgProc.dart';
+import 'package:swork_raon/TestModule/image_process_test_module/Stick/Detail_Check_stick.dart';
+import 'package:swork_raon/TestModule/image_process_test_module/searching_result/Area_color_sets.dart';
+import 'package:swork_raon/TestModule/image_process_test_module/searching_result/SearchingResult_subs.dart';
+import 'package:swork_raon/common/Vector2d.dart';
 
 class process_after_class {
   static operate_process_after(List result_list) async {
@@ -95,7 +92,6 @@ class process_after_class {
     returnResult.add(compareRect_area_colorSets_list);
     returnResult.add(stickRect_area_colorSets_list);
     returnResult.add(backup_img); // origina stick img: imglib.Image
-
 
     return returnResult;
   }

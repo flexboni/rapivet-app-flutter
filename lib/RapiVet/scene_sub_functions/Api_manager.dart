@@ -1,15 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as phttp;
-import 'dart:convert';
-
-import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/0_Commons_totally/AntiCacheURL.dart';
-import 'package:swork_raon/0_Commons_totally/JToast.dart';
-import 'package:swork_raon/0_DataProcess/Pet_data_manager.dart';
-import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
-import 'package:swork_raon/0_DataProcess/one_user_data.dart';
-import 'package:swork_raon/TestModule/Img_Proc_testModule/SubFuncs/SearchingResult/stickResult_dataset.dart';
+import 'package:swork_raon/TestModule/image_process_test_module/searching_result/stickResult_dataset.dart';
+import 'package:swork_raon/common/AntiCacheURL.dart';
+import 'package:swork_raon/common/JToast.dart';
+import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/model/Pet_data_manager.dart';
+import 'package:swork_raon/model/one_pet_data.dart';
+import 'package:swork_raon/model/one_user_data.dart';
 
 class Api_manager {
   Future<String> login(String email, String pw) async {
@@ -137,9 +136,8 @@ class Api_manager {
     return "";
   }
 
-  Future<one_user_data> get_user_data(String token) async{
-
-    var uri = Uri.parse( rapivetStatics.baseURL +"/user/info");
+  Future<one_user_data> get_user_data(String token) async {
+    var uri = Uri.parse(rapivetStatics.baseURL + "/user/info");
 
     var response = await phttp.get(
       uri,
@@ -220,7 +218,8 @@ class Api_manager {
   }
 
   pet_photo_update(String token, String pet_uid, String img_base64) async {
-    String url = "https://434undgut1.execute-api.ap-northeast-2.amazonaws.com/pet/stg_upload_pet_img";
+    String url =
+        "https://434undgut1.execute-api.ap-northeast-2.amazonaws.com/pet/stg_upload_pet_img";
     // rapivetStatics.baseURL + "/pet/photo/update";
     var uri = Uri.parse(url);
 
@@ -230,7 +229,7 @@ class Api_manager {
       "Authorization": "Bearer " + token
     };
 
-  //  Map data = {"pet_uid": pet_uid, "img_data": img_base64};
+    //  Map data = {"pet_uid": pet_uid, "img_data": img_base64};
     Map data = {"pet_uid": pet_uid, "data": img_base64};
 
     var body = json.encode(data);
@@ -241,9 +240,9 @@ class Api_manager {
     print("${response.body}");
   }
 
-
   // pet health --------------------------------------------------------------
-  Future<String> pet_health_check_register (String pet_uid, String token, stickResult_dataset stick_result) async{
+  Future<String> pet_health_check_register(
+      String pet_uid, String token, StickResultDataset stick_result) async {
     String url = rapivetStatics.baseURL_v2 + "/pet/health_check_register";
     //String url = baseURL + "/pet/health_check_register";
     print(url);
@@ -283,9 +282,10 @@ class Api_manager {
     return uid;
   }
 
-  pet_stick_photo_upload(String test_uid, String token, String img_base64) async{
-
-    String url = "https://pvf126ou9d.execute-api.ap-northeast-2.amazonaws.com/pet/stg_upload_stick_img";
+  pet_stick_photo_upload(
+      String test_uid, String token, String img_base64) async {
+    String url =
+        "https://pvf126ou9d.execute-api.ap-northeast-2.amazonaws.com/pet/stg_upload_stick_img";
 
     var uri = Uri.parse(url);
 
@@ -295,10 +295,7 @@ class Api_manager {
       "Authorization": "Bearer " + token
     };
 
-    Map data = {
-      "uid": test_uid,
-      "data": img_base64
-    };
+    Map data = {"uid": test_uid, "data": img_base64};
 
     var body = json.encode(data);
 
@@ -374,9 +371,9 @@ class Api_manager {
 
     String msg = json_data["msg"];
 
-    if(msg == "success"){
+    if (msg == "success") {
       result.add(true);
-    }else{
+    } else {
       result.add(false);
       return result;
     }
@@ -385,21 +382,19 @@ class Api_manager {
       String token = json_data["data"]["token"];
       print(token);
       result.add(token);
-    } catch (e) {
-
-    }
+    } catch (e) {}
 
     return result;
   }
 
-  Future<List> social_login(String email) async{
-    String url =rapivetStatics. baseURL + "/user/social_login";
+  Future<List> social_login(String email) async {
+    String url = rapivetStatics.baseURL + "/user/social_login";
     var uri = Uri.parse(url);
 
     Map<String, String> headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization' : 'Bearer adfdf'
+      'Authorization': 'Bearer adfdf'
     };
 
     Map data = {
@@ -408,8 +403,7 @@ class Api_manager {
 
     var body = json.encode(data);
 
-    var response = await phttp.post(uri,
-        headers: headers, body: body);
+    var response = await phttp.post(uri, headers: headers, body: body);
 
     print("${response.headers}");
     print("${response.statusCode}");
@@ -433,19 +427,20 @@ class Api_manager {
   }
 
   // sub-funcs--------------------------------------------------------------
-  one_user_data _Json_data_to_userData(var json_data){
-
+  one_user_data _Json_data_to_userData(var json_data) {
     one_user_data this_user_data = one_user_data();
 
     this_user_data.email = json_data["data"]["user_info"]["email"].toString();
     this_user_data.name = json_data["data"]["user_info"]["name"].toString();
-    this_user_data.phone_num = json_data["data"]["user_info"]["cell_phone"].toString();
-    this_user_data.address1 = json_data["data"]["user_info"]["address1"].toString();
-    this_user_data.address2 = json_data["data"]["user_info"]["address2"].toString();
+    this_user_data.phone_num =
+        json_data["data"]["user_info"]["cell_phone"].toString();
+    this_user_data.address1 =
+        json_data["data"]["user_info"]["address1"].toString();
+    this_user_data.address2 =
+        json_data["data"]["user_info"]["address2"].toString();
 
     return this_user_data;
   }
-
 
   List<one_pet_data> _json_data_to_petDatas(var json_data) {
     List<one_pet_data> pet_datas = [];

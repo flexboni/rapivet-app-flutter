@@ -1,7 +1,7 @@
 ﻿
 using System.Collections;
 
-public class String_works  {
+public class StringUtilss  {
 
 
 	public string [] get_divided_strs (string str, string indicator)

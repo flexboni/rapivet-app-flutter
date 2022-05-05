@@ -9,7 +9,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:swork_raon/0_DataProcess/All_health_check_manager.dart';
+import 'package:swork_raon/model/All_health_check_manager.dart';
 import 'package:swork_raon/rapivet/10_Result_plus.dart';
 import 'package:swork_raon/rapivet/6_userInfo.dart';
 import 'package:swork_raon/rapivet/7_Test_Guide.dart';
@@ -17,7 +17,7 @@ import 'package:swork_raon/rapivet/9_Result.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/5_2_main_subFuncs.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../0_CommonThisApp/rapivetStatics.dart';
+import '../../common/rapivetStatics.dart';
 import '../4_RegisterPet.dart';
 import '../5_Main.dart';
 import '4_2_ResterPet_subfuncs.dart';

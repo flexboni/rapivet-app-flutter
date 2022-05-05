@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as phttp;
 import 'package:page_transition/page_transition.dart';
-import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/0_DataProcess/one_healthcheck_data.dart';
-import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
+import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/model/one_healthcheck_data.dart';
+import 'package:swork_raon/model/one_pet_data.dart';
 import 'package:swork_raon/rapivet/10_Result_plus.dart';
 
 import 'common_ui.dart';

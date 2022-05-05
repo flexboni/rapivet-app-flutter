@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:swork_raon/0_Commons_totally/JToast.dart';
-import 'package:swork_raon/0_DataProcess/one_user_data.dart';
+import 'package:swork_raon/common/JToast.dart';
+import 'package:swork_raon/model/one_user_data.dart';
 import 'package:swork_raon/rapivet/6_userInfo.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/3_2_Signup_subFuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
 
-import '../0_CommonThisApp/rapivetStatics.dart';
+import '../common/rapivetStatics.dart';
 import 'scene_sub_functions/common_ui.dart';
 
 enum SIGNUP_MODE { SIGNUP, MODIFY }

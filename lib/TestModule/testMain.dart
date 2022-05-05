@@ -33,11 +33,11 @@ class Iptm_App_home extends StatefulWidget {
 }
 
 class _Iptm_App_home_State extends State<Iptm_App_home> {
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(body: Column(
+    return Scaffold(
+        body: Column(
       children: [
         Padding(padding: new EdgeInsets.all(38)),
         Container(
@@ -45,18 +45,16 @@ class _Iptm_App_home_State extends State<Iptm_App_home> {
           height: 68.88,
           child: OutlinedButton(
               onPressed: () {
-
                 testStatics.is_to_show_jpg_to_check = false;
 
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        ImgSearchHome()));
-
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => ImgSearchHome()));
               },
               child: Text(
                 '    STICK SEARCHING    ',
-                style:
-                TextStyle(color: Colors.redAccent, fontSize: 18.88),
+                style: TextStyle(color: Colors.redAccent, fontSize: 18.88),
               )),
         ),
       ],

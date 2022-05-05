@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/0_Commons_totally/JToast.dart';
-import 'package:swork_raon/0_DataProcess/All_health_check_manager.dart';
-import 'package:swork_raon/0_DataProcess/one_healthcheck_data.dart';
+import 'package:swork_raon/common/JToast.dart';
+import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/model/All_health_check_manager.dart';
+import 'package:swork_raon/model/one_healthcheck_data.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/9_2_Result_subFuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 

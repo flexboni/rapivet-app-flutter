@@ -5,7 +5,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/7_TimerPopup.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
-import '../0_CommonThisApp/rapivetStatics.dart';
+import '../common/rapivetStatics.dart';
 import '5_Main.dart';
 
 class Test_Guide extends StatefulWidget {

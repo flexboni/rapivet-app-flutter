@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/ImgSearch_main.dart';
+import 'package:swork_raon/common/rapivetStatics.dart';
 
-import 'common_ui.dart';
 import '7_2_Test_Guide_subFuncs.dart';
+import 'common_ui.dart';
 
 bool _is_showingTimer;
 double s_width, s_height;

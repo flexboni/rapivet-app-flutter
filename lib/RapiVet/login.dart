@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as phttp;
-import 'package:swork_raon/0_Commons_totally/JToast.dart';
-import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
+import 'package:swork_raon/common/JToast.dart';
+import 'package:swork_raon/model/one_pet_data.dart';
 import 'package:swork_raon/rapivet/main.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/2_2_Login_subfuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 import 'package:swork_raon/rapivet/sign_up.dart';
 
-import '../0_CommonThisApp/rapivetStatics.dart';
+import '../common/rapivetStatics.dart';
 
 class LoginPage extends StatefulWidget {
   @override

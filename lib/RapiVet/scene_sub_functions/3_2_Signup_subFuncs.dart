@@ -1,11 +1,13 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as phttp;
-import 'package:swork_raon/0_Commons_totally/JToast.dart';
-import 'dart:convert';
-import '../../0_CommonThisApp/rapivetStatics.dart';
+import 'package:swork_raon/common/JToast.dart';
+
+import '../../common/rapivetStatics.dart';
 import '../4_RegisterPet.dart';
-import 'dart:math';
 
 class Signup_subfuncs {
   Future<String> get_adress_from_zip(String zip) async {
@@ -119,7 +121,9 @@ class Signup_subfuncs {
       }
 
       if (error_msg.indexOf("has expired") != -1) {
-        JToast().show_toast("Código expirado. Por favor tente novamente com o código atualizado.", true);
+        JToast().show_toast(
+            "Código expirado. Por favor tente novamente com o código atualizado.",
+            true);
         return "failed-expired";
       }
 
@@ -180,9 +184,7 @@ class Signup_subfuncs {
       TextEditingController _address1_txt_control,
       TextEditingController _address2_txt_control,
       TextEditingController _phone_txt_control,
-      String token) async{
-
-
+      String token) async {
     String url = rapivetStatics.baseURL + "/user/update";
     var uri = Uri.parse(url);
 

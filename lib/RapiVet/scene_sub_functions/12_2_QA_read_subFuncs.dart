@@ -3,10 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:swork_raon/0_CommonThisApp/String_work.dart';
-import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
 import 'package:http/http.dart' as phttp;
-import 'package:swork_raon/0_DataProcess/one_QA_data.dart';
+import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/model/one_QA_data.dart';
 
 class QA_read_subFuncs {
   get_question_partUI(double s_width, String txt, String date_txt) {
@@ -41,8 +40,7 @@ class QA_read_subFuncs {
               width: s_width * 0.8,
               alignment: Alignment.bottomRight,
               child: Text(
-              get_date_inFomat(date_txt),
-
+                get_date_inFomat(date_txt),
                 style: TextStyle(
                     fontSize: 12, color: Colors.grey.withOpacity(0.7)),
               )),

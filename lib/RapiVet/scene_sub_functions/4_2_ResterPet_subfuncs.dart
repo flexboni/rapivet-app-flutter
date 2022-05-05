@@ -2,16 +2,16 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as phttp;
-import 'package:swork_raon/0_Commons_totally/AntiCacheURL.dart';
-import 'package:swork_raon/0_Commons_totally/JToast.dart';
-import 'package:swork_raon/0_DataProcess/Pet_data_manager.dart';
-import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
+import 'package:swork_raon/common/AntiCacheURL.dart';
+import 'package:swork_raon/common/JToast.dart';
+import 'package:swork_raon/model/Pet_data_manager.dart';
+import 'package:swork_raon/model/one_pet_data.dart';
 import 'package:swork_raon/rapivet/5_Main.dart';
 import 'package:swork_raon/rapivet/6_userInfo.dart';
 import 'package:swork_raon/rapivet/main.dart';
 
-import '../../0_CommonThisApp/app_strings.dart';
-import '../../0_CommonThisApp/rapivetStatics.dart';
+import '../../common/app_strings.dart';
+import '../../common/rapivetStatics.dart';
 import '../4_RegisterPet.dart';
 
 class register_input_dataset {

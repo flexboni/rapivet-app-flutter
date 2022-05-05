@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/0_DataProcess/one_QA_data.dart';
+import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/model/one_QA_data.dart';
 import 'package:swork_raon/rapivet/11_QA_write.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/12_2_QA_read_subFuncs.dart';
 

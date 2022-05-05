@@ -43,7 +43,7 @@ public class SceneManager_raon : MonoBehaviour
     {
         try{
 
-             String_works sw = new String_works();
+             StringUtilss sw = new StringUtilss();
             string [] strs =sw.get_divided_strs(input_rgb_weight.value.Trim(),",");
             r_w =  float.Parse(strs[0].Trim());
             g_w = float.Parse(strs[1].Trim());

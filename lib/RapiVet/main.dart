@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/1_2_Welcome_subfuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
-import '../0_CommonThisApp/rapivetStatics.dart';
+import '../common/rapivetStatics.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/testStatics.dart';
@@ -22,14 +20,13 @@ class _loading_imgSearch extends State<StatefulWidget> {
     super.dispose();
   }
 
-  _moveto_imgSearch_main()async{
+  _moveto_imgSearch_main() async {
     await Future.delayed(Duration(milliseconds: 888));
 
     testStatics.is_to_show_jpg_to_check = false;
 
-    Navigator.pushReplacement(context, MaterialPageRoute(
-        builder: (BuildContext context) =>
-            ImgSearchHome()));
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (BuildContext context) => ImgSearchHome()));
   }
 
   @override
@@ -39,11 +36,18 @@ class _loading_imgSearch extends State<StatefulWidget> {
     return Scaffold(
         backgroundColor: Colors.black,
         body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(alignment: Alignment.center, width: s_width,color: Colors.black54,child: Text("Loading", style: TextStyle(color: Colors.white),)),
-      ],
-    ));
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+                alignment: Alignment.center,
+                width: s_width,
+                color: Colors.black54,
+                child: Text(
+                  "Loading",
+                  style: TextStyle(color: Colors.white),
+                )),
+          ],
+        ));
   }
 }

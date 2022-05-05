@@ -4,24 +4,23 @@ import 'dart:io' show Platform;
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image/image.dart' as imglib;
 import 'package:path_provider/path_provider.dart';
-import 'package:swork_raon/0_Commons_totally/JToast.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/image_converter.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/myparams.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/process_after_class.dart';
-import 'package:swork_raon/TestModule/First_cameraTest/subFuncs/ImgSearch_subFuncs.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/subFuncs/animated_guide.dart';
+import 'package:swork_raon/TestModule/First_cameraTest/subFuncs/image_search_functions.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/testStatics.dart';
+import 'package:swork_raon/common/JToast.dart';
 import 'package:swork_raon/rapivet/7_Test_Guide.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
-import '../../0_CommonThisApp/rapivetStatics.dart';
+import '../../common/rapivetStatics.dart';
 
 // jujego
 

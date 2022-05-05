@@ -3,17 +3,17 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:swork_raon/0_CommonThisApp/app_strings.dart';
-import 'package:swork_raon/0_Commons_totally/JToast.dart';
-import 'package:swork_raon/0_DataProcess/Pet_data_manager.dart';
-import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
-import 'package:swork_raon/0_DataProcess/one_user_data.dart';
+import 'package:swork_raon/common/JToast.dart';
+import 'package:swork_raon/common/app_strings.dart';
+import 'package:swork_raon/model/Pet_data_manager.dart';
+import 'package:swork_raon/model/one_pet_data.dart';
+import 'package:swork_raon/model/one_user_data.dart';
 import 'package:swork_raon/rapivet/5_Main.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/5_2_main_subFuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/6_2_userInfo_subFuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
 
-import '../0_CommonThisApp/rapivetStatics.dart';
+import '../common/rapivetStatics.dart';
 import 'scene_sub_functions/common_ui.dart';
 import 'sign_up.dart';
 

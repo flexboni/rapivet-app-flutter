@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:swork_raon/0_Commons_totally/JToast.dart';
-import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
+import 'package:swork_raon/common/JToast.dart';
+import 'package:swork_raon/model/one_pet_data.dart';
 
-import '../0_CommonThisApp/app_strings.dart';
-import '../0_CommonThisApp/rapivetStatics.dart';
+import '../common/app_strings.dart';
+import '../common/rapivetStatics.dart';
 import 'scene_sub_functions/4_2_ResterPet_subfuncs.dart';
 import 'scene_sub_functions/common_ui.dart';
 

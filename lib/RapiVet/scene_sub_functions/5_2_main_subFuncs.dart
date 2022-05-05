@@ -1,12 +1,10 @@
 import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:swork_raon/0_CommonThisApp/rapivetStatics.dart';
-import 'package:swork_raon/0_DataProcess/Pet_data_manager.dart';
-import 'package:swork_raon/0_DataProcess/one_healthcheck_data.dart';
-import 'package:swork_raon/0_DataProcess/one_pet_data.dart';
-
-import '9_2_Result_subFuncs.dart';
+import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/model/Pet_data_manager.dart';
+import 'package:swork_raon/model/one_pet_data.dart';
 
 class main_subfuncs {
   operate_onclcik_right() {
@@ -98,7 +96,7 @@ class main_subfuncs {
                 height: s_height,
                 width: s_width,
                 color: Colors.black,
-                child: Image.asset(asset_path/*"assets/tutorial/tuto1.jpg"*/,
+                child: Image.asset(asset_path /*"assets/tutorial/tuto1.jpg"*/,
                     fit: BoxFit.fitHeight)),
             Padding(
               padding:
