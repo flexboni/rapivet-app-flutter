@@ -210,7 +210,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
                           ),
                           Padding(padding: new EdgeInsets.all(50)),
                           get_explain_of_textfield_up(s_width, "NOME",
-                              is_showing_footmark: true),
+                              isShowingFootmark: true),
                           Padding(padding: new EdgeInsets.all(gap1)),
                           get_one_textfield(s_width, rapivetStatics.app_blue,
                               _input_dataset.nome_txtedit_control, "Nome",
@@ -218,7 +218,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
                           Padding(padding: new EdgeInsets.all(gap2)),
                           get_explain_of_textfield_up(
                               s_width, "DATA DE NASCIMENTO",
-                              is_showing_footmark: true),
+                              isShowingFootmark: true),
                           Padding(padding: new EdgeInsets.all(gap1)),
                           get_one_textfield(
                               s_width,
@@ -232,7 +232,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
                           // 성별 입력------------------------------------------------
                           Padding(padding: new EdgeInsets.all(gap2)),
                           get_explain_of_textfield_up(s_width, "SEXO",
-                              is_showing_footmark: true),
+                              isShowingFootmark: true),
                           Padding(padding: new EdgeInsets.all(gap1)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -257,7 +257,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
                           // 중성화 여부 ---------------------------------------------
                           Padding(padding: new EdgeInsets.all(gap2)),
                           get_explain_of_textfield_up(s_width, "E CASTRADO",
-                              is_showing_footmark: true),
+                              isShowingFootmark: true),
                           Padding(padding: new EdgeInsets.all(gap1)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -290,7 +290,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
                           // 개 or 고양이--------------------------------------------
                           Padding(padding: new EdgeInsets.all(gap2)),
                           get_explain_of_textfield_up(s_width, "PET",
-                              is_showing_footmark: true),
+                              isShowingFootmark: true),
                           Padding(padding: new EdgeInsets.all(gap1)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -325,7 +325,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
                           // 종류 -----------------------------------------------------
                           Padding(padding: new EdgeInsets.all(gap2)),
                           get_explain_of_textfield_up(s_width, "RAÇA",
-                              is_showing_footmark: true),
+                              isShowingFootmark: true),
                           Padding(padding: new EdgeInsets.all(gap1)),
                           get_one_textfield(
                               s_width,
@@ -339,7 +339,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
                           // 몸무게 ----------------------------------------------------
                           Padding(padding: new EdgeInsets.all(gap2)),
                           get_explain_of_textfield_up(s_width, "PESO",
-                              is_showing_footmark: true),
+                              isShowingFootmark: true),
                           Padding(padding: new EdgeInsets.all(gap1)),
                           get_one_textfield(s_width, rapivetStatics.app_blue,
                               _input_dataset.weight_txtedit_control, "5",

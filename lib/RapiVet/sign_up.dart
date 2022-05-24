@@ -12,12 +12,12 @@ import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
 import '../common/rapivetStatics.dart';
 import 'scene_sub_functions/common_ui.dart';
 
-enum SIGNUP_MODE { SIGNUP, MODIFY }
-SIGNUP_MODE _signup_mode;
+enum SIGN_UP_MODE { SIGNUP, MODIFY }
+SIGN_UP_MODE _signup_mode;
 one_user_data _in_user_data;
 
 class SignUpPage extends StatefulWidget {
-  SignUpPage(SIGNUP_MODE in_signup_mode, {one_user_data user_data = null}) {
+  SignUpPage(SIGN_UP_MODE in_signup_mode, {one_user_data user_data = null}) {
     _signup_mode = in_signup_mode;
     _in_user_data = user_data;
   }
@@ -64,7 +64,7 @@ class _SignUpPageState extends State<StatefulWidget>
     _dialog_zip_txtedit_control = TextEditingController();
     _dialog_smsCode_txtedit_control = TextEditingController();
 
-    if (_signup_mode == SIGNUP_MODE.MODIFY) {
+    if (_signup_mode == SIGN_UP_MODE.MODIFY) {
       _email_txtedit_control.text = _in_user_data.email;
       _name_txtedit_control.text = _in_user_data.name;
       _phoneNum_txtedit_control.text = _in_user_data.phone_num;
@@ -228,7 +228,7 @@ class _SignUpPageState extends State<StatefulWidget>
     }
 
     callback_goback() {
-      if (_signup_mode == SIGNUP_MODE.MODIFY) {
+      if (_signup_mode == SIGN_UP_MODE.MODIFY) {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -243,7 +243,7 @@ class _SignUpPageState extends State<StatefulWidget>
         _is_loading = true;
       });
 
-      if (_signup_mode == SIGNUP_MODE.SIGNUP) {
+      if (_signup_mode == SIGN_UP_MODE.SIGNUP) {
         List result = await Signup_subfuncs().operate_signup(
             _email_txtedit_control,
             _name_txtedit_control,
@@ -275,7 +275,7 @@ class _SignUpPageState extends State<StatefulWidget>
               false);
           Signup_subfuncs().move_to_petRegister(context);
         }
-      } else if (_signup_mode == SIGNUP_MODE.MODIFY) {
+      } else if (_signup_mode == SIGN_UP_MODE.MODIFY) {
         print("modify!!!");
 
         // 1. 비밀 번호 변경
@@ -341,7 +341,7 @@ class _SignUpPageState extends State<StatefulWidget>
                             appblue,
                             _email_txtedit_control,
                             "",
-                            is_readonly: (_signup_mode == SIGNUP_MODE.MODIFY),
+                            is_readonly: (_signup_mode == SIGN_UP_MODE.MODIFY),
                           ),
                           Padding(padding: new EdgeInsets.all(3)),
                           get_explain_of_textfield_down(
@@ -353,7 +353,7 @@ class _SignUpPageState extends State<StatefulWidget>
                           get_one_textfield(
                               s_width, appblue, _name_txtedit_control, "",
                               is_readonly:
-                                  (_signup_mode == SIGNUP_MODE.MODIFY)),
+                                  (_signup_mode == SIGN_UP_MODE.MODIFY)),
                           Padding(padding: new EdgeInsets.all(3)),
                           get_explain_of_textfield_down(
                               s_width, "Ex. Joao Paulo"),
@@ -372,7 +372,7 @@ class _SignUpPageState extends State<StatefulWidget>
                           Padding(padding: new EdgeInsets.all(8)),
                           // adress 1 ------------------------------------------------------
                           Visibility(
-                            visible: (_signup_mode == SIGNUP_MODE.MODIFY),
+                            visible: (_signup_mode == SIGN_UP_MODE.MODIFY),
                             child: Column(
                               children: [
                                 get_explain_of_textfield_up(

@@ -5,10 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/common/JToast.dart';
 import 'package:swork_raon/model/one_healthcheck_data.dart';
-import 'package:swork_raon/rapivet/9_Result.dart';
+import 'package:swork_raon/rapivet/result.dart';
 
 import '../common/rapivetStatics.dart';
-import '5_Main.dart';
+import 'home.dart';
 import 'scene_sub_functions/10_2_ResultPlus_subFuncs.dart';
 import 'scene_sub_functions/9_2_Result_subFuncs.dart';
 import 'scene_sub_functions/common_ui.dart';
@@ -52,13 +52,13 @@ class _result_plus_scene_home extends State<StatefulWidget>
       _is_loading = true;
     });
 
-    _hCheck_list = await Result_subFuncs().get_currentPet_healthCehck_db();
+    _hCheck_list = await Result_subFuncs().getCurrentPetHealthCheckDB();
 
     if (_hCheck_list == [] || _hCheck_list.length == 0) {
       JToast().show_toast("Informação não encontrada.", true);
 
       Navigator.pushReplacement(context,
-          PageTransition(type: PageTransitionType.fade, child: Main_scene()));
+          PageTransition(type: PageTransitionType.fade, child: HomePage()));
     }
 
     setState(() {
@@ -76,12 +76,12 @@ class _result_plus_scene_home extends State<StatefulWidget>
 
     goback_to_main() {
       Navigator.pushReplacement(context,
-          PageTransition(type: PageTransitionType.fade, child: Main_scene()));
+          PageTransition(type: PageTransitionType.fade, child: HomePage()));
     }
 
     goback_to_RESULT() {
       Navigator.pushReplacement(context,
-          PageTransition(type: PageTransitionType.fade, child: Result_scene()));
+          PageTransition(type: PageTransitionType.fade, child: ResultPage()));
     }
 
     callback_setstate() {

@@ -27,6 +27,7 @@ TextEditingController searchPasswordController;
 GoogleSignIn _googleSignIn;
 
 bool showSocialSignPopup = false;
+bool isHidePassword = true;
 
 class _LoginPageState extends State<StatefulWidget>
     with TickerProviderStateMixin {
@@ -37,7 +38,6 @@ class _LoginPageState extends State<StatefulWidget>
     super.initState();
 
     isLoading = false;
-    //
     _googleSignIn = GoogleSignIn(
       scopes: [
         'email',
@@ -56,8 +56,6 @@ class _LoginPageState extends State<StatefulWidget>
       print(account.email);
     });
   }
-
-  bool isHidePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +124,7 @@ class _LoginPageState extends State<StatefulWidget>
     }
 
     // TODO
-    void handleFacebookSignup() async {
+    void onFacebookSignUp() async {
       //   FacebookAuth.in
       // final facebookLogin = FacebookLogin();
       // facebookLogin.loginBehavior = FacebookLoginBehavior.nativeOnly;
@@ -234,94 +232,6 @@ class _LoginPageState extends State<StatefulWidget>
       );
     }
 
-    // void _showDialog() {
-    //   showDialog(
-    //     context: context,
-    //     barrierDismissible: false,
-    //     builder: (BuildContext context) {
-    //       return AlertDialog(
-    //         shape: RoundedRectangleBorder(
-    //           borderRadius: BorderRadius.circular(30),
-    //         ),
-    //         title: new Text(
-    //           "",
-    //           style: TextStyle(fontSize: 1, fontWeight: FontWeight.normal),
-    //         ),
-    //         content: Container(
-    //           height: 105,
-    //           width: double.infinity,
-    //           child: Column(
-    //             children: [
-    //               Container(
-    //                 child: get_one_login_btn(s_width*0.8, Colors.blue, "Sign up with Facebook", (){})
-    //               ),
-    //               Padding(padding: new EdgeInsets.all(1)),
-    //               Container(
-    //                 child: SignInButton(
-    //                   Buttons.GoogleDark,
-    //                   onPressed: () async {
-    //                     rapivetStatics.auth.userChanges();
-    //
-    //                     await rapivetStatics.auth.verifyPhoneNumber(
-    //                       phoneNumber: '+82 10 5538 0188',
-    //                       codeSent:
-    //                           (String verificationId, int resendToken) async {
-    //                         print(verificationId);
-    //                         print(resendToken);
-    //                         print("code sent!!!!");
-    //
-    //                         // PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: "123456");
-    //                         // UserCredential user = await auth.signInWithCredential(credential);
-    //                         // print(user.additionalUserInfo);
-    //                       },
-    //                       codeAutoRetrievalTimeout: (String verificationId) {
-    //                         // TIME OVER
-    //                       },
-    //                     );
-    //
-    //                     /*
-    //                     try {
-    //
-    //                       GoogleSignInAccount result =await _googleSignIn.signIn();
-    //
-    //                       print(result.email);
-    //                       print(result.displayName);
-    //                       print("success login!!!");
-    //
-    //
-    //                     } catch (error) {
-    //                       print("failed login!!!");
-    //                       print(error);
-    //                     }
-    //
-    //                      */
-    //                   },
-    //                 ),
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //         actions: <Widget>[
-    //           new FlatButton(
-    //             child: new Text(
-    //               "Close",
-    //               style: TextStyle(color: rapivetStatics.app_blue),
-    //             ),
-    //             onPressed: () {
-    //               Navigator.pop(context);
-    //               FocusScope.of(context).unfocus();
-    //             },
-    //           ),
-    //         ],
-    //       );
-    //     },
-    //   );
-    // }
-
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //   statusBarColor: Colors.blueGrey,
-    // ));
-
     // TODO: implement build
     return WillPopScope(
       onWillPop: () async {
@@ -351,9 +261,10 @@ class _LoginPageState extends State<StatefulWidget>
                           child: Text(
                             "Já sou cliente Rapivet",
                             style: TextStyle(
-                                fontFamily: "Roboto",
-                                fontSize: 17.5,
-                                color: rapivetStatics.app_black),
+                              fontFamily: "Roboto",
+                              fontSize: 17.5,
+                              color: rapivetStatics.app_black,
+                            ),
                           ),
                         ),
                         Padding(padding: new EdgeInsets.all(12)),
@@ -400,7 +311,9 @@ class _LoginPageState extends State<StatefulWidget>
                         OutlinedButton(
                           style: OutlinedButton.styleFrom(
                             side: BorderSide(
-                                color: rapivetStatics.app_bg, width: 0),
+                              color: rapivetStatics.app_bg,
+                              width: 0,
+                            ),
                           ),
                           onPressed: () {
                             showSearchPasswordDialog();
@@ -408,8 +321,9 @@ class _LoginPageState extends State<StatefulWidget>
                           child: Text(
                             "Esqueci minha senha",
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: rapivetStatics.app_blue),
+                              fontWeight: FontWeight.bold,
+                              color: rapivetStatics.app_blue,
+                            ),
                           ),
                         ),
                         Padding(padding: new EdgeInsets.all(15)),
@@ -420,8 +334,9 @@ class _LoginPageState extends State<StatefulWidget>
                             child: OutlinedButton(
                               style: OutlinedButton.styleFrom(
                                 side: BorderSide(
-                                    color: rapivetStatics.normal_ui_line_color,
-                                    width: 1),
+                                  color: rapivetStatics.normal_ui_line_color,
+                                  width: 1,
+                                ),
                                 backgroundColor: Colors.white,
                                 shape: new RoundedRectangleBorder(
                                   borderRadius: new BorderRadius.circular(30.0),
@@ -477,7 +392,9 @@ class _LoginPageState extends State<StatefulWidget>
                               style: OutlinedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 side: BorderSide(
-                                    color: rapivetStatics.app_blue, width: 1),
+                                  color: rapivetStatics.app_blue,
+                                  width: 1,
+                                ),
                                 shape: new RoundedRectangleBorder(
                                   borderRadius: new BorderRadius.circular(30.0),
                                 ),
@@ -487,7 +404,7 @@ class _LoginPageState extends State<StatefulWidget>
                                   context,
                                   MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        SignUpPage(SIGNUP_MODE.SIGNUP),
+                                        SignUpPage(SIGN_UP_MODE.SIGNUP),
                                   ),
                                 );
                               },
@@ -498,124 +415,27 @@ class _LoginPageState extends State<StatefulWidget>
                                 child: Text(
                                   "SOU UM NOVO USUARIO",
                                   style: TextStyle(
-                                      fontFamily: "Roboto",
-                                      //  fontWeight: FontWeight.bold,
-                                      color: rapivetStatics.app_blue),
+                                    fontFamily: "Roboto",
+                                    //  fontWeight: FontWeight.bold,
+                                    color: rapivetStatics.app_blue,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
                         Padding(padding: new EdgeInsets.all(15)),
-                        // Container(
-                        //   width: s_width * 0.9,
-                        //   height: 52.88,
-                        //   child: FittedBox(
-                        //     child: OutlinedButton(
-                        //         style: OutlinedButton.styleFrom(
-                        //             backgroundColor: Colors.white,
-                        //             side: BorderSide(
-                        //                 color: rapivetStatics.app_blue, width: 1),
-                        //             shape: new RoundedRectangleBorder(
-                        //                 borderRadius:
-                        //                     new BorderRadius.circular(30.0))),
-                        //         onPressed: () {
-                        //           Navigator.push(
-                        //               context,
-                        //               MaterialPageRoute(
-                        //                   builder: (BuildContext context) =>
-                        //                       RegisterPet_scene(COME_FROM.WELCOME,
-                        //                           PET_REGISTER_MODE.ADD)));
-                        //         },
-                        //         child: Container(
-                        //           width: s_width * 0.8,
-                        //           alignment: Alignment.center,
-                        //           height: 52.88,
-                        //           child: Text(
-                        //             "!!!! TEST - PET !!!",
-                        //             style: TextStyle(
-                        //                 fontFamily: "Roboto",
-                        //                 //  fontWeight: FontWeight.bold,
-                        //                 color: rapivetStatics.app_blue),
-                        //           ),
-                        //         )),
-                        //   ),
-                        // ),
-                        // Padding(padding: new EdgeInsets.all(15)),
-                        // Container(
-                        //   width: s_width * 0.9,
-                        //   height: 52.88,
-                        //   child: FittedBox(
-                        //     child: OutlinedButton(
-                        //         style: OutlinedButton.styleFrom(
-                        //             backgroundColor: Colors.white,
-                        //             side: BorderSide(
-                        //                 color: rapivetStatics.app_blue, width: 1),
-                        //             shape: new RoundedRectangleBorder(
-                        //                 borderRadius:
-                        //                     new BorderRadius.circular(30.0))),
-                        //         onPressed: () {
-                        //           Navigator.push(
-                        //               context,
-                        //               MaterialPageRoute(
-                        //                   builder: (BuildContext context) =>
-                        //                       Main_scene()));
-                        //         },
-                        //         child: Container(
-                        //           width: s_width * 0.8,
-                        //           alignment: Alignment.center,
-                        //           height: 52.88,
-                        //           child: Text(
-                        //             "!!!! TEST - MAIN !!!",
-                        //             style: TextStyle(
-                        //                 fontFamily: "Roboto",
-                        //                 //  fontWeight: FontWeight.bold,
-                        //                 color: rapivetStatics.app_blue),
-                        //           ),
-                        //         )),
-                        //   ),
-                        // ),
-                        // Padding(padding: new EdgeInsets.all(15)),
-                        // Container(
-                        //   width: s_width * 0.9,
-                        //   height: 52.88,
-                        //   child: FittedBox(
-                        //     child: OutlinedButton(
-                        //         style: OutlinedButton.styleFrom(
-                        //             backgroundColor: Colors.white,
-                        //             side: BorderSide(
-                        //                 color: rapivetStatics.app_blue, width: 1),
-                        //             shape: new RoundedRectangleBorder(
-                        //                 borderRadius:
-                        //                 new BorderRadius.circular(30.0))),
-                        //         onPressed: () {
-                        //           Navigator.push(
-                        //               context,
-                        //               MaterialPageRoute(
-                        //                   builder: (BuildContext context) =>
-                        //                       Api_test_scene()));
-                        //         },
-                        //         child: Container(
-                        //           width: s_width * 0.8,
-                        //           alignment: Alignment.center,
-                        //           height: 52.88,
-                        //           child: Text(
-                        //             "!!!! TEST - API !!!",
-                        //             style: TextStyle(
-                        //                 fontFamily: "Roboto",
-                        //                 //  fontWeight: FontWeight.bold,
-                        //                 color: rapivetStatics.app_blue),
-                        //           ),
-                        //         )),
-                        //   ),
-                        // ),
-                        // Padding(padding: new EdgeInsets.all(15)),
                       ],
                     ),
                   ),
                 ),
-                get_upbar(() {}, false, "LOGIN",
-                    in_width: widthSize, callback_goBack: clickGoBack),
+                get_upbar(
+                  () {},
+                  false,
+                  "LOGIN",
+                  in_width: widthSize,
+                  callback_goBack: clickGoBack,
+                ),
                 Visibility(
                   visible: showSocialSignPopup,
                   child: Container(
@@ -628,7 +448,6 @@ class _LoginPageState extends State<StatefulWidget>
                         Container(
                           width: widthSize * 0.9,
                           decoration: BoxDecoration(
-                            //shape: BoxShape.circle,
                             borderRadius: BorderRadius.all(
                               Radius.circular(5),
                             ),
@@ -645,13 +464,14 @@ class _LoginPageState extends State<StatefulWidget>
                                 child: FittedBox(
                                   fit: BoxFit.scaleDown,
                                   child: get_one_login_btn(
-                                      widthSize * 0.8,
-                                      Color.fromARGB(255, 59, 87, 157),
-                                      Colors.white,
-                                      'assets/facebook_sign.png',
-                                      "   Cadastre-se no Facebook", () async {
-                                    // callback_sign_up_with_facebook();
-                                  }, in_height: 50),
+                                    widthSize * 0.8,
+                                    Color.fromARGB(255, 59, 87, 157),
+                                    Colors.white,
+                                    'assets/facebook_sign.png',
+                                    "   Cadastre-se no Facebook",
+                                    () async {},
+                                    in_height: 50,
+                                  ),
                                 ),
                               ),
                               Padding(padding: new EdgeInsets.all(5)),
@@ -660,31 +480,39 @@ class _LoginPageState extends State<StatefulWidget>
                                 child: FittedBox(
                                   fit: BoxFit.scaleDown,
                                   child: get_one_login_btn(
-                                      widthSize * 0.8,
-                                      Colors.white,
-                                      rapivetStatics.app_black,
-                                      'assets/google_sign.png',
-                                      "   Cadastre-se com o Google", () {
-                                    handleGoogleSignUp();
-                                  }, in_height: 50, icon_height: 33),
+                                    widthSize * 0.8,
+                                    Colors.white,
+                                    rapivetStatics.app_black,
+                                    'assets/google_sign.png',
+                                    "   Cadastre-se com o Google",
+                                    () {
+                                      handleGoogleSignUp();
+                                    },
+                                    in_height: 50,
+                                    icon_height: 33,
+                                  ),
                                 ),
                               ),
                               Padding(padding: new EdgeInsets.all(5)),
                               Container(
-                                  width: widthSize * 0.8,
-                                  child: FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: get_one_login_btn(
-                                        widthSize * 0.8,
-                                        rapivetStatics.app_blue,
-                                        Colors.white,
-                                        '',
-                                        "Fechar", () {
+                                width: widthSize * 0.8,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: get_one_login_btn(
+                                    widthSize * 0.8,
+                                    rapivetStatics.app_blue,
+                                    Colors.white,
+                                    '',
+                                    "Fechar",
+                                    () {
                                       setState(() {
                                         showSocialSignPopup = false;
                                       });
-                                    }, in_height: 50),
-                                  )),
+                                    },
+                                    in_height: 50,
+                                  ),
+                                ),
+                              ),
                               Padding(
                                 padding: new EdgeInsets.all(widthSize * 0.025),
                               ),

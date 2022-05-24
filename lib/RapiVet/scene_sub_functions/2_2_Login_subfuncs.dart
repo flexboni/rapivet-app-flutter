@@ -4,7 +4,7 @@ import 'package:swork_raon/common/JToast.dart';
 import 'package:swork_raon/common/rapivetStatics.dart';
 import 'package:swork_raon/model/All_health_check_manager.dart';
 import 'package:swork_raon/model/one_pet_data.dart';
-import 'package:swork_raon/rapivet/5_Main.dart';
+import 'package:swork_raon/rapivet/home.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
 
 import '../4_RegisterPet.dart';
@@ -61,7 +61,7 @@ class Login_subFuncs {
       await All_health_check_manager().get_all_health_check_infos();
 
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => Main_scene()));
+          MaterialPageRoute(builder: (BuildContext context) => HomePage()));
     }
   }
 }

@@ -6,7 +6,7 @@ import 'package:swork_raon/rapivet/scene_sub_functions/7_TimerPopup.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
 import '../common/rapivetStatics.dart';
-import '5_Main.dart';
+import 'home.dart';
 
 class Test_Guide extends StatefulWidget {
   @override
@@ -40,7 +40,7 @@ class _test_guide_home extends State<StatefulWidget> {
 
     goback_to_main() {
       Navigator.pushReplacement(context,
-          PageTransition(type: PageTransitionType.fade, child: Main_scene()));
+          PageTransition(type: PageTransitionType.fade, child: HomePage()));
     }
 
     // TODO: implement build

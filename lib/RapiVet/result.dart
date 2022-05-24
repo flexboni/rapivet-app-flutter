@@ -8,7 +8,7 @@ import 'package:swork_raon/model/one_healthcheck_data.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/9_2_Result_subFuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
-import '5_Main.dart';
+import 'home.dart';
 
 Color this_red = Color.fromARGB(255, 213, 48, 8);
 Color this_grey = Colors.grey;
@@ -18,32 +18,32 @@ one_healthcheck_data _current_health_data;
 bool _is_loading;
 String ad_img_url = "";
 
-class Result_scene extends StatefulWidget {
+class ResultPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _result_scene_home();
+  State<StatefulWidget> createState() => _ResultPageState();
 }
 
-class _result_scene_home extends State<StatefulWidget>
+class _ResultPageState extends State<StatefulWidget>
     with TickerProviderStateMixin {
   @override
   void initState() {
     _is_loading = false;
-    get_data_fromServer();
+    getDataFromServer();
     super.initState();
   }
 
-  get_data_fromServer() async {
+  getDataFromServer() async {
     setState(() {
       _is_loading = true;
     });
 
-    _hCheck_list = await Result_subFuncs().get_currentPet_healthCehck_db();
+    _hCheck_list = await Result_subFuncs().getCurrentPetHealthCheckDB();
 
     if (_hCheck_list == [] || _hCheck_list.length == 0) {
       JToast().show_toast("Informação não encontrada.", true);
 
       Navigator.pushReplacement(context,
-          PageTransition(type: PageTransitionType.fade, child: Main_scene()));
+          PageTransition(type: PageTransitionType.fade, child: HomePage()));
     }
 
     _hCheck_list = Result_subFuncs().reverse_order(_hCheck_list);
@@ -76,7 +76,7 @@ class _result_scene_home extends State<StatefulWidget>
 
     goback_to_main() {
       Navigator.pushReplacement(context,
-          PageTransition(type: PageTransitionType.fade, child: Main_scene()));
+          PageTransition(type: PageTransitionType.fade, child: HomePage()));
     }
 
     String _get_date_txt() {

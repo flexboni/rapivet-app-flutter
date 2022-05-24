@@ -12,7 +12,7 @@ import 'package:swork_raon/rapivet/10_Result_plus.dart';
 import 'common_ui.dart';
 
 class Result_subFuncs {
-  Future<List<one_healthcheck_data>> get_currentPet_healthCehck_db() async {
+  Future<List<one_healthcheck_data>> getCurrentPetHealthCheckDB() async {
     one_pet_data this_pet_data =
         rapivetStatics.pet_data_list[rapivetStatics.current_pet_index];
     String token = rapivetStatics.token;

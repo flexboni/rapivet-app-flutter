@@ -7,11 +7,10 @@ import 'package:swork_raon/common/rapivetStatics.dart';
 import 'package:swork_raon/model/All_health_check_manager.dart';
 import 'package:swork_raon/rapivet/12_QA_read.dart';
 import 'package:swork_raon/rapivet/main.dart';
+import 'package:swork_raon/rapivet/result.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/5_2_main_subFuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '9_Result.dart';
 
 extension GlobalKeyExtension on GlobalKey {
   Rect get globalPaintBounds {
@@ -30,12 +29,12 @@ bool _to_show_tutorial = false;
 bool _is_tuto1_visiblle = false;
 bool _is_tuto2_visiblle = false;
 
-class Main_scene extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _main_scene_home();
+  State<StatefulWidget> createState() => _HomeState();
 }
 
-class _main_scene_home extends State<StatefulWidget> {
+class _HomeState extends State<StatefulWidget> {
   bool is_ready_to_remove_line = false;
   final grayMark_containerKey = GlobalKey();
 
@@ -411,7 +410,7 @@ class _main_scene_home extends State<StatefulWidget> {
                                           context,
                                           PageTransition(
                                               type: PageTransitionType.fade,
-                                              child: Result_scene()));
+                                              child: ResultPage()));
                                     }, -1, -1, in_height: 46.88),
                                   ),
                                 ),

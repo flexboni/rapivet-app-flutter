@@ -248,18 +248,14 @@ class SearchUltimateResult {
     double min = 99999;
     int min_i = -1; //juje
 
-    print("Compare start:: " + stickAreaColorSet.area_name);
-
     for (int i = 0; i < compAreaColorSetsIndexList.length; i++) {
       int index = compAreaColorSetsIndexList[i];
-
       ColorIntRGB compareRGB = compAreaColorSetsList[index].av_rgb;
       ColorLab compareLAB = compAreaColorSetsList[index].av_lab;
 
       // weight 넣어주기
       if (rgbWeightList != null) {
-        String rgbWeight = rgbWeightList[i]; // "1.2, 1.1, 1"
-        compareRGB = ColorIntRGB().setColorWeight(rgbWeight, compareRGB);
+        compareRGB = ColorIntRGB().setColorWeight(rgbWeightList[i], compareRGB);
         compareLAB = Lab_manager().rgb2lab(
           compareRGB.r,
           compareRGB.g,

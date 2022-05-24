@@ -13,13 +13,13 @@ import 'package:swork_raon/model/All_health_check_manager.dart';
 import 'package:swork_raon/rapivet/10_Result_plus.dart';
 import 'package:swork_raon/rapivet/6_userInfo.dart';
 import 'package:swork_raon/rapivet/7_Test_Guide.dart';
-import 'package:swork_raon/rapivet/9_Result.dart';
+import 'package:swork_raon/rapivet/result.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/5_2_main_subFuncs.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../common/rapivetStatics.dart';
 import '../4_RegisterPet.dart';
-import '../5_Main.dart';
+import '../home.dart';
 import '4_2_ResterPet_subfuncs.dart';
 
 /*
@@ -182,31 +182,38 @@ Widget selectable_button(double width, double height, String text,
 }
 
 @override
-Widget get_explain_of_textfield_up(double s_width, String text,
-    {bool is_showing_footmark = false}) {
+Widget get_explain_of_textfield_up(
+  double width,
+  String text, {
+  bool isShowingFootmark = false,
+}) {
   return Container(
-      padding: new EdgeInsets.fromLTRB(s_width * 0.05, 0, 0, 0),
-      width: s_width,
-      alignment: Alignment.centerLeft,
-      child: Row(
-        children: [
-          Visibility(
-            visible: is_showing_footmark,
-            child: Padding(
-              padding: new EdgeInsets.fromLTRB(0, 0, 8, 0),
-              child: Container(
-                  height: 13, child: Image.asset('assets/footmark.png')),
+    padding: new EdgeInsets.fromLTRB(width * 0.05, 0, 0, 0),
+    width: width,
+    alignment: Alignment.centerLeft,
+    child: Row(
+      children: [
+        Visibility(
+          visible: isShowingFootmark,
+          child: Padding(
+            padding: new EdgeInsets.fromLTRB(0, 0, 8, 0),
+            child: Container(
+              height: 13,
+              child: Image.asset('assets/footmark.png'),
             ),
           ),
-          Text(
-            text,
-            style: TextStyle(
-                fontSize: 13.88,
-                color: rapivetStatics.app_black.withOpacity(0.88),
-                fontFamily: "Noto"),
+        ),
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: 13.88,
+            color: rapivetStatics.app_black.withOpacity(0.88),
+            fontFamily: "Noto",
           ),
-        ],
-      ));
+        ),
+      ],
+    ),
+  );
 }
 
 @override
@@ -530,8 +537,13 @@ Widget get_one_short_btn(
 
 @override
 Widget get_one_btn(
-    double in_width, Color bgcolor, String text, VoidCallback Callback_click,
-    {double in_height = 46.88, double font_size = 18.88}) {
+  double in_width,
+  Color bgcolor,
+  String text,
+  VoidCallback Callback_click, {
+  double in_height = 46.88,
+  double font_size = 18.88,
+}) {
   return Container(
     height: in_height,
     width: in_width,
@@ -862,7 +874,7 @@ Widget _get_one_downbar_btn(
             Navigator.pushReplacement(
                 context,
                 PageTransition(
-                    type: PageTransitionType.fade, child: Main_scene()));
+                    type: PageTransitionType.fade, child: HomePage()));
           }
 
           if (this_downbar_item == DOWN_BAR_STATUS.TEST) {
@@ -876,7 +888,7 @@ Widget _get_one_downbar_btn(
             Navigator.pushReplacement(
                 context,
                 PageTransition(
-                    type: PageTransitionType.fade, child: Result_scene()));
+                    type: PageTransitionType.fade, child: ResultPage()));
           }
 
           if (this_downbar_item == DOWN_BAR_STATUS.RESULT2) {

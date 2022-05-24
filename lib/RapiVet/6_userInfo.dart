@@ -8,7 +8,7 @@ import 'package:swork_raon/common/app_strings.dart';
 import 'package:swork_raon/model/Pet_data_manager.dart';
 import 'package:swork_raon/model/one_pet_data.dart';
 import 'package:swork_raon/model/one_user_data.dart';
-import 'package:swork_raon/rapivet/5_Main.dart';
+import 'package:swork_raon/rapivet/home.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/5_2_main_subFuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/6_2_userInfo_subFuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
@@ -165,7 +165,7 @@ class _userInfo_home extends State<StatefulWidget>
     return WillPopScope(
       onWillPop: () async {
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (BuildContext context) => Main_scene()));
+            MaterialPageRoute(builder: (BuildContext context) => HomePage()));
 
         return false;
       },
@@ -365,7 +365,7 @@ class _userInfo_home extends State<StatefulWidget>
                                         MaterialPageRoute(
                                             builder: (BuildContext context) =>
                                                 SignUpPage(
-                                                  SIGNUP_MODE.MODIFY,
+                                                  SIGN_UP_MODE.MODIFY,
                                                   user_data: _this_user_data,
                                                 )));
                                   }, in_height: 50),
@@ -539,7 +539,7 @@ class _userInfo_home extends State<StatefulWidget>
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (BuildContext context) => Main_scene()));
+                              builder: (BuildContext context) => HomePage()));
                     }),
                   ),
                   //    show_notReadyyet(s_width,s_height,is_full_screen: true)

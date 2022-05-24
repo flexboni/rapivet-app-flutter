@@ -27,13 +27,17 @@ class ColorLab {
       return diff / 100;
     }
 
+    // 각 채널의 유사도를 먼저 계산 후 평균값을 구하는 것이 적합해 보임.
     if (compareMode == COMPARE_MODE.LAB_ONLY_USING_LAB) {
       double similarityL = (1 - lab_1.l / lab_2.l).abs() * 100;
       double similarityA = (1 - lab_1.a / lab_2.a).abs() * 100;
       double similarityB = (1 - lab_1.b / lab_2.b).abs() * 100;
 
-      // TODO
-      // return diff / 100;
+      double w1 = 1.0;
+      double w2 = 1.0;
+      double w3 = 1.0;
+
+      return ((similarityL * w1) + (similarityA * w2) + (similarityB * w3)) / 3;
     }
 
     return 0;

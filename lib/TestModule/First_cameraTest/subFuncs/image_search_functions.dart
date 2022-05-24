@@ -10,7 +10,7 @@ import 'package:swork_raon/TestModule/image_process_test_module/searching_result
 import 'package:swork_raon/TestModule/image_process_test_module/searching_result/stickResult_dataset.dart';
 import 'package:swork_raon/common/rapivetStatics.dart';
 import 'package:swork_raon/model/one_pet_data.dart';
-import 'package:swork_raon/rapivet/9_Result.dart';
+import 'package:swork_raon/rapivet/result.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
@@ -154,7 +154,7 @@ void _get_result_and_upload_it(
 
   print("move to result!");
   Navigator.pushReplacement(context,
-      PageTransition(type: PageTransitionType.fade, child: Result_scene()));
+      PageTransition(type: PageTransitionType.fade, child: ResultPage()));
 }
 
 // test result area ==============================================================================

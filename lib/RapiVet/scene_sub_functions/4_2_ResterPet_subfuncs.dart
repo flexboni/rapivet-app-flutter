@@ -6,8 +6,8 @@ import 'package:swork_raon/common/AntiCacheURL.dart';
 import 'package:swork_raon/common/JToast.dart';
 import 'package:swork_raon/model/Pet_data_manager.dart';
 import 'package:swork_raon/model/one_pet_data.dart';
-import 'package:swork_raon/rapivet/5_Main.dart';
 import 'package:swork_raon/rapivet/6_userInfo.dart';
+import 'package:swork_raon/rapivet/home.dart';
 import 'package:swork_raon/rapivet/main.dart';
 
 import '../../common/app_strings.dart';
@@ -148,7 +148,7 @@ class register_subFuncs {
               builder: (BuildContext context) => userInfo_scene()));
     } else if (come_from == COME_FROM.MAIN) {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => Main_scene()));
+          MaterialPageRoute(builder: (BuildContext context) => HomePage()));
     }
   }
 
@@ -156,7 +156,7 @@ class register_subFuncs {
     if (_come_from == COME_FROM.WELCOME) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (BuildContext context) => Main_scene()),
+        MaterialPageRoute(builder: (BuildContext context) => HomePage()),
       );
     } else if (_come_from == COME_FROM.USER_INFO) {
       Navigator.pushReplacement(
@@ -165,7 +165,7 @@ class register_subFuncs {
               builder: (BuildContext context) => userInfo_scene()));
     } else if (_come_from == COME_FROM.MAIN) {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => Main_scene()));
+          MaterialPageRoute(builder: (BuildContext context) => HomePage()));
     }
   }
 

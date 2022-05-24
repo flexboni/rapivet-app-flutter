@@ -6,7 +6,7 @@ import 'package:swork_raon/model/one_QA_data.dart';
 import 'package:swork_raon/rapivet/11_QA_write.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/12_2_QA_read_subFuncs.dart';
 
-import '5_Main.dart';
+import 'home.dart';
 import 'scene_sub_functions/common_ui.dart';
 
 bool _is_showing_questionArea = false;
@@ -54,7 +54,7 @@ class _QA_read_home extends State<StatefulWidget>
 
     goback_to_main() {
       Navigator.pushReplacement(context,
-          PageTransition(type: PageTransitionType.fade, child: Main_scene()));
+          PageTransition(type: PageTransitionType.fade, child: HomePage()));
     }
 
     return WillPopScope(
