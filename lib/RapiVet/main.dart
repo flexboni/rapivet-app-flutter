@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:swork_raon/rapivet/welcome.dart';
+
+final helloWorldProvider = Provider((_) => "Hello World");
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

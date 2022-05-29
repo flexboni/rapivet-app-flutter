@@ -14,8 +14,8 @@ Color this_red = Color.fromARGB(255, 213, 48, 8);
 Color this_grey = Colors.grey;
 List<one_healthcheck_data> _hCheck_list = [];
 List<String> _hCheck_date_strs = [];
-one_healthcheck_data _current_health_data;
-bool _is_loading;
+one_healthcheck_data? _current_health_data;
+bool? _is_loading;
 String ad_img_url = "";
 
 class ResultPage extends StatefulWidget {
