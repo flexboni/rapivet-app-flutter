@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:swork_raon/common/rapivetStatics.dart';
-import 'package:swork_raon/model/one_pet_data.dart';
+import 'package:swork_raon/common/rapivet_statics.dart';
+import 'package:swork_raon/model/one_pet.dart';
 import 'package:swork_raon/rapivet/4_RegisterPet.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/4_2_ResterPet_subfuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
@@ -10,7 +10,7 @@ import 'package:swork_raon/utils/string_utils.dart';
 class Pet_data_manager {
   test() {
     List<String> loaded_myPetlist =
-        rapivetStatics.prefs.getStringList("mypets");
+        RapivetStatics.prefs.getStringList("mypets");
     if (loaded_myPetlist == null || loaded_myPetlist == []) {
       print("no data!!!!!!!");
     } else {
@@ -32,10 +32,10 @@ class Pet_data_manager {
     List<String> petdata_list = [];
     petdata_list.add(json_str);
 
-    rapivetStatics.prefs.setStringList("mypets", petdata_list);
+    RapivetStatics.prefs.setStringList("mypets", petdata_list);
 
     // 2. load
-    loaded_myPetlist = rapivetStatics.prefs.getStringList("mypets");
+    loaded_myPetlist = RapivetStatics.prefs.getStringList("mypets");
     print(loaded_myPetlist.length);
   }
 
@@ -64,7 +64,7 @@ class Pet_data_manager {
       "kind": pet_kind_index.toString(),
       "weight": _input_dataset.weight_txtedit_control.text.trim(),
       "img_data": (in_pet_register_mode == PET_REGISTER_MODE.ADD)
-          ? rapivetStatics.pet_img_base64
+          ? RapivetStatics.petImgBase64
           : "",
     };
 
@@ -77,14 +77,14 @@ class Pet_data_manager {
     // modify
     else {
       String modify_pet_uid =
-          rapivetStatics.pet_data_list[rapivetStatics.current_pet_index].uid;
+          RapivetStatics.petDataList[RapivetStatics.currentPetIndex].uid;
       pet_uid = await Api_manager().pet_update(modify_pet_uid, petdata);
 
       // image 업데이트
-      if (rapivetStatics.pet_img_base64 != "") {
+      if (RapivetStatics.petImgBase64 != "") {
         print("이미지도 업데이트!!!");
-        await Api_manager().pet_photo_update(rapivetStatics.token,
-            modify_pet_uid, rapivetStatics.pet_img_base64);
+        await Api_manager().pet_photo_update(
+            RapivetStatics.token, modify_pet_uid, RapivetStatics.petImgBase64);
       }
 
       print("pet uid=====================");
@@ -96,8 +96,8 @@ class Pet_data_manager {
     if (pet_uid == "") return null;
 
     // load pet list
-    List<one_pet_data> petDatas =
-        await Api_manager().get_pet_list(rapivetStatics.token);
+    List<OnePet> petDatas =
+        await Api_manager().get_pet_list(RapivetStatics.token);
     if (petDatas == null || petDatas == []) return null;
 
     // get current index
@@ -138,7 +138,7 @@ class Pet_data_manager {
           (_input_dataset.enum_e_castrado == REG_E_CASTRADO.Y) ? "1" : "0",
       "kind": pet_kind_index.toString(),
       "weight": _input_dataset.weight_txtedit_control.text.trim(),
-      "local_pic": rapivetStatics.current_pet_pic_path,
+      "local_pic": RapivetStatics.currentPetPicturePath,
     };
 
     String json_str = json.encode(petdata);
@@ -146,24 +146,24 @@ class Pet_data_manager {
 
     // 1. load
     List<String> loaded_myPetlist =
-        rapivetStatics.prefs.getStringList("mypets");
+        RapivetStatics.prefs.getStringList("mypets");
 
     if (loaded_myPetlist == null) loaded_myPetlist = [];
 
     // 2. add & save
     if (in_pet_register_mode == PET_REGISTER_MODE.MODIFY) {
       //  replace case
-      print("modifying index: " + rapivetStatics.current_pet_index.toString());
-      loaded_myPetlist[rapivetStatics.current_pet_index] = json_str;
+      print("modifying index: " + RapivetStatics.currentPetIndex.toString());
+      loaded_myPetlist[RapivetStatics.currentPetIndex] = json_str;
     } else {
       // add case
       loaded_myPetlist.add(json_str);
     }
 
-    rapivetStatics.prefs.setStringList("mypets", loaded_myPetlist);
+    RapivetStatics.prefs.setStringList("mypets", loaded_myPetlist);
 
     // 3. load all
-    loaded_myPetlist = rapivetStatics.prefs.getStringList("mypets");
+    loaded_myPetlist = RapivetStatics.prefs.getStringList("mypets");
     print(loaded_myPetlist.length);
 
     // 4. return index
@@ -173,32 +173,32 @@ class Pet_data_manager {
   }
 
   // remove data
-  Future<List<one_pet_data>> remove_pet_data(
-      List<one_pet_data> pet_data_list, int index) async {
-    if (rapivetStatics.is_logged_on_user) {
+  Future<List<OnePet>> remove_pet_data(
+      List<OnePet> pet_data_list, int index) async {
+    if (RapivetStatics.isLoggedOnUser) {
       // delete it
-      String uid = rapivetStatics.pet_data_list[index].uid;
-      String token = rapivetStatics.token;
+      String uid = RapivetStatics.petDataList[index].uid;
+      String token = RapivetStatics.token;
 
       await Api_manager().pet_delete(token, uid);
 
-      List<one_pet_data> petDatas = await Api_manager().get_pet_list(token);
+      List<OnePet> petDatas = await Api_manager().get_pet_list(token);
       return petDatas;
     }
     // local only ---------------------------------------------
     else {
       // 1. load
       List<String> loaded_myPetlist =
-          rapivetStatics.prefs.getStringList("mypets");
+          RapivetStatics.prefs.getStringList("mypets");
 
       // 2. delete index
       loaded_myPetlist.removeAt(index);
 
       // 3. save it
-      rapivetStatics.prefs.setStringList("mypets", loaded_myPetlist);
+      RapivetStatics.prefs.setStringList("mypets", loaded_myPetlist);
 
       // 3. load all for test
-      loaded_myPetlist = rapivetStatics.prefs.getStringList("mypets");
+      loaded_myPetlist = RapivetStatics.prefs.getStringList("mypets");
       print(loaded_myPetlist.length);
 
       // load data
@@ -208,7 +208,7 @@ class Pet_data_manager {
 
   bool do_we_have_local_petsDB() {
     List<String> loaded_myPetlist =
-        rapivetStatics.prefs.getStringList("mypets");
+        RapivetStatics.prefs.getStringList("mypets");
 
     if (loaded_myPetlist == null || loaded_myPetlist.length == 0)
       return false;
@@ -216,10 +216,10 @@ class Pet_data_manager {
       return true;
   }
 
-  List<one_pet_data> load_local_petDB() {
+  List<OnePet> load_local_petDB() {
     List<String> loaded_myPetlist =
-        rapivetStatics.prefs.getStringList("mypets");
-    List<one_pet_data> pet_data_list = [];
+        RapivetStatics.prefs.getStringList("mypets");
+    List<OnePet> pet_data_list = [];
 
     for (int i = 0; i < loaded_myPetlist.length; i++) {
       var this_json = json.decode(loaded_myPetlist[i]);
@@ -230,10 +230,10 @@ class Pet_data_manager {
       this_one_pet_data.birthday = this_json["birthday"];
       this_one_pet_data.type = this_json["type"];
       this_one_pet_data.gender = this_json["gender"];
-      this_one_pet_data.is_neuter = this_json["is_neuter"];
+      this_one_pet_data.isNeuter = this_json["is_neuter"];
       this_one_pet_data.weight = this_json["weight"];
       this_one_pet_data.kind = this_json["kind"];
-      this_one_pet_data.local_pic = this_json["local_pic"];
+      this_one_pet_data.localPicture = this_json["local_pic"];
 
       this_one_pet_data = _get_birthday_ymd(this_one_pet_data);
 
@@ -243,7 +243,7 @@ class Pet_data_manager {
     return pet_data_list;
   }
 
-  List<one_pet_data> get_birthday_ymd_inList(List<one_pet_data> petDatas) {
+  List<OnePet> get_birthday_ymd_inList(List<OnePet> petDatas) {
     for (int i = 0; i < petDatas.length; i++) {
       petDatas[i] = _get_birthday_ymd(petDatas[i]);
     }
@@ -256,18 +256,18 @@ class Pet_data_manager {
 
     print(birthday_str);
 
-    this_one_pet_data.birthday_year = int.parse(birthday_str.substring(0, 4));
-    this_one_pet_data.birthday_month = int.parse(birthday_str.substring(4, 6));
-    this_one_pet_data.birthday_day = int.parse(birthday_str.substring(6, 8));
+    this_one_pet_data.year = int.parse(birthday_str.substring(0, 4));
+    this_one_pet_data.month = int.parse(birthday_str.substring(4, 6));
+    this_one_pet_data.day = int.parse(birthday_str.substring(6, 8));
 
     return this_one_pet_data;
   }
 
-  Future<List<one_pet_data>> load_pet_data_list_accordingly_localOnly() async {
+  Future<List<OnePet>> load_pet_data_list_accordingly_localOnly() async {
     // if user is logged on, get data from server
     // or get data from local
 
-    // if (rapivetStatics.is_logged_on_user) {
+    // if (RapivetStatics.is_logged_on_user) {
     // } else {
     //   return load_local_petDB();
     // }
@@ -288,7 +288,7 @@ class Pet_data_manager {
     month = outlist[1].trim();
 
     // month str -> index
-    month = (rapivetStatics.month_in_pt.indexOf(month) + 1).toString();
+    month = (RapivetStatics.monthInPT.indexOf(month) + 1).toString();
     if (month.length == 1) {
       month = "0" + month;
     }
@@ -310,28 +310,28 @@ class Pet_data_manager {
     int index = int.parse(this_pet_data.kind);
 
     if (this_pet_data.type == "1")
-      return rapivetStatics.dog_kind_set[index];
+      return RapivetStatics.dogs[index];
     else
-      return rapivetStatics.cat_kind_set[index];
+      return RapivetStatics.cats[index];
   }
 
   int get_animal_kind_index(register_input_dataset _input_dataset) {
     String type_name = _input_dataset.breed_txtedit_control.text.trim();
 
     if (_input_dataset.enum_pet_type == REG_PET_TYPE.DOG) {
-      for (int i = 0; i < rapivetStatics.dog_kind_set.length; i++) {
-        if (rapivetStatics.dog_kind_set[i] == type_name) return i;
+      for (int i = 0; i < RapivetStatics.dogs.length; i++) {
+        if (RapivetStatics.dogs[i] == type_name) return i;
       }
     } else {
-      for (int i = 0; i < rapivetStatics.cat_kind_set.length; i++) {
-        if (rapivetStatics.cat_kind_set[i] == type_name) return i;
+      for (int i = 0; i < RapivetStatics.cats.length; i++) {
+        if (RapivetStatics.cats[i] == type_name) return i;
       }
     }
 
     return 0;
   }
 
-  int _get_pet_index_of_serverData(List<one_pet_data> pet_datas, String uid) {
+  int _get_pet_index_of_serverData(List<OnePet> pet_datas, String uid) {
     for (int i = 0; i < pet_datas.length; i++) {
       if (pet_datas[i].uid == uid) return i;
     }

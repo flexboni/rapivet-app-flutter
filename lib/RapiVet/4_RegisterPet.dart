@@ -5,17 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:swork_raon/common/JToast.dart';
-import 'package:swork_raon/model/one_pet_data.dart';
+import 'package:swork_raon/model/one_pet.dart';
 
 import '../common/app_strings.dart';
-import '../common/rapivetStatics.dart';
+import '../common/rapivet_statics.dart';
 import 'scene_sub_functions/4_2_ResterPet_subfuncs.dart';
 import 'scene_sub_functions/common_ui.dart';
 
 enum PET_REGISTER_MODE { ADD, MODIFY }
 
 enum REG_SEXO { NOT_SELECTED, MALE, FEMALE }
+
 enum REG_E_CASTRADO { NOT_SELECTED, Y, N }
+
 enum REG_PET_TYPE { NOT_SELECTED, DOG, CAT }
 
 PET_REGISTER_MODE _pet_register_mode;
@@ -31,18 +33,18 @@ class RegisterPet_scene extends StatefulWidget {
     _pet_register_mode = in_pet_register_mode;
 
     if (_pet_register_mode == PET_REGISTER_MODE.ADD) {
-      rapivetStatics.current_pet_pic_path = "";
+      RapivetStatics.currentPetPicturePath = "";
     } else if (_pet_register_mode == PET_REGISTER_MODE.MODIFY) {
-      if (rapivetStatics.is_logged_on_user) {
+      if (RapivetStatics.isLoggedOnUser) {
         // 서버에서 불러오기
         _modifying_pet_data =
-            rapivetStatics.pet_data_list[rapivetStatics.current_pet_index];
-        rapivetStatics.current_pet_pic_path = "";
+            RapivetStatics.petDataList[RapivetStatics.currentPetIndex];
+        RapivetStatics.currentPetPicturePath = "";
       } else {
         // 로컬에서 불러오기
         _modifying_pet_data =
-            rapivetStatics.pet_data_list[rapivetStatics.current_pet_index];
-        rapivetStatics.current_pet_pic_path = _modifying_pet_data.local_pic;
+            RapivetStatics.petDataList[RapivetStatics.currentPetIndex];
+        RapivetStatics.currentPetPicturePath = _modifying_pet_data.localPicture;
       }
     }
   }
@@ -71,7 +73,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
     _input_dataset.enum_e_castrado = REG_E_CASTRADO.NOT_SELECTED;
     _input_dataset.enum_pet_type = REG_PET_TYPE.NOT_SELECTED;
 
-    rapivetStatics.pet_img_base64 = "";
+    RapivetStatics.petImgBase64 = "";
     _initialize();
   }
 
@@ -127,23 +129,13 @@ class _registerpet_scene_home extends State<StatefulWidget>
     await Future.delayed(Duration(milliseconds: 200));
 
     if (_input_dataset.enum_pet_type == REG_PET_TYPE.CAT) {
-      show_dialog_petlist(
-          context,
-          rapivetStatics.cat_kind_set,
-          _callback_setstate,
-          _value,
-          _input_dataset.enum_pet_type,
-          _input_dataset);
+      show_dialog_petlist(context, RapivetStatics.cats, _callback_setstate,
+          _value, _input_dataset.enum_pet_type, _input_dataset);
     }
 
     if (_input_dataset.enum_pet_type == REG_PET_TYPE.DOG) {
-      show_dialog_petlist(
-          context,
-          rapivetStatics.dog_kind_set,
-          _callback_setstate,
-          _value,
-          _input_dataset.enum_pet_type,
-          _input_dataset);
+      show_dialog_petlist(context, RapivetStatics.dogs, _callback_setstate,
+          _value, _input_dataset.enum_pet_type, _input_dataset);
     }
 
     await Future.delayed(Duration(milliseconds: 100));
@@ -191,7 +183,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
         return false;
       },
       child: Scaffold(
-          backgroundColor: rapivetStatics.app_bg,
+          backgroundColor: RapivetStatics.appBG,
           body: AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle.dark,
             child: SafeArea(
@@ -212,7 +204,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
                           get_explain_of_textfield_up(s_width, "NOME",
                               isShowingFootmark: true),
                           Padding(padding: new EdgeInsets.all(gap1)),
-                          get_one_textfield(s_width, rapivetStatics.app_blue,
+                          get_one_textfield(s_width, RapivetStatics.appBlue,
                               _input_dataset.nome_txtedit_control, "Nome",
                               is_name_keyboard: true),
                           Padding(padding: new EdgeInsets.all(gap2)),
@@ -222,7 +214,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
                           Padding(padding: new EdgeInsets.all(gap1)),
                           get_one_textfield(
                               s_width,
-                              rapivetStatics.app_blue,
+                              RapivetStatics.appBlue,
                               _input_dataset.birthday_txtedit_control,
                               "17. 04. 2020",
                               is_readonly: true,
@@ -329,7 +321,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
                           Padding(padding: new EdgeInsets.all(gap1)),
                           get_one_textfield(
                               s_width,
-                              rapivetStatics.app_blue,
+                              RapivetStatics.appBlue,
                               _input_dataset.breed_txtedit_control,
                               "Rabrador Retriever",
                               is_readonly: true,
@@ -341,7 +333,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
                           get_explain_of_textfield_up(s_width, "PESO",
                               isShowingFootmark: true),
                           Padding(padding: new EdgeInsets.all(gap1)),
-                          get_one_textfield(s_width, rapivetStatics.app_blue,
+                          get_one_textfield(s_width, RapivetStatics.appBlue,
                               _input_dataset.weight_txtedit_control, "5",
                               is_to_show_kg_mark: true,
                               is_using_number_only: true),
@@ -349,7 +341,7 @@ class _registerpet_scene_home extends State<StatefulWidget>
                           // 등록 버튼 ------------------------------------------------
                           get_one_btn(
                               s_width * 0.9,
-                              rapivetStatics.app_blue.withOpacity(0.8),
+                              RapivetStatics.appBlue.withOpacity(0.8),
                               "Seguinte",
                               _callback_register_pet),
                           Padding(padding: new EdgeInsets.all(23)),

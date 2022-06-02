@@ -7,7 +7,7 @@ import 'package:swork_raon/rapivet/12_QA_read.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/12_2_QA_read_subFuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
-import '../common/rapivetStatics.dart';
+import '../common/rapivet_statics.dart';
 
 TextEditingController _question_txtedit_control;
 bool _is_loading = false;
@@ -48,7 +48,7 @@ class _QA_write_home extends State<StatefulWidget>
       });
 
       bool result = await QA_read_subFuncs().write_QnA_toServer(
-          rapivetStatics.token, _question_txtedit_control.text);
+          RapivetStatics.token, _question_txtedit_control.text);
 
       if (result) {
         callback_goto_QA_read();
@@ -60,7 +60,7 @@ class _QA_write_home extends State<StatefulWidget>
     }
 
     return Scaffold(
-      backgroundColor: rapivetStatics.app_bg,
+      backgroundColor: RapivetStatics.appBG,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark,
         child: SafeArea(
@@ -115,7 +115,7 @@ class _QA_write_home extends State<StatefulWidget>
                                   filled: true,
                                   // labelStyle: TextStyle(fontSize: 10),
                                   // hoverColor: Colors.red,
-                                  //  rapivetStatics.app_blue.withOpacity(0.1),
+                                  //  RapivetStatics.app_blue.withOpacity(0.1),
                                   hintText: 'Em breve retornaremos o contato.',
                                   hintStyle: TextStyle(
                                       color: Colors.grey.withOpacity(0.7),
@@ -123,13 +123,12 @@ class _QA_write_home extends State<StatefulWidget>
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(7.0),
                                     borderSide: BorderSide(
-                                        color:
-                                            rapivetStatics.normal_ui_line_color,
+                                        color: RapivetStatics.normalUILineColor,
                                         width: 1.5),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: rapivetStatics.app_blue,
+                                        color: RapivetStatics.appBlue,
                                         width: 1.0),
                                     borderRadius: BorderRadius.circular(7.0),
                                   ),
@@ -140,7 +139,7 @@ class _QA_write_home extends State<StatefulWidget>
                         ),
                         Padding(padding: new EdgeInsets.all(15)),
                         get_one_btn(
-                            s_width * 0.9, rapivetStatics.app_blue, "Cadastrar",
+                            s_width * 0.9, RapivetStatics.appBlue, "Cadastrar",
                             () {
                           onClick_write();
                         }, in_height: 55),

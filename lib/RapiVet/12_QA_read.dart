@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/common/rapivet_statics.dart';
 import 'package:swork_raon/model/one_QA_data.dart';
 import 'package:swork_raon/rapivet/11_QA_write.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/12_2_QA_read_subFuncs.dart';
@@ -34,7 +34,7 @@ class _QA_read_home extends State<StatefulWidget>
     });
 
     _qa_datas_list =
-        await QA_read_subFuncs().get_QnA_fromServer(rapivetStatics.token);
+        await QA_read_subFuncs().get_QnA_fromServer(RapivetStatics.token);
 
     if (_qa_datas_list == [] || _qa_datas_list.length == 0) {
       _is_showing_questionArea = false;
@@ -63,7 +63,7 @@ class _QA_read_home extends State<StatefulWidget>
         return false;
       },
       child: Scaffold(
-          backgroundColor: rapivetStatics.app_bg,
+          backgroundColor: RapivetStatics.appBG,
           body: AnnotatedRegion<SystemUiOverlayStyle>(
               value: SystemUiOverlayStyle.dark,
               child: SafeArea(
@@ -105,7 +105,7 @@ class _QA_read_home extends State<StatefulWidget>
                         ),
                         Padding(padding: new EdgeInsets.all(13)),
                         get_one_btn(
-                            s_width * 0.9, rapivetStatics.app_blue, "Escreva",
+                            s_width * 0.9, RapivetStatics.appBlue, "Escreva",
                             () {
                           Navigator.push(
                               context,

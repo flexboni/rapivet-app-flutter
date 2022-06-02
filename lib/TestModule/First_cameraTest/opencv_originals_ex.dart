@@ -1,7 +1,7 @@
 /*
 import 'dart:io';
 
-import 'package:swork_raon/rapivetStatics.dart';
+import 'package:swork_raon/rapivet_statics.dart';
 import 'package:opencv/opencv.dart';
 
 

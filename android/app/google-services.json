@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "1063008850823-6m7l4vrensqlajp99roal9btsmd4h2k2.apps.googleusercontent.com",
+          "client_id": "1063008850823-d1h1n3cqsn3bkvinv4obauolsmjme0h2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.raonhealth.rapivet",
-            "certificate_hash": "f5fa2c58b0bbbb3e397778d04d2db73d0213f04d"
+            "certificate_hash": "d644b3064e39ca8afe04eda05a142dc93adf7d8c"
           }
         },
         {
@@ -37,6 +37,13 @@
             {
               "client_id": "1063008850823-nvq4rflfcsk5bbsnrrihkrhn2a69b7j0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1063008850823-d9pt78q4eg93h9an25b3tc4u230emt78.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.raonhealth.rapivet"
+              }
             }
           ]
         }

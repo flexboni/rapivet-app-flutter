@@ -5,14 +5,14 @@ import 'package:http/http.dart' as phttp;
 import 'package:swork_raon/TestModule/image_process_test_module/searching_result/stickResult_dataset.dart';
 import 'package:swork_raon/common/AntiCacheURL.dart';
 import 'package:swork_raon/common/JToast.dart';
-import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/common/rapivet_statics.dart';
 import 'package:swork_raon/model/Pet_data_manager.dart';
-import 'package:swork_raon/model/one_pet_data.dart';
+import 'package:swork_raon/model/one_pet.dart';
 import 'package:swork_raon/model/one_user_data.dart';
 
 class Api_manager {
   Future<String> login(String email, String pw) async {
-    String url = rapivetStatics.baseURL + "/user/login";
+    String url = RapivetStatics.baseURL + "/user/login";
     print(url);
     var uri = Uri.parse(url);
 
@@ -47,7 +47,7 @@ class Api_manager {
   }
 
   Future<int> get_user_pet_count(String token) async {
-    var uri = Uri.parse(rapivetStatics.baseURL + "/user/info");
+    var uri = Uri.parse(RapivetStatics.baseURL + "/user/info");
 
     var response = await phttp.get(
       uri,
@@ -70,16 +70,16 @@ class Api_manager {
   // pet----------------------------------------------------------------
   Future<String> pet_register(Map<String, String> mapData) async {
     // converting
-    String url = rapivetStatics.baseURL + "/pet/register";
+    String url = RapivetStatics.baseURL + "/pet/register";
     print(url);
     var uri = Uri.parse(url);
 
-    print(rapivetStatics.token);
+    print(RapivetStatics.token);
 
     Map<String, String> headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      "Authorization": "Bearer " + rapivetStatics.token
+      "Authorization": "Bearer " + RapivetStatics.token
     };
 
     var body = json.encode(mapData);
@@ -104,14 +104,14 @@ class Api_manager {
   }
 
   Future<String> pet_update(String pet_uid, Map<String, String> mapData) async {
-    String url = rapivetStatics.baseURL + "/pet/update";
+    String url = RapivetStatics.baseURL + "/pet/update";
     print(url);
     var uri = Uri.parse(url);
 
     Map<String, String> headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      "Authorization": "Bearer " + rapivetStatics.token
+      "Authorization": "Bearer " + RapivetStatics.token
     };
 
     Map data = {"pet_uid": pet_uid, "pet_info": mapData};
@@ -137,7 +137,7 @@ class Api_manager {
   }
 
   Future<one_user_data> get_user_data(String token) async {
-    var uri = Uri.parse(rapivetStatics.baseURL + "/user/info");
+    var uri = Uri.parse(RapivetStatics.baseURL + "/user/info");
 
     var response = await phttp.get(
       uri,
@@ -165,8 +165,8 @@ class Api_manager {
     return null;
   }
 
-  Future<List<one_pet_data>> get_pet_list(String token) async {
-    var uri = Uri.parse(rapivetStatics.baseURL + "/pet/read");
+  Future<List<OnePet>> get_pet_list(String token) async {
+    var uri = Uri.parse(RapivetStatics.baseURL + "/pet/read");
 
     print(token);
 
@@ -196,7 +196,7 @@ class Api_manager {
   }
 
   pet_delete(String token, String pet_uid) async {
-    String url = rapivetStatics.baseURL + "/pet/delete";
+    String url = RapivetStatics.baseURL + "/pet/delete";
     var uri = Uri.parse(url);
 
     Map<String, String> headers = {
@@ -220,7 +220,7 @@ class Api_manager {
   pet_photo_update(String token, String pet_uid, String img_base64) async {
     String url =
         "https://434undgut1.execute-api.ap-northeast-2.amazonaws.com/pet/stg_upload_pet_img";
-    // rapivetStatics.baseURL + "/pet/photo/update";
+    // RapivetStatics.baseURL + "/pet/photo/update";
     var uri = Uri.parse(url);
 
     Map<String, String> headers = {
@@ -243,7 +243,7 @@ class Api_manager {
   // pet health --------------------------------------------------------------
   Future<String> pet_health_check_register(
       String pet_uid, String token, StickResultDataset stick_result) async {
-    String url = rapivetStatics.baseURL_v2 + "/pet/health_check_register";
+    String url = RapivetStatics.baseUrlV2 + "/pet/health_check_register";
     //String url = baseURL + "/pet/health_check_register";
     print(url);
     var uri = Uri.parse(url);
@@ -311,7 +311,7 @@ class Api_manager {
 
   // signup -----------------------------------------------------------
   Future<String> search_pw(String email) async {
-    String url = rapivetStatics.baseURL + "/user/search_password";
+    String url = RapivetStatics.baseURL + "/user/search_password";
     var uri = Uri.parse(url);
 
     Map<String, String> headers = {
@@ -344,7 +344,7 @@ class Api_manager {
   }
 
   Future<List> social_signup(String email, String name) async {
-    String url = rapivetStatics.baseURL + "/user/social_signup";
+    String url = RapivetStatics.baseURL + "/user/social_signup";
     var uri = Uri.parse(url);
 
     Map<String, String> headers = {
@@ -388,7 +388,7 @@ class Api_manager {
   }
 
   Future<List> social_login(String email) async {
-    String url = rapivetStatics.baseURL + "/user/social_login";
+    String url = RapivetStatics.baseURL + "/user/social_login";
     var uri = Uri.parse(url);
 
     Map<String, String> headers = {
@@ -442,8 +442,8 @@ class Api_manager {
     return this_user_data;
   }
 
-  List<one_pet_data> _json_data_to_petDatas(var json_data) {
-    List<one_pet_data> pet_datas = [];
+  List<OnePet> _json_data_to_petDatas(var json_data) {
+    List<OnePet> pet_datas = [];
 
     for (int i = 0; i < 100; i++) {
       try {
@@ -455,14 +455,14 @@ class Api_manager {
         this_pet_data.birthday = json_data["data"][i]["birthday"].toString();
         this_pet_data.type = json_data["data"][i]["type"].toString();
         this_pet_data.gender = json_data["data"][i]["gender"].toString();
-        this_pet_data.is_neuter = json_data["data"][i]["is_neuter"].toString();
+        this_pet_data.isNeuter = json_data["data"][i]["is_neuter"].toString();
         this_pet_data.kind = json_data["data"][i]["kind"].toString();
         // this_pet_data.name = json_data["data"][i]["weight"].toString();
         this_pet_data.weight = json_data["data"][i]["weight"].toString();
-        this_pet_data.pic_url = json_data["data"][i]["photo_url"].toString();
+        this_pet_data.urlPicture = json_data["data"][i]["photo_url"].toString();
         // 이거 안 하면 수정하면 반영 바로 안 됨.
-        this_pet_data.pic_url =
-            AntiCacheURL().URLAntiCacheRandomizer(this_pet_data.pic_url);
+        this_pet_data.urlPicture =
+            AntiCacheURL().URLAntiCacheRandomizer(this_pet_data.urlPicture);
 
         pet_datas.add(this_pet_data);
       } catch (e) {

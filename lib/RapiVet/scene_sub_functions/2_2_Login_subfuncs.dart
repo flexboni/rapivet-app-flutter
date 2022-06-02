@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:swork_raon/common/JToast.dart';
-import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/common/rapivet_statics.dart';
 import 'package:swork_raon/model/All_health_check_manager.dart';
-import 'package:swork_raon/model/one_pet_data.dart';
+import 'package:swork_raon/model/one_pet.dart';
 import 'package:swork_raon/rapivet/home.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
 
@@ -30,10 +30,10 @@ class Login_subFuncs {
     }
 
     if (token != "") {
-      List<one_pet_data> petDatas = await Api_manager().get_pet_list(token);
+      List<OnePet> petDatas = await Api_manager().get_pet_list(token);
 
       print(petDatas.length);
-      rapivetStatics.pet_data_list = petDatas;
+      RapivetStatics.petDataList = petDatas;
 
       Login_subFuncs().operate_after_login(context, token);
     }
@@ -41,16 +41,16 @@ class Login_subFuncs {
 
   operate_after_login(BuildContext context, String token,
       {bool is_simple_login = false}) async {
-    rapivetStatics.prefs.setString("token", token);
-    rapivetStatics.prefs.setBool("is_logged_on_user", true);
-    rapivetStatics.prefs.setBool("is_simple_login", is_simple_login);
+    RapivetStatics.prefs.setString("token", token);
+    RapivetStatics.prefs.setBool("is_logged_on_user", true);
+    RapivetStatics.prefs.setBool("is_simple_login", is_simple_login);
 
-    rapivetStatics.token = token;
-    rapivetStatics.is_logged_on_user = true;
+    RapivetStatics.token = token;
+    RapivetStatics.isLoggedOnUser = true;
 
-    if (rapivetStatics.pet_data_list == [] ||
-        rapivetStatics.pet_data_list == null ||
-        rapivetStatics.pet_data_list.length == 0) {
+    if (RapivetStatics.petDataList == [] ||
+        RapivetStatics.petDataList == null ||
+        RapivetStatics.petDataList.length == 0) {
       JToast().show_toast("Faça o cadastramento do primeiro pet.", false);
       Navigator.pushReplacement(
           context,

@@ -17,7 +17,7 @@ import 'package:swork_raon/rapivet/result.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/5_2_main_subFuncs.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../common/rapivetStatics.dart';
+import '../../common/rapivet_statics.dart';
 import '../4_RegisterPet.dart';
 import '../home.dart';
 import '4_2_ResterPet_subfuncs.dart';
@@ -95,11 +95,11 @@ Widget get_one_textfield(double s_width, Color appblue,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                       borderSide: BorderSide(
-                          color: rapivetStatics.normal_ui_line_color, width: 1),
+                          color: RapivetStatics.normalUILineColor, width: 1),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                          color: rapivetStatics.selected_ui_line_color,
+                          color: RapivetStatics.selectedUILineColor,
                           width: 1.0),
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -174,8 +174,8 @@ Widget selectable_button(double width, double height, String text,
         ),
         side: BorderSide(
             color: (is_selected)
-                ? rapivetStatics.selected_ui_line_color
-                : rapivetStatics.normal_ui_line_color),
+                ? RapivetStatics.selectedUILineColor
+                : RapivetStatics.normalUILineColor),
       ),
     ),
   );
@@ -207,7 +207,7 @@ Widget get_explain_of_textfield_up(
           text,
           style: TextStyle(
             fontSize: 13.88,
-            color: rapivetStatics.app_black.withOpacity(0.88),
+            color: RapivetStatics.appBlack.withOpacity(0.88),
             fontFamily: "Noto",
           ),
         ),
@@ -280,7 +280,7 @@ void show_dialog_petlist(
                 child: Padding(
                   padding: new EdgeInsets.fromLTRB(0, 20, 0, 20),
                   child: RawScrollbar(
-                    thumbColor: rapivetStatics.app_blue.withOpacity(0.5),
+                    thumbColor: RapivetStatics.appBlue.withOpacity(0.5),
                     thickness: 1.8,
                     child: SingleChildScrollView(
                       physics: BouncingScrollPhysics(),
@@ -298,14 +298,14 @@ void show_dialog_petlist(
                                         color: (_types_set[i] ==
                                                 _input_dataset
                                                     .breed_txtedit_control.text)
-                                            ? rapivetStatics.app_blue
+                                            ? RapivetStatics.appBlue
                                             : Colors.black.withOpacity(0.58),
                                         fontSize: 11.5),
                                   ),
                                   value: i,
                                   groupValue: _get_current_pet_sort_list(
                                       _input_dataset, _types_set),
-                                  activeColor: rapivetStatics.app_blue,
+                                  activeColor: RapivetStatics.appBlue,
                                   onChanged: (int value) {
                                     _value = value;
 
@@ -344,7 +344,7 @@ void show_dialog_petlist(
                   child: Text(
                     "Fechar",
                     style: TextStyle(
-                        color: rapivetStatics.app_blue.withOpacity(0.7)),
+                        color: RapivetStatics.appBlue.withOpacity(0.7)),
                   )),
             ],
           ),
@@ -397,12 +397,12 @@ void showDialogPopup(
                     child: Text(
                       ment,
                       style: TextStyle(
-                          color: rapivetStatics.app_black.withOpacity(0.7)),
+                          color: RapivetStatics.appBlack.withOpacity(0.7)),
                     ),
                   ),
                 ),
                 Padding(padding: new EdgeInsets.all(12)),
-                get_one_textfield(s_width * 0.88, rapivetStatics.app_blue,
+                get_one_textfield(s_width * 0.88, RapivetStatics.appBlue,
                     _in_txt_edit_cont, hint,
                     is_using_number_only: is_using_number_only,
                     is_phone_number: is_phone_number),
@@ -422,7 +422,7 @@ void showDialogPopup(
                         child: Text(
                           "Fechar",
                           style: TextStyle(
-                              color: rapivetStatics.app_black.withOpacity(0.7)),
+                              color: RapivetStatics.appBlack.withOpacity(0.7)),
                         )),
                     Padding(
                         padding: new EdgeInsets.fromLTRB(
@@ -439,7 +439,7 @@ void showDialogPopup(
                         child: Text(
                           "OK",
                           style: TextStyle(
-                            color: rapivetStatics.app_blue.withOpacity(0.99),
+                            color: RapivetStatics.appBlue.withOpacity(0.99),
                           ),
                         )),
                   ],
@@ -578,7 +578,7 @@ Widget get_one_login_btn(double in_width, Color bgcolor, Color btncolor,
     child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           side: BorderSide(
-              color: rapivetStatics.app_black.withOpacity(0.3), width: 0.75),
+              color: RapivetStatics.appBlack.withOpacity(0.3), width: 0.75),
           shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(5.0)),
           tapTargetSize: MaterialTapTargetSize.padded,
@@ -637,19 +637,19 @@ Widget get_upbar(
 
   _get_rightPart() {
     // print("get_rightPart");
-    // print(rapivetStatics.current_pet_pic_path);
+    // print(RapivetStatics.current_pet_pic_path);
 
     // 로그인 유저가 수정할 경우는 기존 url 이미지 이용해야함.
     print("----");
-    print(rapivetStatics.is_logged_on_user);
-    print(rapivetStatics.current_pet_pic_path);
+    print(RapivetStatics.isLoggedOnUser);
+    print(RapivetStatics.currentPetPicturePath);
     print(is_modify_mode);
 
-    if (rapivetStatics.is_logged_on_user &&
+    if (RapivetStatics.isLoggedOnUser &&
         is_modify_mode &&
-        rapivetStatics.current_pet_pic_path == "") {
+        RapivetStatics.currentPetPicturePath == "") {
       return _get_thumb_img(false);
-    } else if (rapivetStatics.current_pet_pic_path == "") {
+    } else if (RapivetStatics.currentPetPicturePath == "") {
       return Container(
           alignment: Alignment.center,
           child: Icon(
@@ -708,16 +708,16 @@ Widget get_upbar(
                 // Pick an image
                 PickedFile image = await _picker.getImage(
                     source: ImageSource.gallery,
-                    maxHeight: rapivetStatics.pic_max_width.toDouble(),
-                    maxWidth: rapivetStatics.pic_max_width.toDouble());
+                    maxHeight: RapivetStatics.maxWidth.toDouble(),
+                    maxWidth: RapivetStatics.maxWidth.toDouble());
                 print(image.path);
 
                 // Capture a photo
-                rapivetStatics.current_pet_pic_path = image.path;
+                RapivetStatics.currentPetPicturePath = image.path;
                 print(image.path);
 
                 final bytes = File(image.path).readAsBytesSync();
-                rapivetStatics.pet_img_base64 = base64Encode(bytes);
+                RapivetStatics.petImgBase64 = base64Encode(bytes);
 
                 var file = File(image.path);
                 print("fileseze!!");
@@ -740,8 +740,8 @@ Widget get_upbar(
 
 @override
 Widget get_paging(double s_width) {
-  int total_count = rapivetStatics.pet_data_list.length;
-  int current_index = rapivetStatics.current_pet_index;
+  int total_count = RapivetStatics.petDataList.length;
+  int current_index = RapivetStatics.currentPetIndex;
 
   print(total_count);
   print(current_index);
@@ -805,7 +805,7 @@ Widget get_temp_downbar(BuildContext context, VoidCallback Callback_setstate,
   double btn_width = s_width * 0.135;
 
   return Container(
-    color: rapivetStatics.app_bg,
+    color: RapivetStatics.appBG,
     child: Column(
       children: [
         Padding(padding: new EdgeInsets.all(5)),
@@ -825,7 +825,7 @@ Widget get_temp_downbar(BuildContext context, VoidCallback Callback_setstate,
               children: [
                 InkWell(
                   onTap: () {
-                    rapivetStatics.is_showing_menuBtns = true;
+                    RapivetStatics.isShowingMenuButtons = true;
                     Callback_setstate();
                   },
                   child: Container(
@@ -915,7 +915,7 @@ Widget _get_one_downbar_btn(
             fit: BoxFit.scaleDown,
             child: Text(
               _get_downBar_txt(current_status),
-              style: TextStyle(color: rapivetStatics.app_blue, fontSize: 12),
+              style: TextStyle(color: RapivetStatics.appBlue, fontSize: 12),
               maxLines: 1,
             ),
           ),
@@ -999,10 +999,10 @@ Widget get_overlay_btns(BuildContext context, VoidCallback Callback_setstate,
   Color over_btn_bg_color = Colors.blueGrey.withOpacity(0.88);
   Color over_fontColor = Colors.white.withOpacity(0.6);
 
-  print(rapivetStatics.is_showing_menuBtns);
+  print(RapivetStatics.isShowingMenuButtons);
 
   return Visibility(
-    visible: rapivetStatics.is_showing_menuBtns,
+    visible: RapivetStatics.isShowingMenuButtons,
     child: Container(
       width: s_width,
       height: s_height,
@@ -1033,7 +1033,7 @@ Widget get_overlay_btns(BuildContext context, VoidCallback Callback_setstate,
                   child: RawMaterialButton(
                     shape: CircleBorder(),
                     onPressed: () {
-                      rapivetStatics.is_showing_menuBtns = false;
+                      RapivetStatics.isShowingMenuButtons = false;
                       Callback_setstate();
                       Navigator.pushReplacement(
                           context,
@@ -1066,7 +1066,7 @@ Widget get_overlay_btns(BuildContext context, VoidCallback Callback_setstate,
                   child: RawMaterialButton(
                     shape: CircleBorder(),
                     onPressed: () {
-                      rapivetStatics.is_showing_menuBtns = false;
+                      RapivetStatics.isShowingMenuButtons = false;
                       Callback_setstate();
 
                       Navigator.pushReplacement(
@@ -1157,7 +1157,7 @@ Widget get_overlay_btns(BuildContext context, VoidCallback Callback_setstate,
                   child: RawMaterialButton(
                     shape: CircleBorder(),
                     onPressed: () {
-                      rapivetStatics.is_showing_menuBtns = false;
+                      RapivetStatics.isShowingMenuButtons = false;
                       Callback_setstate();
                     },
                     fillColor: over_btn_bg_color,
@@ -1194,7 +1194,7 @@ Widget get_one_temp_resultTable(
                   Icon(
                     MaterialCommunityIcons.rectangle,
                     size: 15,
-                    color: rapivetStatics.app_blue,
+                    color: RapivetStatics.appBlue,
                   ),
                   Padding(padding: new EdgeInsets.fromLTRB(5, 0, 0, 0)),
                   Text(
@@ -1295,7 +1295,7 @@ Widget get_one_temp_resultTable(
                     Container(
                       width: result_talbe_width * 2 / 6,
                       height: result_talbe_height,
-                      color: rapivetStatics.app_blue.withOpacity(0.68),
+                      color: RapivetStatics.appBlue.withOpacity(0.68),
                     ),
                   ],
                 ),

@@ -2,41 +2,39 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/common/rapivet_statics.dart';
 import 'package:swork_raon/model/Pet_data_manager.dart';
-import 'package:swork_raon/model/one_pet_data.dart';
+import 'package:swork_raon/model/one_pet.dart';
 
 class main_subfuncs {
   operate_onclcik_right() {
-    rapivetStatics.current_pet_index++;
+    RapivetStatics.currentPetIndex++;
 
-    if (rapivetStatics.current_pet_index >=
-        rapivetStatics.pet_data_list.length) {
-      rapivetStatics.current_pet_index = 0;
+    if (RapivetStatics.currentPetIndex >= RapivetStatics.petDataList.length) {
+      RapivetStatics.currentPetIndex = 0;
     }
   }
 
   operate_onclick_left() {
-    rapivetStatics.current_pet_index--;
+    RapivetStatics.currentPetIndex--;
 
-    if (rapivetStatics.current_pet_index < 0) {
-      rapivetStatics.current_pet_index =
-          rapivetStatics.pet_data_list.length - 1;
+    if (RapivetStatics.currentPetIndex < 0) {
+      RapivetStatics.currentPetIndex = RapivetStatics.petDataList.length - 1;
     }
   }
 
   get_name_and_age() {
-    int index = rapivetStatics.current_pet_index;
-    String str = rapivetStatics.pet_data_list[index].name;
+    int index = RapivetStatics.currentPetIndex;
+    String str = RapivetStatics.petDataList[index].name;
     print("name::: " + str);
 
-    String str2 = rapivetStatics.pet_data_list[index].birthday;
+    String str2 = RapivetStatics.petDataList[index].birthday;
 
     DateTime now = DateTime.now();
     DateTime birthday = DateTime(
-        rapivetStatics.pet_data_list[index].birthday_year,
-        rapivetStatics.pet_data_list[index].birthday_month,
-        rapivetStatics.pet_data_list[index].birthday_day);
+        RapivetStatics.petDataList[index].year,
+        RapivetStatics.petDataList[index].month,
+        RapivetStatics.petDataList[index].day);
 
     Duration duration = now.difference(birthday);
     int gap_days = duration.inDays;
@@ -55,14 +53,14 @@ class main_subfuncs {
   }
 
   get_secondLine_infos() {
-    int index = rapivetStatics.current_pet_index;
-    one_pet_data this_pet_data = rapivetStatics.pet_data_list[index];
+    int index = RapivetStatics.currentPetIndex;
+    one_pet_data this_pet_data = RapivetStatics.petDataList[index];
 
     String kind_name = Pet_data_manager().get_kind_name(this_pet_data);
 
     String str = kind_name +
         "   |   " +
-        this_pet_data.yyyymmddBirhday_to_pt() +
+        this_pet_data.yyyymmddBirthdayToPT() +
         "   |   " +
         this_pet_data.weight +
         "Kg";
@@ -120,31 +118,31 @@ class main_subfuncs {
 
   @override
   Widget get_img() {
-    print(rapivetStatics.current_pet_index);
+    print(RapivetStatics.currentPetIndex);
     one_pet_data this_pet_data =
-        rapivetStatics.pet_data_list[rapivetStatics.current_pet_index];
+        RapivetStatics.petDataList[RapivetStatics.currentPetIndex];
 
     if (this_pet_data.uid == "") {
       return Image.file(
-        File(this_pet_data.local_pic),
+        File(this_pet_data.localPicture),
         fit: BoxFit.cover,
       );
     } else {
-      return Image.network(this_pet_data.pic_url, fit: BoxFit.cover);
+      return Image.network(this_pet_data.urlPicture, fit: BoxFit.cover);
     }
   }
 
   DecorationImage get_thumb_img_in_userInfo(int index) {
-    one_pet_data this_pet_data = rapivetStatics.pet_data_list[index];
-    print(this_pet_data.pic_url);
+    one_pet_data this_pet_data = RapivetStatics.petDataList[index];
+    print(this_pet_data.urlPicture);
 
     if (this_pet_data.uid == "") {
       return DecorationImage(
-          image: FileImage(File(this_pet_data.local_pic), scale: 0.2),
+          image: FileImage(File(this_pet_data.localPicture), scale: 0.2),
           fit: BoxFit.cover);
     } else {
       return DecorationImage(
-        image: CachedNetworkImageProvider(this_pet_data.pic_url, scale: 0.2),
+        image: CachedNetworkImageProvider(this_pet_data.urlPicture, scale: 0.2),
         fit: BoxFit.cover,
       );
       // image: NetworkImage(this_pet_data.pic_url, scale: 0.2),
@@ -156,25 +154,25 @@ class main_subfuncs {
     // main / pet_register 씬에서 공용으로 사용함.
     one_pet_data this_pet_data;
 
-    if (rapivetStatics.pet_data_list == null ||
-        rapivetStatics.pet_data_list == [] ||
-        rapivetStatics.pet_data_list.length == 0) {
+    if (RapivetStatics.petDataList == null ||
+        RapivetStatics.petDataList == [] ||
+        RapivetStatics.petDataList.length == 0) {
       is_using_local_img = true;
     } else {
       this_pet_data =
-          rapivetStatics.pet_data_list[rapivetStatics.current_pet_index];
-      print(this_pet_data.pic_url);
+          RapivetStatics.petDataList[RapivetStatics.currentPetIndex];
+      print(this_pet_data.urlPicture);
     }
 
     print(is_using_local_img);
-    print(rapivetStatics.current_pet_pic_path);
+    print(RapivetStatics.currentPetPicturePath);
 
     try {
       if (is_using_local_img &&
-          rapivetStatics.current_pet_pic_path != null &&
-          rapivetStatics.current_pet_pic_path != "") {
+          RapivetStatics.currentPetPicturePath != null &&
+          RapivetStatics.currentPetPicturePath != "") {
         return DecorationImage(
-            image: FileImage(File(rapivetStatics.current_pet_pic_path),
+            image: FileImage(File(RapivetStatics.currentPetPicturePath),
                 scale: 0.2),
             fit: BoxFit.cover);
       }
@@ -182,13 +180,13 @@ class main_subfuncs {
       else if (this_pet_data.uid == "") {
         return DecorationImage(
             image: FileImage(
-                File(rapivetStatics
-                    .pet_data_list[rapivetStatics.current_pet_index].local_pic),
+                File(RapivetStatics
+                    .petDataList[RapivetStatics.currentPetIndex].localPicture),
                 scale: 0.2),
             fit: BoxFit.cover);
       } else {
         return DecorationImage(
-            image: NetworkImage(this_pet_data.pic_url, scale: 0.2),
+            image: NetworkImage(this_pet_data.urlPicture, scale: 0.2),
             fit: BoxFit.cover);
       }
     } catch (e) {

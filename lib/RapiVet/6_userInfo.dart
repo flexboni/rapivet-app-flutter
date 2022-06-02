@@ -6,14 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:swork_raon/common/JToast.dart';
 import 'package:swork_raon/common/app_strings.dart';
 import 'package:swork_raon/model/Pet_data_manager.dart';
-import 'package:swork_raon/model/one_pet_data.dart';
+import 'package:swork_raon/model/one_pet.dart';
 import 'package:swork_raon/model/one_user_data.dart';
 import 'package:swork_raon/rapivet/home.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/5_2_main_subFuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/6_2_userInfo_subFuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
 
-import '../common/rapivetStatics.dart';
+import '../common/rapivet_statics.dart';
 import 'scene_sub_functions/common_ui.dart';
 import 'sign_up.dart';
 
@@ -31,18 +31,18 @@ class _userInfo_home extends State<StatefulWidget>
     with TickerProviderStateMixin {
   bool _is_loading = false;
 
-  _operate_delete(List<one_pet_data> _pet_data_list, int _index) async {
+  _operate_delete(List<OnePet> _pet_data_list, int _index) async {
     setState(() {
       _is_loading = true;
     });
 
-    rapivetStatics.pet_data_list =
+    RapivetStatics.petDataList =
         await Pet_data_manager().remove_pet_data(_pet_data_list, _index);
 
-    int pet_data_count = rapivetStatics.pet_data_list.length;
+    int pet_data_count = RapivetStatics.petDataList.length;
 
-    if (rapivetStatics.current_pet_index >= pet_data_count) {
-      rapivetStatics.current_pet_index = pet_data_count - 1;
+    if (RapivetStatics.currentPetIndex >= pet_data_count) {
+      RapivetStatics.currentPetIndex = pet_data_count - 1;
     }
 
     setState(() {
@@ -62,7 +62,7 @@ class _userInfo_home extends State<StatefulWidget>
     _this_user_data.email = ".";
     _this_user_data.phone_num = ".";
 
-    if (rapivetStatics.is_logged_on_user) load_data_fromServer();
+    if (RapivetStatics.isLoggedOnUser) load_data_fromServer();
   }
 
   load_data_fromServer() async {
@@ -74,13 +74,13 @@ class _userInfo_home extends State<StatefulWidget>
     // 바로 반영되는 것을 볼 수 없다.
     await Future.delayed(Duration(milliseconds: 2888));
 
-    String token = rapivetStatics.token;
+    String token = RapivetStatics.token;
     _this_user_data = await Api_manager().get_user_data(token);
-    if (rapivetStatics.is_make_random_cellphone)
+    if (RapivetStatics.isMakeRandomCellphone)
       _this_user_data.phone_num = "1000000000";
 
-    List<one_pet_data> petDatas = await Api_manager().get_pet_list(token);
-    rapivetStatics.pet_data_list = petDatas;
+    List<OnePet> petDatas = await Api_manager().get_pet_list(token);
+    RapivetStatics.petDataList = petDatas;
 
     if (_this_user_data.address1 != "") {
       _is_showing_adress = true;
@@ -104,7 +104,7 @@ class _userInfo_home extends State<StatefulWidget>
     Color iconColor = Colors.black.withOpacity(0.6);
     Color normalFont_color = Colors.black.withOpacity(0.48);
 
-    void _show_deleteDialog(List<one_pet_data> _pet_data_list, int _index) {
+    void _show_deleteDialog(List<OnePet> _pet_data_list, int _index) {
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -170,7 +170,7 @@ class _userInfo_home extends State<StatefulWidget>
         return false;
       },
       child: Scaffold(
-          backgroundColor: rapivetStatics.app_bg,
+          backgroundColor: RapivetStatics.appBG,
           body: AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle.dark,
             child: SafeArea(
@@ -185,7 +185,7 @@ class _userInfo_home extends State<StatefulWidget>
                         children: [
                           Padding(padding: new EdgeInsets.all(45)),
                           Visibility(
-                            visible: /*!rapivetStatics.is_simple_loggined ||*/ !Platform
+                            visible: /*!RapivetStatics.is_simple_loggined ||*/ !Platform
                                 .isIOS,
                             child: Column(
                               children: [
@@ -359,7 +359,7 @@ class _userInfo_home extends State<StatefulWidget>
                                   visible:
                                       (_this_user_data.phone_num.trim() != ""),
                                   child: get_one_btn(s_width * 0.9,
-                                      rapivetStatics.app_blue, "Editar", () {
+                                      RapivetStatics.appBlue, "Editar", () {
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -405,7 +405,7 @@ class _userInfo_home extends State<StatefulWidget>
                           ),
                           Padding(padding: new EdgeInsets.all(8)),
                           for (int i = 0;
-                              i < rapivetStatics.pet_data_list.length;
+                              i < RapivetStatics.petDataList.length;
                               i++)
                             Container(
                               // padding: new EdgeInsets.fromLTRB(0, 8, 0, 8),
@@ -435,8 +435,7 @@ class _userInfo_home extends State<StatefulWidget>
                                               padding: new EdgeInsets.fromLTRB(
                                                   20, 0, 0, 0)),
                                           Text(
-                                            rapivetStatics
-                                                .pet_data_list[i].name,
+                                            RapivetStatics.petDataList[i].name,
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                                 fontSize: 17,
@@ -481,9 +480,8 @@ class _userInfo_home extends State<StatefulWidget>
                                               child: RawMaterialButton(
                                                 shape: CircleBorder(),
                                                 onPressed: () {
-                                                  if (rapivetStatics
-                                                          .pet_data_list
-                                                          .length ==
+                                                  if (RapivetStatics
+                                                          .petDataList.length ==
                                                       1) {
                                                     JToast().show_toast(
                                                         app_strings()
@@ -492,8 +490,8 @@ class _userInfo_home extends State<StatefulWidget>
                                                     return;
                                                   }
                                                   _show_deleteDialog(
-                                                      rapivetStatics
-                                                          .pet_data_list,
+                                                      RapivetStatics
+                                                          .petDataList,
                                                       i);
                                                 },
                                                 child: Opacity(
@@ -515,8 +513,8 @@ class _userInfo_home extends State<StatefulWidget>
                                   Padding(padding: new EdgeInsets.all(4)),
                                   Visibility(
                                       visible: (i <
-                                              rapivetStatics
-                                                      .pet_data_list.length -
+                                              RapivetStatics
+                                                      .petDataList.length -
                                                   1)
                                           ? true
                                           : false,

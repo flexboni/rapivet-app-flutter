@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/common/rapivet_statics.dart';
 import 'package:swork_raon/model/All_health_check_manager.dart';
 import 'package:swork_raon/rapivet/12_QA_read.dart';
 import 'package:swork_raon/rapivet/main.dart';
@@ -43,7 +43,7 @@ class _HomeState extends State<StatefulWidget> {
     // print("width: "+ MediaQuery.of(context).size.width.toString());
 
     bool was_shown_tutorial =
-        rapivetStatics.prefs.getBool("was_shown_tutorial");
+        RapivetStatics.prefs.getBool("was_shown_tutorial");
 
     if (was_shown_tutorial == null || was_shown_tutorial == false) {
       _to_show_tutorial = true;
@@ -88,7 +88,7 @@ class _HomeState extends State<StatefulWidget> {
     callback_close_tutorial2() {
       setState(() {
         _is_tuto2_visiblle = false;
-        rapivetStatics.prefs.setBool("was_shown_tutorial", true);
+        RapivetStatics.prefs.setBool("was_shown_tutorial", true);
       });
     }
 
@@ -105,7 +105,7 @@ class _HomeState extends State<StatefulWidget> {
           body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: Container(
-          color: rapivetStatics.app_bg,
+          color: RapivetStatics.appBG,
           child: SafeArea(
             top: false,
             child: Stack(
@@ -123,10 +123,10 @@ class _HomeState extends State<StatefulWidget> {
                               main_subfuncs().get_img(),
                               // Image.file(
                               //   File(
-                              //       /*rapivetStatics.current_pet_pic_path*/
-                              //       rapivetStatics
+                              //       /*RapivetStatics.current_pet_pic_path*/
+                              //       RapivetStatics
                               //           .pet_data_list[
-                              //               rapivetStatics.current_pet_index]
+                              //               RapivetStatics.current_pet_index]
                               //           .local_pic),
                               //   fit: BoxFit.cover,
                               // ),
@@ -137,7 +137,7 @@ class _HomeState extends State<StatefulWidget> {
                                   Container(
                                     width: s_width,
                                     height: 3,
-                                    color: rapivetStatics.app_bg,
+                                    color: RapivetStatics.appBG,
                                   ),
                                 ],
                               ),
@@ -217,10 +217,10 @@ class _HomeState extends State<StatefulWidget> {
                                   Container(
                                     width: s_width,
                                     height: 20,
-                                    //  color: rapivetStatics.app_bg,
+                                    //  color: RapivetStatics.app_bg,
                                     alignment: Alignment.bottomCenter,
                                     decoration: new BoxDecoration(
-                                        color: rapivetStatics.app_bg,
+                                        color: RapivetStatics.appBG,
                                         borderRadius: new BorderRadius.only(
                                           topLeft: const Radius.circular(20.0),
                                           topRight: const Radius.circular(20.0),
@@ -241,8 +241,7 @@ class _HomeState extends State<StatefulWidget> {
                                 ],
                               ),
                               Visibility(
-                                visible:
-                                    rapivetStatics.pet_data_list.length > 1,
+                                visible: RapivetStatics.petDataList.length > 1,
                                 child: Container(
                                   alignment: Alignment.centerLeft,
                                   child: Container(
@@ -265,8 +264,7 @@ class _HomeState extends State<StatefulWidget> {
                                 ),
                               ),
                               Visibility(
-                                visible:
-                                    rapivetStatics.pet_data_list.length > 1,
+                                visible: RapivetStatics.petDataList.length > 1,
                                 child: Container(
                                   alignment: Alignment.centerRight,
                                   child: Container(
@@ -460,7 +458,7 @@ class _HomeState extends State<StatefulWidget> {
                                   child: FittedBox(
                                     fit: BoxFit.scaleDown,
                                     child: get_one_short_btn(46.88 * 2.5,
-                                        rapivetStatics.app_blue, "COMPRAR", () {
+                                        RapivetStatics.appBlue, "COMPRAR", () {
                                       launch(
                                         "https://www.raonhealth.com/produtos",
                                       );
@@ -491,7 +489,7 @@ class _HomeState extends State<StatefulWidget> {
                       Container(
                         width: s_width,
                         height: 1,
-                        color: rapivetStatics.app_bg,
+                        color: RapivetStatics.appBG,
                       ),
                     ],
                   ),

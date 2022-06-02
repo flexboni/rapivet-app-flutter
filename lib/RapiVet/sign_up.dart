@@ -9,10 +9,11 @@ import 'package:swork_raon/rapivet/6_userInfo.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/3_2_Signup_subFuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
 
-import '../common/rapivetStatics.dart';
+import '../common/rapivet_statics.dart';
 import 'scene_sub_functions/common_ui.dart';
 
 enum SIGN_UP_MODE { SIGNUP, MODIFY }
+
 SIGN_UP_MODE _signup_mode;
 one_user_data _in_user_data;
 
@@ -141,8 +142,8 @@ class _SignUpPageState extends State<StatefulWidget>
       _dialog_phoneNum_txtedit_control.text = txt_val;
 
       // 1. send sms code!!
-      rapivetStatics.sms_verificationId = "null";
-      rapivetStatics.sms_verification_error = "null";
+      RapivetStatics.smsVerificationId = "null";
+      RapivetStatics.smsVerificationError = "null";
       sms_auth_failed_count = 0;
       phone_num = Signup_subfuncs()
           .get_phone_num(_dialog_phoneNum_txtedit_control.text);
@@ -159,7 +160,7 @@ class _SignUpPageState extends State<StatefulWidget>
       for (int i = 0; i < 50; i++) {
         await Future.delayed(Duration(milliseconds: 200));
 
-        if (rapivetStatics.sms_verificationId != "null") {
+        if (RapivetStatics.smsVerificationId != "null") {
           print("Ready to enter code !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
           is_okay_to_go = true;
           i = 99999;
@@ -167,7 +168,7 @@ class _SignUpPageState extends State<StatefulWidget>
           print("wait.....");
         }
 
-        if (rapivetStatics.sms_verification_error != "null") {
+        if (RapivetStatics.smsVerificationError != "null") {
           // 에러가 있다면 표시하라
           JToast().show_toast("Impossível dar continuidade.", false);
         }
@@ -262,10 +263,10 @@ class _SignUpPageState extends State<StatefulWidget>
               _pw1_txtedit_control.text.trim());
 
           if (token != "") {
-            rapivetStatics.token = token;
-            rapivetStatics.prefs.setString("token", token);
-            rapivetStatics.prefs.setBool("is_logged_on_user", true);
-            rapivetStatics.is_logged_on_user = true;
+            RapivetStatics.token = token;
+            RapivetStatics.prefs.setString("token", token);
+            RapivetStatics.prefs.setBool("is_logged_on_user", true);
+            RapivetStatics.isLoggedOnUser = true;
           } else {
             print("fatal error!!!!!");
           }
@@ -280,7 +281,7 @@ class _SignUpPageState extends State<StatefulWidget>
 
         // 1. 비밀 번호 변경
         bool was_changed_pw = await Signup_subfuncs().operate_change_pw(
-            _pw1_txtedit_control, _pw2_txtedit_control, rapivetStatics.token);
+            _pw1_txtedit_control, _pw2_txtedit_control, RapivetStatics.token);
 
         // 2. 나머지 데잍터 변경
         if (was_changed_pw) {
@@ -288,7 +289,7 @@ class _SignUpPageState extends State<StatefulWidget>
               _adress1_txtedit_control,
               _adress2_txtedit_control,
               _phoneNum_txtedit_control,
-              rapivetStatics.token);
+              RapivetStatics.token);
 
           if (was_succeed) {
             Navigator.pushReplacement(
@@ -319,7 +320,7 @@ class _SignUpPageState extends State<StatefulWidget>
         return false;
       },
       child: Scaffold(
-          backgroundColor: rapivetStatics.app_bg,
+          backgroundColor: RapivetStatics.appBG,
           body: AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle.dark,
             child: SafeArea(
@@ -447,7 +448,7 @@ class _SignUpPageState extends State<StatefulWidget>
                           Padding(padding: new EdgeInsets.all(18)),
                           // btn ---------------------------------------------------------
                           get_one_btn(
-                              s_width * 0.9, rapivetStatics.app_blue, "SALVAR",
+                              s_width * 0.9, RapivetStatics.appBlue, "SALVAR",
                               () {
                             onClick_signup();
                           }, in_height: 50),
@@ -464,7 +465,7 @@ class _SignUpPageState extends State<StatefulWidget>
                           //         tapTargetSize:
                           //             MaterialTapTargetSize.shrinkWrap,
                           //         backgroundColor:
-                          //             rapivetStatics.app_blue.withOpacity(0.8),
+                          //             RapivetStatics.app_blue.withOpacity(0.8),
                           //       ),
                           //       onPressed: () async {
                           //         Navigator.push(

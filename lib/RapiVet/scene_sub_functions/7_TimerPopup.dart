@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/ImgSearch_main.dart';
-import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/common/rapivet_statics.dart';
 
 import '7_2_Test_Guide_subFuncs.dart';
 import 'common_ui.dart';
@@ -104,7 +104,7 @@ class _timerPopup extends State<TimerPopup> {
                     ),
                     Padding(padding: new EdgeInsets.all(15)),
                     get_one_btn(
-                        s_width * 0.8, rapivetStatics.app_blue, "Próximo", () {
+                        s_width * 0.8, RapivetStatics.appBlue, "Próximo", () {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -112,8 +112,8 @@ class _timerPopup extends State<TimerPopup> {
                                   ImgSearchHome()));
                     }, in_height: 50),
                     Padding(padding: new EdgeInsets.all(8)),
-                    get_one_btn(
-                        s_width * 0.8, rapivetStatics.app_blue, "Fechar", () {
+                    get_one_btn(s_width * 0.8, RapivetStatics.appBlue, "Fechar",
+                        () {
                       _endTimer();
                     }, in_height: 50),
                     Padding(padding: new EdgeInsets.all(15)),
@@ -162,7 +162,7 @@ class _timerPopup extends State<TimerPopup> {
       Duration gap = DateTime.now().difference(_timer_startTime);
 
       int remainedTime =
-          rapivetStatics.test_takePic_waitSec * 1000 - gap.inMilliseconds;
+          RapivetStatics.testTakePicWaitSec * 1000 - gap.inMilliseconds;
 
       _timeRemain = remainedTime;
       _timeRemain_str = Test_Guide_subFuncs().millsec_to_MMssmm(_timeRemain);

@@ -8,8 +8,8 @@ import 'package:swork_raon/TestModule/First_cameraTest/horizontal_checker.dart';
 import 'package:swork_raon/TestModule/First_cameraTest/testStatics.dart';
 import 'package:swork_raon/TestModule/image_process_test_module/searching_result/search_ultimate_result.dart';
 import 'package:swork_raon/TestModule/image_process_test_module/searching_result/stickResult_dataset.dart';
-import 'package:swork_raon/common/rapivetStatics.dart';
-import 'package:swork_raon/model/one_pet_data.dart';
+import 'package:swork_raon/common/rapivet_statics.dart';
+import 'package:swork_raon/model/one_pet.dart';
 import 'package:swork_raon/rapivet/result.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
@@ -59,11 +59,11 @@ get_find_end_check_oneLine(
         children: [
           Text("ESTA na posicao correta ?"),
           Padding(padding: new EdgeInsets.fromLTRB(s_width * 0.05, 0, 0, 0)),
-          get_one_btn(s_width / 6, rapivetStatics.app_blue, "sim", () {
+          get_one_btn(s_width / 6, RapivetStatics.appBlue, "sim", () {
             _get_result_and_upload_it(Callback_loading_on, context);
           }, in_height: 18, font_size: 10),
           Padding(padding: new EdgeInsets.fromLTRB(s_width * 0.05, 0, 0, 0)),
-          get_one_btn(s_width / 6, rapivetStatics.app_blue, "não", () {
+          get_one_btn(s_width / 6, RapivetStatics.appBlue, "não", () {
             _moveto_loading(context);
           }, in_height: 18, font_size: 10),
         ],
@@ -85,12 +85,12 @@ get_find_end_check_twoLine(
           Padding(padding: new EdgeInsets.all(8)),
           Row(
             children: [
-              get_one_btn(s_width / 5, rapivetStatics.app_blue, "sim", () {
+              get_one_btn(s_width / 5, RapivetStatics.appBlue, "sim", () {
                 _get_result_and_upload_it(Callback_loading_on, context);
               }, in_height: 28, font_size: 12),
               Padding(
                   padding: new EdgeInsets.fromLTRB(s_width * 0.08, 0, 0, 0)),
-              get_one_btn(s_width / 5, rapivetStatics.app_blue, "não", () {
+              get_one_btn(s_width / 5, RapivetStatics.appBlue, "não", () {
                 _moveto_loading(context);
               }, in_height: 28, font_size: 12),
             ],
@@ -129,9 +129,9 @@ void _get_result_and_upload_it(
 
   try {
     one_pet_data this_pet_data =
-        rapivetStatics.pet_data_list[rapivetStatics.current_pet_index];
+        RapivetStatics.petDataList[RapivetStatics.currentPetIndex];
     String pet_uid = this_pet_data.uid;
-    String token = rapivetStatics.prefs.getString("token");
+    String token = RapivetStatics.prefs.getString("token");
 
     // upload data
     print("upload result data");
@@ -218,7 +218,7 @@ get_horizontal_checker(double s_width, double camear_area_height) {
 show_guide_img(
     double s_width, double s_height, VoidCallback Callback_setstate) {
   return Visibility(
-    visible: rapivetStatics.is_to_show_cam_guide,
+    visible: RapivetStatics.isToShowCamGuide,
     child: Stack(
       children: [
         Container(
@@ -253,9 +253,9 @@ show_guide_img(
             ),
             Padding(padding: new EdgeInsets.fromLTRB(0, 30, 0, 0)),
             get_one_btn(
-                s_width * 0.9, rapivetStatics.app_blue.withOpacity(0.8), "OK",
+                s_width * 0.9, RapivetStatics.appBlue.withOpacity(0.8), "OK",
                 () {
-              rapivetStatics.is_to_show_cam_guide = false;
+              RapivetStatics.isToShowCamGuide = false;
               Callback_setstate();
             })
           ],

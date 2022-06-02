@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:swork_raon/common/rapivetStatics.dart';
-import 'package:swork_raon/model/one_healthcheck_data.dart';
+import 'package:swork_raon/common/rapivet_statics.dart';
+import 'package:swork_raon/model/one_health_check.dart';
 import 'package:swork_raon/rapivet/10_Result_plus.dart';
 
 class ResultPlus_subFuncs {
@@ -33,57 +33,55 @@ class ResultPlus_subFuncs {
   ];
 
   String _get_dialogTitle() {
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.KETON) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.KETON) {
       return "Cetonas";
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.GLUCOSE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.GLUCOSE) {
       return "Glicose";
     }
-    if (rapivetStatics.selected_result_plus_mode ==
-        RESULT_PLUS_MODE.LEUKOZYTEN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.LEUKOZYTEN) {
       return "Leucócitos";
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.NITRITE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.NITRITE) {
       return "Nitrito";
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.BLOOD) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.BLOOD) {
       return "Sangue";
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PH) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PH) {
       return "pH";
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PROTEIN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PROTEIN) {
       return "Proteínas";
     }
   }
 
   String _get_dialogContent() {
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.KETON) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.KETON) {
       //return "Em condições normais, a urina da maioria dos animais domésticos é livre de cetonas. Concentrações detectáveis de cetona podem ser originadas por situações fisiológicas como stress, exercício físico intenso e gestação.";
       return "As cetonas são uma substância química produzida pelo corpo quando este não é capaz de usar a glicose como fonte de energia, e passa a utilizar a gordura. \n\nPROVÁVEIS CAUSAS: Anorexia; Dietas pobres em carboidratos e rico em gorduras; Estresse; Exercícios intenso; Gestação. ";
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.GLUCOSE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.GLUCOSE) {
       // return "A presença de glicose na urina significa que a concentração excedeu o limiar renal. A medição é usada no diagnóstico e tratamento de desordens do metabolismo de carboidratos, incluindo Diabetes Mellitus, hiperglicemia e distúrbios hereditários. Normalmente não se detecta em animais saudáveis, embora pequenas quantidades possam ser secretadas por um rim não doente. Reações falso positivas podem ser produzidas por resíduos de produtos de limpeza contendo peróxido.";
       return "A glicose é uma das principais fontes de energia que o corpo do animal utiliza. Frequentemente, é possível detectar a glicose na urina dos cachorros com menos de 8 semanas de vida.\n\nPROVÁVEIS CAUSAS: Ingestão excessiva de carboidratos; Estresse.";
     }
-    if (rapivetStatics.selected_result_plus_mode ==
-        RESULT_PLUS_MODE.LEUKOZYTEN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.LEUKOZYTEN) {
       //return "Leucócitos são indicações de doença inflamatórias renais ou do trato urinário. Urinas de animais saudáveis não contém leucócitos. Resultados falso-positivos podem ser causados por contaminação por secreções vaginais ou esmegma.";
       return "Geralmente as urinas dos pets saudáveis não contém leucócitos. A presença de leucócitos na urina indica inflamações renais ou infecções do sistema urinário. O número de leucócitos pode variar conforme a ação imunológica do corpo.\n\nPROVÁVEIS CAUSAS: Ambiente anti-higiênico.";
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.NITRITE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.NITRITE) {
       // return "O teste normalmente é negativo para animais sadios. Resultados negativos não excluem uma bacteriúria relevante. Antes do teste, deve diminuir a ingestão de líquidos, e descontinuar o uso de antibióticos e vitamina C. Um resultado negativo pode ocorrer devido às seguintes razões: bactérias que não apresentam nitrato redutase, dietas com baixos níveis de nitrato(animais carnívoros), aumento da diurese, altas concentrações de ácido ascórbico, ou incubação insuficiente da urina na bexiga.";
       return "O nitrito é produzido a partir dos nitratos naturais da urina pelas bactérias formadoras de nitrito. A identificação do nitrito é usada no diagnóstico de infecções do trato urinário. As bactérias formadoras de nitrito são: Escherichia coli, Staphylococcus aureus e Pseudomonas auruginosa. Elas possuem enzimas que reduzem o nitrato a nitrito. A infecção do trato urinário é detectado quando o nitrito está presente na urina. A maioria dos pets saudáveis não apresentam nitritos nas urinas. Para os que apresentam, é recomendável diminuir a ingestão de líquidos e interromper o uso de antibióticos e vitamina C (cerca de 3dias). \n\nPROVÁVEIS CAUSAS: Ambiente anti-higiênico; Ingestão excessiva de petiscos contendo alta quantidade de nitrito.";
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.BLOOD) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.BLOOD) {
       //return "Reações falso positivas podem ser causadas por resíduos de produtos de limpeza, formalina ou atividade de oxidases microbianas oriundas de infecções do trato urinário. O significado de um resultado positivo varia de animal para animal. Para estabelecer um diagnóstico individual, é indispensável levar em consideração o quadro clínico do animal. O teste é normalmente negativo para animais saudáveis.";
       return "Indica níveis de sangue ocultos na urina. O sangue pode estar presente na urina em forma de glóbulos vermelhos(hematúria), hemoglobina(hemoglobinúria) ou mioglobina(pigmentúria muscular) livres.\n\nPROVÁVEIS CAUSAS: Exercícios físicos excessivo ou caminhada antes de fazer o teste; Ingestão excessiva de carnes, peixes(vermelhos), vegatais cru e frutas.";
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PH) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PH) {
       //return "A estimativa do pH é usada para avaliar a acidez ou a alcalinidade da urina dos animais sendo útil também no acompanhamento da urolitíase. Essas características podem estar relacionadas a vários distúrbios renais e metabólicos. O pH urinário dos animais está diretamente relacionado à nutrição.";
       return "A estimativa do pH pode variar com o tempo da digestão, tempo de armazenamento da urina, infecção bacteriana e com o equilíbrio do ácido-básico do corpo. O pH normal da urina é de 6.0~7.0. Geralmente o pH dos herbívoros(alcalino) é mais alto do que o pH dos carnívoros(ácido). \n\nPROVÁVEIS CAUSAS: Ingestão excessiva de carne; Vegetariano; Ingestão excessiva de petiscos contendo alta quantidade de grãos e amido.";
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PROTEIN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PROTEIN) {
       // return "A identificação da proteína urinária é usada no diagnóstico e tratamento de infecções do trato urinário (geralmente acompanhada por hematúria, pH alcalino e reação positiva para nitrito) e afecções renais. O teste é normalmente negativo para a maioria dos animais domésticos, mas saudáveis podem apresentar traços de proteína na urina.";
       return "Chamamos de proteinúria quando uma grande quantidade de proteínas é filtrada pelos rins e excretada na urina. Para a maioria dos pets saudáveis as proteínas são retidas no corpo, apresentando poucas ou não apresentando proteínas na urina. \n\nPROVÁVEIS CAUSAS: Exercícios físicos excessivo ou caminhada antes de fazer o teste; Ingestão excessiva de alimentos ricos em proteínas, como carne.";
     }
@@ -182,7 +180,7 @@ class ResultPlus_subFuncs {
   }
 
   get_graphTable(BuildContext context, double s_width,
-      List<one_healthcheck_data> hcheck_data_list) {
+      List<OneHealthCheck> hcheck_data_list) {
     double result_talbe_width = s_width * 0.5;
     double result_talbe_height = 33;
 
@@ -427,7 +425,7 @@ class ResultPlus_subFuncs {
 
   // etc =======================================================================
 
-  _get_bar_graph(double s_width, one_healthcheck_data this_healthcheck_data) {
+  _get_bar_graph(double s_width, one_health_check this_healthcheck_data) {
     // server data --> local
     int current_index = _get_current_value(this_healthcheck_data);
     int total_count = _get_graph_maxY() + 1;
@@ -474,75 +472,73 @@ class ResultPlus_subFuncs {
   String _get_bar_fileName() {
     String parentPath = "assets/result_plus/bar_";
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.KETON) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.KETON) {
       return parentPath + 'keton.png';
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.GLUCOSE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.GLUCOSE) {
       return parentPath + 'glucose.png';
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PROTEIN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PROTEIN) {
       return parentPath + 'protein.png';
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.BLOOD) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.BLOOD) {
       return parentPath + 'blood.png';
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.NITRITE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.NITRITE) {
       return parentPath + 'nitrite.png';
     }
 
-    if (rapivetStatics.selected_result_plus_mode ==
-        RESULT_PLUS_MODE.LEUKOZYTEN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.LEUKOZYTEN) {
       return parentPath + 'leukozyten.png';
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PH) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PH) {
       return parentPath + 'ph.png';
     }
   }
 
-  bool _is_normal(one_healthcheck_data this_healthCheck_data) {
+  bool _is_normal(one_health_check this_healthCheck_data) {
     return this_healthCheck_data
-        .is_normal(rapivetStatics.selected_result_plus_mode);
+        .isNormal(RapivetStatics.selectedResultPlusMode);
   }
 
   List<String> _get_suspect_dieasesList() {
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.KETON) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.KETON) {
       return _suspect_disease_ketoen;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.GLUCOSE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.GLUCOSE) {
       return _suspect_disease_glucose;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PROTEIN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PROTEIN) {
       return _suspect_disease_protein;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.BLOOD) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.BLOOD) {
       return _suspect_disease_blood;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.NITRITE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.NITRITE) {
       return _suspect_disease_nitrite;
     }
 
-    if (rapivetStatics.selected_result_plus_mode ==
-        RESULT_PLUS_MODE.LEUKOZYTEN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.LEUKOZYTEN) {
       return _suspect_disease_leukozyten;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PH) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PH) {
       return _suspect_disease_ph;
     }
   }
 
   String _get_current_title() {
     for (int i = 0; i < _resultPlust_mode.length; i++) {
-      if (_resultPlust_mode[i] == rapivetStatics.selected_result_plus_mode) {
+      if (_resultPlust_mode[i] == RapivetStatics.selectedResultPlusMode) {
         return _titles[i];
       }
     }
@@ -566,16 +562,16 @@ class ResultPlus_subFuncs {
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
             tapTargetSize: MaterialTapTargetSize.padded,
-            backgroundColor: (in_result_plus_mode ==
-                    rapivetStatics.selected_result_plus_mode)
-                ? rapivetStatics.app_blue.withOpacity(0.88)
-                : bgcolor,
+            backgroundColor:
+                (in_result_plus_mode == RapivetStatics.selectedResultPlusMode)
+                    ? RapivetStatics.appBlue.withOpacity(0.88)
+                    : bgcolor,
           ),
           onPressed: () {
-            if (in_result_plus_mode == rapivetStatics.selected_result_plus_mode)
+            if (in_result_plus_mode == RapivetStatics.selectedResultPlusMode)
               return;
 
-            rapivetStatics.selected_result_plus_mode = in_result_plus_mode;
+            RapivetStatics.selectedResultPlusMode = in_result_plus_mode;
 
             Callback_setState();
           },
@@ -586,7 +582,7 @@ class ResultPlus_subFuncs {
               style: TextStyle(
                 fontFamily: 'Noto',
                 color: (in_result_plus_mode ==
-                        rapivetStatics.selected_result_plus_mode)
+                        RapivetStatics.selectedResultPlusMode)
                     ? Colors.white
                     : Colors.black,
                 fontSize: font_size,
@@ -723,7 +719,7 @@ class ResultPlus_subFuncs {
     );
   }
 
-  LineChartData _make_mainChart(List<one_healthcheck_data> hcheck_data_list) {
+  LineChartData _make_mainChart(List<OneHealthCheck> hcheck_data_list) {
     int min_y = -1; // grid 안에 그래프 보일 수 있게.
     int max_y = _get_graph_maxY();
 
@@ -818,102 +814,99 @@ class ResultPlus_subFuncs {
   ];
 
   int _get_graph_maxY() {
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.KETON) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.KETON) {
       return 4;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.GLUCOSE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.GLUCOSE) {
       return 5;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PROTEIN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PROTEIN) {
       return 4;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.BLOOD) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.BLOOD) {
       return 6;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.NITRITE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.NITRITE) {
       return 2;
     }
 
-    if (rapivetStatics.selected_result_plus_mode ==
-        RESULT_PLUS_MODE.LEUKOZYTEN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.LEUKOZYTEN) {
       return 3;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PH) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PH) {
       return 5;
     }
   }
 
-  int _get_current_value(one_healthcheck_data this_healthcheck_data) {
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.KETON) {
-      return this_healthcheck_data.keton;
+  int _get_current_value(one_health_check this_healthcheck_data) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.KETON) {
+      return this_healthcheck_data.ketone;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.GLUCOSE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.GLUCOSE) {
       return this_healthcheck_data.glucose;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PROTEIN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PROTEIN) {
       return this_healthcheck_data.proteinuria;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.BLOOD) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.BLOOD) {
       return this_healthcheck_data.blood;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.NITRITE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.NITRITE) {
       return this_healthcheck_data.nitrite;
     }
 
-    if (rapivetStatics.selected_result_plus_mode ==
-        RESULT_PLUS_MODE.LEUKOZYTEN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.LEUKOZYTEN) {
       return this_healthcheck_data.leukocyte;
     }
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PH) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PH) {
       return this_healthcheck_data.ph;
     }
   }
 
-  List<FlSpot> _get_FlSpot_datas(List<one_healthcheck_data> hcheck_data_list) {
+  List<FlSpot> _get_FlSpot_datas(List<OneHealthCheck> hcheck_data_list) {
     List<int> int_datas = [];
 
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.KETON) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.KETON) {
       for (int i = 0; i < hcheck_data_list.length; i++) {
-        int_datas.add(hcheck_data_list[i].keton);
+        int_datas.add(hcheck_data_list[i].ketone);
       }
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.GLUCOSE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.GLUCOSE) {
       for (int i = 0; i < hcheck_data_list.length; i++) {
         int_datas.add(hcheck_data_list[i].glucose);
       }
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PROTEIN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PROTEIN) {
       for (int i = 0; i < hcheck_data_list.length; i++) {
         int_datas.add(hcheck_data_list[i].proteinuria);
       }
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.BLOOD) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.BLOOD) {
       for (int i = 0; i < hcheck_data_list.length; i++) {
         int_datas.add(hcheck_data_list[i].blood);
       }
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.NITRITE) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.NITRITE) {
       for (int i = 0; i < hcheck_data_list.length; i++) {
         int_datas.add(hcheck_data_list[i].nitrite);
       }
     }
-    if (rapivetStatics.selected_result_plus_mode ==
-        RESULT_PLUS_MODE.LEUKOZYTEN) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.LEUKOZYTEN) {
       for (int i = 0; i < hcheck_data_list.length; i++) {
         int_datas.add(hcheck_data_list[i].leukocyte);
       }
     }
-    if (rapivetStatics.selected_result_plus_mode == RESULT_PLUS_MODE.PH) {
+    if (RapivetStatics.selectedResultPlusMode == RESULT_PLUS_MODE.PH) {
       for (int i = 0; i < hcheck_data_list.length; i++) {
         int_datas.add(hcheck_data_list[i].ph);
       }

@@ -20,7 +20,7 @@ import 'package:swork_raon/common/JToast.dart';
 import 'package:swork_raon/rapivet/7_Test_Guide.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
-import '../../common/rapivetStatics.dart';
+import '../../common/rapivet_statics.dart';
 
 // jujego
 
@@ -209,7 +209,7 @@ class _ImgSearchHomeState extends State<ImgSearchHome>
         return false;
       },
       child: Scaffold(
-        backgroundColor: rapivetStatics.app_bg,
+        backgroundColor: RapivetStatics.appBG,
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.dark,
           child: SafeArea(
@@ -287,7 +287,7 @@ class _ImgSearchHomeState extends State<ImgSearchHome>
                                     padding: new EdgeInsets.all(20),
                                     alignment: Alignment.topCenter,
                                     height: s_height * 0.3,
-                                    color: rapivetStatics.app_bg,
+                                    color: RapivetStatics.appBG,
                                     child: get_find_end_check(context, s_width,
                                         s_height, callback_loading_on),
                                   ),

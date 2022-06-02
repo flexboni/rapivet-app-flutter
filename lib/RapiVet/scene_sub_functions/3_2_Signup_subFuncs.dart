@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as phttp;
 import 'package:swork_raon/common/JToast.dart';
 
-import '../../common/rapivetStatics.dart';
+import '../../common/rapivet_statics.dart';
 import '../4_RegisterPet.dart';
 
 class Signup_subfuncs {
@@ -71,17 +71,17 @@ class Signup_subfuncs {
   }
 
   request_sms_code(String phone_num) async {
-    rapivetStatics.auth.userChanges();
-    rapivetStatics.auth.authStateChanges();
+    RapivetStatics.auth.userChanges();
+    RapivetStatics.auth.authStateChanges();
 
-    await rapivetStatics.auth.verifyPhoneNumber(
+    await RapivetStatics.auth.verifyPhoneNumber(
       phoneNumber: phone_num,
       timeout: const Duration(seconds: 60),
       codeSent: (String verificationId, int resendToken) async {
         print(verificationId);
         print(resendToken);
 
-        rapivetStatics.sms_verificationId = verificationId;
+        RapivetStatics.smsVerificationId = verificationId;
         // PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: "123456");
         // UserCredential user = await auth.signInWithCredential(credential);
         // print(user.additionalUserInfo);
@@ -92,20 +92,20 @@ class Signup_subfuncs {
       verificationFailed: (FirebaseAuthException e) {
         print("verification 1st error!!!");
         print(e);
-        rapivetStatics.sms_verification_error = e.toString();
+        RapivetStatics.smsVerificationError = e.toString();
       },
     );
   }
 
   Future<String> check_sms_code(String sms_code) async {
-    String user_uid = rapivetStatics.sms_verificationId;
+    String user_uid = RapivetStatics.smsVerificationId;
 
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: user_uid, smsCode: sms_code);
 
     try {
       UserCredential user =
-          await rapivetStatics.auth.signInWithCredential(credential);
+          await RapivetStatics.auth.signInWithCredential(credential);
       JToast().show_toast("Código de segurança enviado com sucesso.", true);
       return "success";
     } catch (e) {
@@ -140,7 +140,7 @@ class Signup_subfuncs {
       return true;
     }
 
-    String url = rapivetStatics.baseURL + "/user/change_password";
+    String url = RapivetStatics.baseURL + "/user/change_password";
     var uri = Uri.parse(url);
 
     Map<String, String> headers = {
@@ -185,7 +185,7 @@ class Signup_subfuncs {
       TextEditingController _address2_txt_control,
       TextEditingController _phone_txt_control,
       String token) async {
-    String url = rapivetStatics.baseURL + "/user/update";
+    String url = RapivetStatics.baseURL + "/user/update";
     var uri = Uri.parse(url);
 
     Map<String, String> headers = {
@@ -235,7 +235,7 @@ class Signup_subfuncs {
       // TextEditingController _adress2_txtedit_control,
       TextEditingController _pw1_txtedit_control,
       TextEditingController _pw2_txtedit_control) async {
-    String url = rapivetStatics.baseURL + "/user/signup";
+    String url = RapivetStatics.baseURL + "/user/signup";
     var uri = Uri.parse(url);
 
     Map<String, String> headers = {

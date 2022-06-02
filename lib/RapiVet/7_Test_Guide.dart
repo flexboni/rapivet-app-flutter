@@ -5,7 +5,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/7_TimerPopup.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
-import '../common/rapivetStatics.dart';
+import '../common/rapivet_statics.dart';
 import 'home.dart';
 
 class Test_Guide extends StatefulWidget {
@@ -50,7 +50,7 @@ class _test_guide_home extends State<StatefulWidget> {
         return false;
       },
       child: Scaffold(
-          backgroundColor: rapivetStatics.app_bg,
+          backgroundColor: RapivetStatics.appBG,
           body: AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle.dark,
             child: SafeArea(
@@ -112,10 +112,9 @@ class _test_guide_home extends State<StatefulWidget> {
                                   //     )),
                                   Padding(padding: new EdgeInsets.all(1)),
                                   get_one_btn(s_width * 0.9,
-                                      rapivetStatics.app_blue, "CONFIRMAR", () {
+                                      RapivetStatics.appBlue, "CONFIRMAR", () {
                                     setState(() {
-                                      rapivetStatics.is_to_show_cam_guide =
-                                          true;
+                                      RapivetStatics.isToShowCamGuide = true;
                                       _is_showingTimer = true;
                                     });
                                   }, in_height: 50),

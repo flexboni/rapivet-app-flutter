@@ -1,13 +1,12 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/common/JToast.dart';
-import 'package:swork_raon/model/one_healthcheck_data.dart';
+import 'package:swork_raon/model/one_health_check.dart';
 import 'package:swork_raon/rapivet/result.dart';
 
-import '../common/rapivetStatics.dart';
 import 'home.dart';
 import 'scene_sub_functions/10_2_ResultPlus_subFuncs.dart';
 import 'scene_sub_functions/9_2_Result_subFuncs.dart';
@@ -24,8 +23,8 @@ enum RESULT_PLUS_MODE {
   NOTHING
 }
 
-bool _is_loading;
-List<one_healthcheck_data> _hCheck_list = [];
+bool? _isLoading;
+List<OneHealthCheck> _oneHealthCheckList = [];
 
 class Result_plus_scene extends StatefulWidget {
   @override
@@ -34,7 +33,7 @@ class Result_plus_scene extends StatefulWidget {
 
 class _result_plus_scene_home extends State<StatefulWidget>
     with TickerProviderStateMixin {
-  callback_setstate() {
+  callbackSetState() {
     setState(() {
       print("callback  state");
     });
@@ -42,19 +41,19 @@ class _result_plus_scene_home extends State<StatefulWidget>
 
   @override
   void initState() {
-    _is_loading = false;
+    _isLoading = false;
     get_data_fromServer();
     super.initState();
   }
 
   get_data_fromServer() async {
     setState(() {
-      _is_loading = true;
+      _isLoading = true;
     });
 
-    _hCheck_list = await Result_subFuncs().getCurrentPetHealthCheckDB();
+    _oneHealthCheckList = await Result_subFuncs().getCurrentPetHealthCheckDB();
 
-    if (_hCheck_list == [] || _hCheck_list.length == 0) {
+    if (_oneHealthCheckList == [] || _oneHealthCheckList.length == 0) {
       JToast().show_toast("Informação não encontrada.", true);
 
       Navigator.pushReplacement(context,
@@ -62,7 +61,7 @@ class _result_plus_scene_home extends State<StatefulWidget>
     }
 
     setState(() {
-      _is_loading = false;
+      _isLoading = false;
     });
   }
 
@@ -96,7 +95,7 @@ class _result_plus_scene_home extends State<StatefulWidget>
         return false;
       },
       child: Scaffold(
-          backgroundColor: rapivetStatics.app_bg,
+          backgroundColor: RapivetStatics.appBG,
           body: AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle.dark,
             child: SafeArea(
@@ -106,7 +105,7 @@ class _result_plus_scene_home extends State<StatefulWidget>
                     physics: BouncingScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     child: Visibility(
-                      visible: !_is_loading,
+                      visible: !_isLoading,
                       child: Column(
                         children: [
                           Padding(padding: new EdgeInsets.all(38)),
@@ -114,8 +113,8 @@ class _result_plus_scene_home extends State<StatefulWidget>
                               .get_result_btns(s_width, callback_setstate),
                           Padding(padding: new EdgeInsets.all(6)),
                           // 테이블 그리기
-                          ResultPlus_subFuncs()
-                              .get_graphTable(context, s_width, _hCheck_list),
+                          ResultPlus_subFuncs().get_graphTable(
+                              context, s_width, _oneHealthCheckList),
                           Padding(padding: new EdgeInsets.all(13)),
                           Row(
                             children: [
@@ -164,7 +163,7 @@ class _result_plus_scene_home extends State<StatefulWidget>
                   ),
                   get_overlay_btns(
                       context, callback_setstate, s_width, s_height),
-                  show_loading(_is_loading, s_height, s_width, this),
+                  show_loading(_isLoading, s_height, s_width, this),
                 ],
               ),
             ),

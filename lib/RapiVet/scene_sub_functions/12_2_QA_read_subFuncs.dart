@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as phttp;
-import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/common/rapivet_statics.dart';
 import 'package:swork_raon/model/one_QA_data.dart';
 
 class QA_read_subFuncs {
@@ -106,12 +106,12 @@ class QA_read_subFuncs {
   String get_date_inFomat(String date_txt) {
     if (date_txt.trim() == "") return ".";
 
-    return rapivetStatics.converTime_to_displlay(date_txt.trim(),
+    return RapivetStatics.convertTimeToDisplay(date_txt.trim(),
         in_format: "yyyy-MM-dd HH:mm:ss");
   }
 
   Future<List<one_QA_data>> get_QnA_fromServer(String token) async {
-    var uri = Uri.parse(rapivetStatics.baseURL + "/qa/read/1/1000");
+    var uri = Uri.parse(RapivetStatics.baseURL + "/qa/read/1/1000");
 
     var response = await phttp.get(
       uri,
@@ -152,7 +152,7 @@ class QA_read_subFuncs {
   }
 
   Future<bool> write_QnA_toServer(String token, String question) async {
-    String url = rapivetStatics.baseURL + "/qa/write";
+    String url = RapivetStatics.baseURL + "/qa/write";
     var uri = Uri.parse(url);
 
     Map<String, String> headers = {

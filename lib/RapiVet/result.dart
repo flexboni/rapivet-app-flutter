@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:swork_raon/common/JToast.dart';
-import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/common/rapivet_statics.dart';
 import 'package:swork_raon/model/All_health_check_manager.dart';
-import 'package:swork_raon/model/one_healthcheck_data.dart';
+import 'package:swork_raon/model/one_health_check.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/9_2_Result_subFuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 
@@ -12,9 +12,9 @@ import 'home.dart';
 
 Color this_red = Color.fromARGB(255, 213, 48, 8);
 Color this_grey = Colors.grey;
-List<one_healthcheck_data> _hCheck_list = [];
+List<OneHealthCheck> _hCheck_list = [];
 List<String> _hCheck_date_strs = [];
-one_healthcheck_data? _current_health_data;
+one_health_check? _current_health_data;
 bool? _is_loading;
 String ad_img_url = "";
 
@@ -48,13 +48,13 @@ class _ResultPageState extends State<StatefulWidget>
 
     _hCheck_list = Result_subFuncs().reverse_order(_hCheck_list);
     _hCheck_date_strs = Result_subFuncs().get_check_dates(_hCheck_list);
-    rapivetStatics.selected_check_index = 0;
-    _current_health_data = _hCheck_list[rapivetStatics.selected_check_index];
+    RapivetStatics.selectedCheckIndex = 0;
+    _current_health_data = _hCheck_list[RapivetStatics.selectedCheckIndex];
 
     await All_health_check_manager().get_all_health_check_infos();
 
     // get link information
-    ad_img_url = await Result_subFuncs().get_link_info(rapivetStatics.token);
+    ad_img_url = await Result_subFuncs().get_link_info(RapivetStatics.token);
 
     setState(() {
       _is_loading = false;
@@ -68,8 +68,7 @@ class _ResultPageState extends State<StatefulWidget>
 
     callback_setstate() {
       setState(() {
-        _current_health_data =
-            _hCheck_list[rapivetStatics.selected_check_index];
+        _current_health_data = _hCheck_list[RapivetStatics.selectedCheckIndex];
         print("callback  state");
       });
     }
@@ -81,7 +80,7 @@ class _ResultPageState extends State<StatefulWidget>
 
     String _get_date_txt() {
       try {
-        return _hCheck_date_strs[rapivetStatics.selected_check_index];
+        return _hCheck_date_strs[RapivetStatics.selectedCheckIndex];
       } catch (e) {
         return ".";
       }
@@ -93,7 +92,7 @@ class _ResultPageState extends State<StatefulWidget>
         return false;
       },
       child: Scaffold(
-          backgroundColor: rapivetStatics.app_bg,
+          backgroundColor: RapivetStatics.appBG,
           body: AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle.dark,
             child: SafeArea(
@@ -115,7 +114,7 @@ class _ResultPageState extends State<StatefulWidget>
                                   context,
                                   _hCheck_date_strs,
                                   callback_setstate,
-                                  rapivetStatics.selected_check_index,
+                                  RapivetStatics.selectedCheckIndex,
                                   s_width);
                             },
                             child: Container(

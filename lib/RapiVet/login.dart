@@ -6,14 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as phttp;
 import 'package:swork_raon/common/JToast.dart';
-import 'package:swork_raon/model/one_pet_data.dart';
+import 'package:swork_raon/model/one_pet.dart';
 import 'package:swork_raon/rapivet/main.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/2_2_Login_subfuncs.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/Api_manager.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/common_ui.dart';
 import 'package:swork_raon/rapivet/sign_up.dart';
 
-import '../common/rapivetStatics.dart';
+import '../common/rapivet_statics.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -86,8 +86,8 @@ class _LoginPageState extends State<StatefulWidget>
       } else {
         // 로그인 성공 -- temp
         // load pet list
-        List<one_pet_data> petData = await Api_manager().get_pet_list(token);
-        rapivetStatics.pet_data_list = petData;
+        List<OnePet> petData = await Api_manager().get_pet_list(token);
+        RapivetStatics.petDataList = petData;
 
         Login_subFuncs().operate_after_login(context, token);
       }
@@ -242,7 +242,7 @@ class _LoginPageState extends State<StatefulWidget>
         return false;
       },
       child: Scaffold(
-        backgroundColor: rapivetStatics.app_bg,
+        backgroundColor: RapivetStatics.appBG,
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.dark,
           child: SafeArea(
@@ -263,7 +263,7 @@ class _LoginPageState extends State<StatefulWidget>
                             style: TextStyle(
                               fontFamily: "Roboto",
                               fontSize: 17.5,
-                              color: rapivetStatics.app_black,
+                              color: RapivetStatics.appBlack,
                             ),
                           ),
                         ),
@@ -275,7 +275,7 @@ class _LoginPageState extends State<StatefulWidget>
                         Padding(padding: new EdgeInsets.all(2)),
                         get_one_textfield(
                           widthSize,
-                          rapivetStatics.app_blue,
+                          RapivetStatics.appBlue,
                           emailController,
                           "",
                         ),
@@ -292,7 +292,7 @@ class _LoginPageState extends State<StatefulWidget>
                         Padding(padding: new EdgeInsets.all(2)),
                         get_one_textfield(
                           widthSize,
-                          rapivetStatics.app_blue,
+                          RapivetStatics.appBlue,
                           passwordController,
                           "",
                           is_password: isHidePassword,
@@ -302,7 +302,7 @@ class _LoginPageState extends State<StatefulWidget>
                         Padding(padding: new EdgeInsets.all(15)),
                         get_one_btn(
                           widthSize * 0.9,
-                          rapivetStatics.app_blue.withOpacity(0.8),
+                          RapivetStatics.appBlue.withOpacity(0.8),
                           "Entar",
                           clickLoginButton,
                           in_height: 52,
@@ -311,7 +311,7 @@ class _LoginPageState extends State<StatefulWidget>
                         OutlinedButton(
                           style: OutlinedButton.styleFrom(
                             side: BorderSide(
-                              color: rapivetStatics.app_bg,
+                              color: RapivetStatics.appBG,
                               width: 0,
                             ),
                           ),
@@ -322,7 +322,7 @@ class _LoginPageState extends State<StatefulWidget>
                             "Esqueci minha senha",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: rapivetStatics.app_blue,
+                              color: RapivetStatics.appBlue,
                             ),
                           ),
                         ),
@@ -334,7 +334,7 @@ class _LoginPageState extends State<StatefulWidget>
                             child: OutlinedButton(
                               style: OutlinedButton.styleFrom(
                                 side: BorderSide(
-                                  color: rapivetStatics.normal_ui_line_color,
+                                  color: RapivetStatics.normalUILineColor,
                                   width: 1,
                                 ),
                                 backgroundColor: Colors.white,
@@ -392,7 +392,7 @@ class _LoginPageState extends State<StatefulWidget>
                               style: OutlinedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 side: BorderSide(
-                                  color: rapivetStatics.app_blue,
+                                  color: RapivetStatics.appBlue,
                                   width: 1,
                                 ),
                                 shape: new RoundedRectangleBorder(
@@ -417,7 +417,7 @@ class _LoginPageState extends State<StatefulWidget>
                                   style: TextStyle(
                                     fontFamily: "Roboto",
                                     //  fontWeight: FontWeight.bold,
-                                    color: rapivetStatics.app_blue,
+                                    color: RapivetStatics.appBlue,
                                   ),
                                 ),
                               ),
@@ -482,7 +482,7 @@ class _LoginPageState extends State<StatefulWidget>
                                   child: get_one_login_btn(
                                     widthSize * 0.8,
                                     Colors.white,
-                                    rapivetStatics.app_black,
+                                    RapivetStatics.appBlack,
                                     'assets/google_sign.png',
                                     "   Cadastre-se com o Google",
                                     () {
@@ -500,7 +500,7 @@ class _LoginPageState extends State<StatefulWidget>
                                   fit: BoxFit.scaleDown,
                                   child: get_one_login_btn(
                                     widthSize * 0.8,
-                                    rapivetStatics.app_blue,
+                                    RapivetStatics.appBlue,
                                     Colors.white,
                                     '',
                                     "Fechar",

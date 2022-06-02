@@ -4,21 +4,20 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as phttp;
 import 'package:page_transition/page_transition.dart';
-import 'package:swork_raon/common/rapivetStatics.dart';
-import 'package:swork_raon/model/one_healthcheck_data.dart';
-import 'package:swork_raon/model/one_pet_data.dart';
+import 'package:swork_raon/model/one_health_check.dart';
+import 'package:swork_raon/model/one_pet.dart';
 import 'package:swork_raon/rapivet/10_Result_plus.dart';
 
 import 'common_ui.dart';
 
 class Result_subFuncs {
-  Future<List<one_healthcheck_data>> getCurrentPetHealthCheckDB() async {
-    one_pet_data this_pet_data =
-        rapivetStatics.pet_data_list[rapivetStatics.current_pet_index];
-    String token = rapivetStatics.token;
+  Future<List<OneHealthCheck>> getCurrentPetHealthCheckDB() async {
+    OnePet this_pet_data =
+        RapivetStatics.petDataList[RapivetStatics.currentPetIndex];
+    String token = RapivetStatics.token;
     String pet_uid = this_pet_data.uid;
 
-    String url = rapivetStatics.baseURL + "/pet/health_check_list/" + pet_uid;
+    String url = RapivetStatics.baseURL + "/pet/health_check_list/" + pet_uid;
     print(url);
 
     var uri = Uri.parse(url);
@@ -46,11 +45,10 @@ class Result_subFuncs {
     }
   }
 
-  Future<List<one_healthcheck_data>> get_onePet_healthCehck_db(
-      String pet_uid) async {
-    String token = rapivetStatics.token;
+  Future<List<OneHealthCheck>> get_onePet_healthCehck_db(String pet_uid) async {
+    String token = RapivetStatics.token;
 
-    String url = rapivetStatics.baseURL + "/pet/health_check_list/" + pet_uid;
+    String url = RapivetStatics.baseURL + "/pet/health_check_list/" + pet_uid;
     print(url);
 
     var uri = Uri.parse(url);
@@ -78,13 +76,13 @@ class Result_subFuncs {
     }
   }
 
-  List<one_healthcheck_data> _raw_data_toList(List dblist, String pet_uid) {
+  List<OneHealthCheck> _raw_data_toList(List dblist, String pet_uid) {
     int data_count = dblist.length;
 
-    List<one_healthcheck_data> health_check_list = [];
+    List<OneHealthCheck> health_check_list = [];
 
     for (int i = 0; i < data_count; i++) {
-      one_healthcheck_data this_healthCheck_data = one_healthcheck_data();
+      one_health_check this_healthCheck_data = one_health_check();
 
       String round = dblist[i]["round"];
       String keton = dblist[i]["keton"];
@@ -96,7 +94,7 @@ class Result_subFuncs {
       String proteinuria = dblist[i]["proteinuria"];
       String created_at = dblist[i]["created_at"];
 
-      this_healthCheck_data.set_data(pet_uid, round, keton, glucose, leukocyte,
+      this_healthCheck_data.setData(pet_uid, round, keton, glucose, leukocyte,
           nitrite, blood, ph, proteinuria, created_at);
 
       health_check_list.add(this_healthCheck_data);
@@ -105,9 +103,8 @@ class Result_subFuncs {
     return health_check_list;
   }
 
-  List<one_healthcheck_data> reverse_order(
-      List<one_healthcheck_data> in_health_datas) {
-    List<one_healthcheck_data> out_health_datas = [];
+  List<OneHealthCheck> reverse_order(List<OneHealthCheck> in_health_datas) {
+    List<OneHealthCheck> out_health_datas = [];
 
     for (int i = in_health_datas.length - 1; i >= 0; i--) {
       out_health_datas.add(in_health_datas[i]);
@@ -116,11 +113,11 @@ class Result_subFuncs {
     return out_health_datas;
   }
 
-  List<String> get_check_dates(List<one_healthcheck_data> check_datas) {
+  List<String> get_check_dates(List<OneHealthCheck> check_datas) {
     List<String> _health_check_dates = [];
 
     for (int i = 0; i < check_datas.length; i++) {
-      String timeStr = check_datas[i].time_to_display;
+      String timeStr = check_datas[i].timeToDisplay;
       _health_check_dates.add(timeStr);
     }
 
@@ -129,7 +126,7 @@ class Result_subFuncs {
 
   // get link =====
   get_link_info(String token) async {
-    var uri = Uri.parse(rapivetStatics.baseURL + "/operation/links");
+    var uri = Uri.parse(RapivetStatics.baseURL + "/operation/links");
 
     var response = await phttp.get(
       uri,
@@ -150,7 +147,7 @@ class Result_subFuncs {
 
   // ui ======================================
   get_current_checkUI(BuildContext context, double s_width,
-      one_healthcheck_data this_healthCheck_data) {
+      one_health_check this_healthCheck_data) {
     try {
       return Column(children: [
         for (int i = 0; i < 7; i++)
@@ -162,10 +159,10 @@ class Result_subFuncs {
   }
 
   _get_one_result_listUI(BuildContext context, double s_width,
-      one_healthcheck_data this_healthCheck_data, int index) {
+      one_health_check this_healthCheck_data, int index) {
     Color this_red = Color.fromARGB(255, 213, 48, 8);
     Color this_grey = Colors.grey.withOpacity(0.8);
-    String title = rapivetStatics.healthCheck_title[index];
+    String title = RapivetStatics.healthCheckTitle[index];
 
     /*
     "Cetonas",
@@ -181,37 +178,37 @@ class Result_subFuncs {
     RESULT_PLUS_MODE target_mode = RESULT_PLUS_MODE.KETON;
 
     if (index == 0) {
-      _is_normal = this_healthCheck_data.is_normal(RESULT_PLUS_MODE.KETON);
+      _is_normal = this_healthCheck_data.isNormal(RESULT_PLUS_MODE.KETON);
       target_mode = RESULT_PLUS_MODE.KETON;
     }
 
     if (index == 1) {
-      _is_normal = this_healthCheck_data.is_normal(RESULT_PLUS_MODE.GLUCOSE);
+      _is_normal = this_healthCheck_data.isNormal(RESULT_PLUS_MODE.GLUCOSE);
       target_mode = RESULT_PLUS_MODE.GLUCOSE;
     }
 
     if (index == 2) {
-      _is_normal = this_healthCheck_data.is_normal(RESULT_PLUS_MODE.LEUKOZYTEN);
+      _is_normal = this_healthCheck_data.isNormal(RESULT_PLUS_MODE.LEUKOZYTEN);
       target_mode = RESULT_PLUS_MODE.LEUKOZYTEN;
     }
 
     if (index == 3) {
-      _is_normal = this_healthCheck_data.is_normal(RESULT_PLUS_MODE.NITRITE);
+      _is_normal = this_healthCheck_data.isNormal(RESULT_PLUS_MODE.NITRITE);
       target_mode = RESULT_PLUS_MODE.NITRITE;
     }
 
     if (index == 4) {
-      _is_normal = this_healthCheck_data.is_normal(RESULT_PLUS_MODE.BLOOD);
+      _is_normal = this_healthCheck_data.isNormal(RESULT_PLUS_MODE.BLOOD);
       target_mode = RESULT_PLUS_MODE.BLOOD;
     }
 
     if (index == 5) {
-      _is_normal = this_healthCheck_data.is_normal(RESULT_PLUS_MODE.PH);
+      _is_normal = this_healthCheck_data.isNormal(RESULT_PLUS_MODE.PH);
       target_mode = RESULT_PLUS_MODE.PH;
     }
 
     if (index == 6) {
-      _is_normal = this_healthCheck_data.is_normal(RESULT_PLUS_MODE.PROTEIN);
+      _is_normal = this_healthCheck_data.isNormal(RESULT_PLUS_MODE.PROTEIN);
       target_mode = RESULT_PLUS_MODE.PROTEIN;
     }
 
@@ -277,7 +274,7 @@ class Result_subFuncs {
                     ),
                     onPressed: () {
                       print(target_mode);
-                      rapivetStatics.selected_result_plus_mode = target_mode;
+                      RapivetStatics.selectedResultPlusMode = target_mode;
                       Navigator.pushReplacement(
                           context,
                           PageTransition(
@@ -463,7 +460,7 @@ class Result_subFuncs {
                   child: Padding(
                     padding: new EdgeInsets.fromLTRB(0, 20, 0, 20),
                     child: RawScrollbar(
-                      thumbColor: rapivetStatics.app_blue.withOpacity(0.5),
+                      thumbColor: RapivetStatics.appBlue.withOpacity(0.5),
                       thickness: 1.8,
                       child: SingleChildScrollView(
                         physics: BouncingScrollPhysics(),
@@ -480,16 +477,16 @@ class Result_subFuncs {
                                     _types_set[i],
                                     style: TextStyle(
                                         color: (i == _selected_val)
-                                            ? rapivetStatics.app_blue
+                                            ? RapivetStatics.appBlue
                                             : Colors.black.withOpacity(0.58),
                                         fontSize: 11.5),
                                   ),
                                   value: i,
                                   groupValue: (i == _selected_val) ? i : -1,
-                                  activeColor: rapivetStatics.app_blue,
+                                  activeColor: RapivetStatics.appBlue,
                                   onChanged: (int value) {
                                     // _value = value;
-                                    rapivetStatics.selected_check_index = value;
+                                    RapivetStatics.selectedCheckIndex = value;
                                     // print();
                                     Navigator.pop(context);
                                     FocusScope.of(context).unfocus();
@@ -516,7 +513,7 @@ class Result_subFuncs {
                     child: Text(
                       "Fechar",
                       style: TextStyle(
-                          color: rapivetStatics.app_blue.withOpacity(0.7)),
+                          color: RapivetStatics.appBlue.withOpacity(0.7)),
                     )),
               ],
             ),

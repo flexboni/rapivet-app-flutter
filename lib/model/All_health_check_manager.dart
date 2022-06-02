@@ -4,100 +4,98 @@
 
 // 로드할 때ㅣ welcome --> main ,,,  result (시작시에)
 
-import 'package:swork_raon/common/rapivetStatics.dart';
+import 'package:swork_raon/common/rapivet_statics.dart';
 import 'package:swork_raon/rapivet/10_Result_plus.dart';
 import 'package:swork_raon/rapivet/scene_sub_functions/9_2_Result_subFuncs.dart';
 
-import 'one_healthcheck_data.dart';
+import 'one_health_check.dart';
 
 class All_health_check_manager {
   get_all_health_check_infos() async {
     print("get pet health info from server======");
-    List<List<one_healthcheck_data>> allPets_healthCheck_list = [];
+    List<List<OneHealthCheck>> allPets_healthCheck_list = [];
 
-    for (int i = 0; i < rapivetStatics.pet_data_list.length; i++) {
-      String pet_uid = rapivetStatics.pet_data_list[i].uid;
+    for (int i = 0; i < RapivetStatics.petDataList.length; i++) {
+      String pet_uid = RapivetStatics.petDataList[i].uid;
       print("pet uid:::::" + pet_uid);
-      List<one_healthcheck_data> _hCheck_list =
+      List<OneHealthCheck> _hCheck_list =
           await Result_subFuncs().get_onePet_healthCehck_db(pet_uid);
       print("health check data count:: " + _hCheck_list.length.toString());
       allPets_healthCheck_list.add(_hCheck_list);
     }
 
-    rapivetStatics.allPets_healthCheck_list = allPets_healthCheck_list;
-    print(rapivetStatics.allPets_healthCheck_list.length);
+    RapivetStatics.allPetsHealthCheckList = allPets_healthCheck_list;
+    print(RapivetStatics.allPetsHealthCheckList.length);
   }
 
   String get_currentPet_last_test_date() {
     print("get_currentPet_last_test_date");
 
-    one_healthcheck_data currentPet_last_checkInfo =
+    one_health_check currentPet_last_checkInfo =
         _get_currentPet_last_checkInfo();
 
     if (currentPet_last_checkInfo == null) return "Informação não encontrada.";
 
-    return currentPet_last_checkInfo.last_test_Date_str;
+    return currentPet_last_checkInfo.lastTestDate;
   }
 
   String get_currentPet_next_test_date() {
     print("get_currentPet_last_test_date");
 
-    one_healthcheck_data currentPet_last_checkInfo =
+    one_health_check currentPet_last_checkInfo =
         _get_currentPet_last_checkInfo();
 
     if (currentPet_last_checkInfo == null) return "-";
 
-    return currentPet_last_checkInfo.next_test_Date_str;
+    return currentPet_last_checkInfo.nextTestDate;
   }
 
   String get_currentPet_normal_countStr() {
-    one_healthcheck_data currentPet_last_checkInfo =
+    one_health_check currentPet_last_checkInfo =
         _get_currentPet_last_checkInfo();
 
     if (currentPet_last_checkInfo == null) return "0";
 
     int normal_count = 0;
 
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.KETON))
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.KETON))
       normal_count++;
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.GLUCOSE))
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.GLUCOSE))
       normal_count++;
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.PROTEIN))
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.PROTEIN))
       normal_count++;
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.BLOOD))
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.BLOOD))
       normal_count++;
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.NITRITE))
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.NITRITE))
       normal_count++;
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.LEUKOZYTEN))
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.LEUKOZYTEN))
       normal_count++;
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.PH))
-      normal_count++;
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.PH)) normal_count++;
 
     return normal_count.toString();
   }
 
   String get_currentPet_suspect_countStr() {
-    one_healthcheck_data currentPet_last_checkInfo =
+    one_health_check currentPet_last_checkInfo =
         _get_currentPet_last_checkInfo();
 
     if (currentPet_last_checkInfo == null) return "0";
 
     int normal_count = 0;
 
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.KETON))
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.KETON))
       normal_count++;
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.GLUCOSE))
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.GLUCOSE))
       normal_count++;
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.PROTEIN))
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.PROTEIN))
       normal_count++;
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.BLOOD))
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.BLOOD))
       normal_count++;
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.NITRITE))
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.NITRITE))
       normal_count++;
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.LEUKOZYTEN))
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.LEUKOZYTEN))
       normal_count++;
-    if (currentPet_last_checkInfo.is_normal(RESULT_PLUS_MODE.PH))
-      normal_count++;
+    if (currentPet_last_checkInfo.isNormal(RESULT_PLUS_MODE.PH)) normal_count++;
 
     normal_count = 7 - normal_count;
 
@@ -105,18 +103,18 @@ class All_health_check_manager {
   }
 
   // get current pet's health check info
-  one_healthcheck_data _get_currentPet_last_checkInfo() {
+  one_health_check _get_currentPet_last_checkInfo() {
     String pet_uid =
-        rapivetStatics.pet_data_list[rapivetStatics.current_pet_index].uid;
+        RapivetStatics.petDataList[RapivetStatics.currentPetIndex].uid;
 
     print("_get_currentPet_last_checkInfo()");
-    print(rapivetStatics.allPets_healthCheck_list.length);
+    print(RapivetStatics.allPetsHealthCheckList.length);
 
-    for (int i = 0; i < rapivetStatics.allPets_healthCheck_list.length; i++) {
-      List<one_healthcheck_data> _hCheck_list =
-          rapivetStatics.allPets_healthCheck_list[i];
+    for (int i = 0; i < RapivetStatics.allPetsHealthCheckList.length; i++) {
+      List<OneHealthCheck> _hCheck_list =
+          RapivetStatics.allPetsHealthCheckList[i];
 
-      // print(rapivetStatics.allPets_healthCheck_list[i][0].toString());
+      // print(RapivetStatics.allPets_healthCheck_list[i][0].toString());
 
       if (_hCheck_list == null ||
           _hCheck_list == [] ||
@@ -126,9 +124,9 @@ class All_health_check_manager {
         continue;
       }
 
-      print(_hCheck_list[0].pet_uid);
+      print(_hCheck_list[0].petUID);
 
-      if (_hCheck_list[0].pet_uid == pet_uid) {
+      if (_hCheck_list[0].petUID == pet_uid) {
         print("finded!!!");
         return _hCheck_list[_hCheck_list.length - 1];
       }

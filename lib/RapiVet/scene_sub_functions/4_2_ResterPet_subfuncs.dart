@@ -5,13 +5,13 @@ import 'package:http/http.dart' as phttp;
 import 'package:swork_raon/common/AntiCacheURL.dart';
 import 'package:swork_raon/common/JToast.dart';
 import 'package:swork_raon/model/Pet_data_manager.dart';
-import 'package:swork_raon/model/one_pet_data.dart';
+import 'package:swork_raon/model/one_pet.dart';
 import 'package:swork_raon/rapivet/6_userInfo.dart';
 import 'package:swork_raon/rapivet/home.dart';
 import 'package:swork_raon/rapivet/main.dart';
 
 import '../../common/app_strings.dart';
-import '../../common/rapivetStatics.dart';
+import '../../common/rapivet_statics.dart';
 import '../4_RegisterPet.dart';
 
 class register_input_dataset {
@@ -27,7 +27,7 @@ class register_input_dataset {
 
 class register_subFuncs {
   get_pet_type_infos(String url) async {
-    // String url = rapivetStatics.url_get_type_dog;
+    // String url = RapivetStatics.url_get_type_dog;
 
     url = AntiCacheURL().URLAntiCacheRandomizer(url);
     print(url);
@@ -175,7 +175,7 @@ class register_subFuncs {
 
     int month_index = int.parse(month_str) - 1;
 
-    String month_pt = rapivetStatics.month_in_pt[month_index];
+    String month_pt = RapivetStatics.monthInPT[month_index];
 
     String str = in_dateTime.day.toString() +
         ".  " +
@@ -192,7 +192,7 @@ class register_subFuncs {
       one_pet_data _modifying_pet_data, register_input_dataset _input_dataset) {
     _input_dataset.nome_txtedit_control.text = _modifying_pet_data.name;
     _input_dataset.birthday_txtedit_control.text =
-        _modifying_pet_data.yyyymmddBirhday_to_pt();
+        _modifying_pet_data.yyyymmddBirthdayToPT();
     _input_dataset.weight_txtedit_control.text = _modifying_pet_data.weight;
 
     _input_dataset.breed_txtedit_control.text =
@@ -203,7 +203,7 @@ class register_subFuncs {
     else
       _input_dataset.enum_sexo = REG_SEXO.FEMALE;
 
-    if (_modifying_pet_data.is_neuter == "1")
+    if (_modifying_pet_data.isNeuter == "1")
       _input_dataset.enum_e_castrado = REG_E_CASTRADO.Y;
     else
       _input_dataset.enum_e_castrado = REG_E_CASTRADO.N;
@@ -227,25 +227,25 @@ class register_subFuncs {
     // 1. 로컬에 다이렉트로 저장하는 경우
     if (is_local_mode) {
       result = await process_data_locally(_pet_register_mode, _input_dataset,
-          rapivetStatics.current_pet_pic_path);
+          RapivetStatics.currentPetPicturePath);
 
       // 성공한 경우 ----------------------------------------
-      rapivetStatics.current_pet_index = result;
-      rapivetStatics.pet_data_list =
+      RapivetStatics.currentPetIndex = result;
+      RapivetStatics.petDataList =
           await Pet_data_manager().load_pet_data_list_accordingly_localOnly();
     }
     // 2. 서버에 다이렉트로 저장하는 경우
     else {
       List result_list = await process_data_onServer(_pet_register_mode,
-          _input_dataset, rapivetStatics.current_pet_pic_path);
+          _input_dataset, RapivetStatics.currentPetPicturePath);
 
       if (result_list == null)
         result = -1;
       else {
-        rapivetStatics.current_pet_index = result_list[0];
-        rapivetStatics.pet_data_list = result_list[1];
+        RapivetStatics.currentPetIndex = result_list[0];
+        RapivetStatics.petDataList = result_list[1];
 
-        print(rapivetStatics.pet_data_list.length);
+        print(RapivetStatics.petDataList.length);
         result = 1;
       }
     }
@@ -254,7 +254,7 @@ class register_subFuncs {
 
     if (result != -1) {
       // if(_pet_register_mode==PET_REGISTER_MODE.ADD){
-      //   rapivetStatics.current_pet_index = rapivetStatics.pet_data_list.length-1;
+      //   RapivetStatics.current_pet_index = RapivetStatics.pet_data_list.length-1;
       // }
 
       register_subFuncs().move_operate(context, _comeFrom);
